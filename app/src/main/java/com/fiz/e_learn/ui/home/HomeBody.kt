@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 
 @Composable
-fun SettingsBody(navController: NavController){
+fun HomeBody(navController: NavController){
     Button(onClick = {  }) {
-        Text(text = "Settings")
+        Text(text = "Home")
     }
 }

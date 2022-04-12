@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.fiz.e_learn.ui.home_content.HomeContentBody
 
 @Composable
 fun ELearnNavHost(
@@ -52,24 +53,7 @@ fun ELearnNavHost(
             }
         }
         composable(ELearnScreen.HomeContent.name) {
-            HomeContentBody {
-                navController.navigate(ELearnScreen.Favorities.name)
-            }
-        }
-        composable(ELearnScreen.Favorities.name) {
-            FavoritiesBody {
-                navController.navigate(ELearnScreen.Courses.name)
-            }
-        }
-        composable(ELearnScreen.Courses.name) {
-            CoursesBody {
-                navController.navigate(ELearnScreen.Settings.name)
-            }
-        }
-        composable(ELearnScreen.Settings.name) {
-            SettingsBody {
-                navController.navigate(ELearnScreen.TitleScreen.name)
-            }
+            HomeContentBody(navController)
         }
     }
 }

@@ -19,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -35,9 +36,9 @@ private const val TabFadeOutAnimationDuration = 100
 
 @Composable
 fun ELearnTabRow(
-    allScreens: List<ELearnScreen>,
-    onTabSelected: (ELearnScreen) -> Unit,
-    currentScreen: ELearnScreen
+    allScreens: List<HomeContentScreen>,
+    onTabSelected: (HomeContentScreen) -> Unit,
+    currentScreen: Boolean
 ) {
     Surface(
         Modifier
@@ -47,10 +48,9 @@ fun ELearnTabRow(
         Row(Modifier.selectableGroup()) {
             allScreens.forEach { screen ->
                 ELearnTab(
-                    text = screen.name,
-                    icon = screen.icon,
+                    text = stringResource(screen.resourceId),
                     onSelected = { onTabSelected(screen) },
-                    selected = currentScreen == screen
+                    selected = currentScreen
                 )
             }
         }
@@ -60,7 +60,6 @@ fun ELearnTabRow(
 @Composable
 fun ELearnTab(
     text: String,
-    icon: ImageVector,
     onSelected: () -> Unit,
     selected: Boolean
 ) {
@@ -96,7 +95,6 @@ fun ELearnTab(
             )
             .clearAndSetSemantics { contentDescription = text }
     ) {
-        Icon(imageVector = icon, contentDescription = text, tint = tabTintColor)
         if (selected) {
             Spacer(Modifier.width(12.dp))
             Text(text.uppercase(Locale.getDefault()), color = tabTintColor)

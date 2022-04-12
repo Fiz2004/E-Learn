@@ -32,15 +32,6 @@ enum class ELearnScreen(
     ),
     HomeContent(
         icon = Icons.Filled.MoneyOff,
-    ),
-    Favorities(
-        icon = Icons.Filled.MoneyOff,
-    ),
-    Courses(
-        icon = Icons.Filled.MoneyOff,
-    ),
-    Settings(
-        icon = Icons.Filled.MoneyOff,
     );
 
 
@@ -55,9 +46,6 @@ enum class ELearnScreen(
                 EnterCode.name -> EnterCode
                 ChangePassword.name -> ChangePassword
                 HomeContent.name -> HomeContent
-                Favorities.name -> Favorities
-                Courses.name -> Courses
-                Settings.name -> Settings
                 null -> HomeContent
                 else -> throw IllegalArgumentException("Route $route is not recognized.")
             }
