@@ -7,8 +7,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.fiz.e_learn.R
-
-
     private val Inter = FontFamily(
         Font(R.font.inter_regular),
         Font(R.font.inter_medium, FontWeight.W500),

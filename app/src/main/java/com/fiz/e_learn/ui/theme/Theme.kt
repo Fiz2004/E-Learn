@@ -1,32 +1,38 @@
 package com.fiz.e_learn.ui.theme
 
+import android.graphics.drawable.ShapeDrawable
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Typography
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
 
-private val DarkColorPalette = darkColors(
+private val LightColorPalette = lightColors(
     surface = White_100,
     onSurface = Black_200,
-    primary = Navy,
-    onPrimary = Chartreuse
+    primary = LightBlue,
+    onPrimary = Navy,
 )
 
-private val LightColorPalette = lightColors(
+private val DarkColorPalette = darkColors(
     surface = Black_100,
     onSurface = White_200,
-    primary = LightBlue,
-    onPrimary = Navy
+    primary = Navy,
+    onPrimary = Chartreuse,
 )
+
+@get:Composable
+val Colors.onSurface2: Color
+    get() = if (isLight) Black_300 else White_300
+
+@get:Composable
+val Colors.surface2: Color
+    get() = if (isLight) White_400 else Black_400
+
 
 @Composable
 fun ELearnTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
