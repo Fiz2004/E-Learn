@@ -2,11 +2,9 @@ package com.fiz.e_learn
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
-import androidx.navigation.NavType
+import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
 import com.fiz.e_learn.ui.home_content.HomeContentBody
 import com.fiz.e_learn.ui.on_boarding.OnBoardingBody
 
@@ -22,25 +20,10 @@ fun ELearnNavHost(
     ) {
         composable(ELearnScreen.TitleScreen.name) {
             TitleScreenBody {
-                navController.navigate(ELearnScreen.OnBoarding.name + "/1")
+                navController.navigate("onBoarding")
             }
         }
-        composable(route = ELearnScreen.OnBoarding.name + "/{page}",
-            arguments = listOf(navArgument("page") {
-                type = NavType.StringType
-            })
-        ) {backStackEntry ->
-            val page=backStackEntry.arguments?.getString("page")?.toInt()
-
-            OnBoardingBody (backStackEntry.arguments?.getString("page")){
-                when (page) {
-                   1-> navController.navigate(ELearnScreen.OnBoarding.name + "/2")
-                   2-> navController.navigate(ELearnScreen.OnBoarding.name + "/3")
-                   3-> navController.navigate(ELearnScreen.OnBoarding.name + "/4")
-                   4-> navController.navigate(ELearnScreen.LogIn.name)
-                }
-            }
-        }
+        onBoardingGraph(navController)
         composable(ELearnScreen.LogIn.name) {
             LogInBody {
                 navController.navigate(ELearnScreen.CreateAccount.name)
@@ -68,6 +51,30 @@ fun ELearnNavHost(
         }
         composable(ELearnScreen.HomeContent.name) {
             HomeContentBody(navController)
+        }
+    }
+}
+
+fun NavGraphBuilder.onBoardingGraph(navController: NavController) {
+    navigation(startDestination = ELearnScreen.OnBoarding.name + "/1", route = "onBoarding") {
+        composable(ELearnScreen.OnBoarding.name + "/1") {
+            OnBoardingBody("1") {
+                navController.navigate(ELearnScreen.OnBoarding.name + "/2")
+            }
+        }
+        composable(
+            route = ELearnScreen.OnBoarding.name + "/{page}",
+            arguments = listOf(navArgument("page") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val page = backStackEntry.arguments?.getString("page")?.toInt()
+
+            OnBoardingBody(backStackEntry.arguments?.getString("page")) {
+                when (page) {
+                    2 -> navController.navigate(ELearnScreen.OnBoarding.name + "/3")
+                    3 -> navController.navigate(ELearnScreen.OnBoarding.name + "/4")
+                    4 -> navController.navigate(ELearnScreen.LogIn.name)
+                }
+            }
         }
     }
 }
