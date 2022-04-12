@@ -25,24 +25,16 @@ fun ELearnNavHost(
         }
         onBoardingGraph(navController)
         composable(ELearnScreen.LogIn.name) {
-            LogInBody {
+            LogInBody (
+                onClickSignUp={
                 navController.navigate(ELearnScreen.CreateAccount.name)
-            }
-        }
-        composable(ELearnScreen.CreateAccount.name) {
-            CreateAccountBody {
+            },
+                onClickForgotPassword={
                 navController.navigate(ELearnScreen.ForgotPassword.name)
-            }
-        }
-        composable(ELearnScreen.ForgotPassword.name) {
-            ForgotPasswordBody {
-                navController.navigate(ELearnScreen.EnterCode.name)
-            }
-        }
-        composable(ELearnScreen.EnterCode.name) {
-            EnterCodeBody {
-                navController.navigate(ELearnScreen.ChangePassword.name)
-            }
+            },
+                onClickSignIn={
+                    navController.navigate(ELearnScreen.HomeContent.name)
+                })
         }
         composable(ELearnScreen.ChangePassword.name) {
             ChangePasswordBody {

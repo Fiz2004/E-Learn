@@ -14,14 +14,14 @@ import com.fiz.e_learn.R
 private val LightColorPalette = lightColors(
     surface = White_100,
     onSurface = Black_200,
-    primary = LightBlue,
+    primary = Green_200,
     onPrimary = Navy,
 )
 
 private val DarkColorPalette = darkColors(
     surface = Black_100,
     onSurface = White_200,
-    primary = Navy,
+    primary = Green_200,
     onPrimary = Chartreuse,
 )
 
@@ -32,6 +32,14 @@ val Colors.onSurface2: Color
 @get:Composable
 val Colors.surface2: Color
     get() = if (isLight) White_400 else Black_400
+
+@get:Composable
+val Colors.border: Color
+    get() = if (isLight) White_500 else Black_500
+
+@get:Composable
+val Colors.greenText: Color
+    get() = if (isLight) White_100 else Black_200
 
 
 @Composable

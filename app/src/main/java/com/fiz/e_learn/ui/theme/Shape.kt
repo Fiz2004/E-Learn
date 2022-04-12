@@ -12,7 +12,7 @@ val Shapes = Shapes(
 )
 
 val ELearnShapes = Shapes(
-    small = CutCornerShape(topStart = 8.dp),
+    small = RoundedCornerShape(18.dp),
     medium = CutCornerShape(topStart = 24.dp),
     large = RoundedCornerShape(8.dp)
 )

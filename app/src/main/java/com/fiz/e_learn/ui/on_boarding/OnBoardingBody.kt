@@ -1,10 +1,10 @@
 package com.fiz.e_learn.ui.on_boarding
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.annotation.ArrayRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,6 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringArrayResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
@@ -25,6 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fiz.e_learn.R
+import com.fiz.e_learn.ui.components.TextDescription
+import com.fiz.e_learn.ui.components.TextTitle
 import com.fiz.e_learn.ui.theme.ELearnTheme
 import com.fiz.e_learn.ui.theme.onSurface2
 import com.fiz.e_learn.ui.theme.surface2
@@ -77,37 +81,15 @@ fun OnBoardingBody(
 
 @Composable
 fun MainText(onBoardingViewModel: OnBoardingViewModel = viewModel(),onClickButton: () -> Unit = {}) {
-    TextTitle()
-    TextDescription()
-    FloatingButton(onBoardingViewModel,onClickButton)
-}
 
-@Composable
-private fun TextDescription() {
-    Text(
-        modifier = Modifier
-            .padding(start = 50.dp, end = 50.dp, bottom = 68.4.dp),
-        textAlign = TextAlign.Center,
-        text = "A handful of model sentence" +
-                " structures, too generate Lorem which" +
-                " looks reason able.",
-        fontSize = 15.78.sp,
-        fontFamily = FontFamily(Font(R.font.inter_light)),
-        color = MaterialTheme.colors.onSurface2,
+    TextTitle(
+        stringArrayResource(R.array.on_boarding_title)[onBoardingViewModel.uiState.page-1],
+        Modifier.padding(bottom = 13.41.dp).width(169.dp)
     )
-}
-
-@Composable
-private fun TextTitle() {
-    Text(
-        modifier = Modifier.padding(bottom = 13.41.dp),
-        text = "Online Learning\n" +
-                "Platform",
-        textAlign = TextAlign.Center,
-        fontSize = 26.31.sp,
-        color = MaterialTheme.colors.onSurface,
-        fontFamily = FontFamily(Font(R.font.inter_semibold))
-    )
+    TextDescription(
+        stringArrayResource(R.array.on_boarding_description)[onBoardingViewModel.uiState.page-1],
+        Modifier.padding(start = 50.dp, end = 50.dp, bottom = 68.4.dp))
+    FloatingButton(onBoardingViewModel, onClickButton)
 }
 
 @Composable

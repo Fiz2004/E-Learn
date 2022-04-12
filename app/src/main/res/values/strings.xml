@@ -6,4 +6,29 @@
     <string name="favorities">Favorities</string>
     <string name="courses">Courses</string>
     <string name="settings">Settings</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="login_description">A handful of model sentence structures</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in">Sign in</string>
+    <string name="or">(or)</string>
+    <string name="password">Password</string>
+    <string name="email_id">Email id</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="don_t_have_an_account">Don’t have an account? </string>
+    <string name="sign_up">Sign up</string>
+
+    <string-array name="on_boarding_title">
+        <item>Online Learning Platform</item>
+        <item>Learn on your Schedule</item>
+        <item>Ready to find a Course</item>
+        <item>Explore it Today!</item>
+    </string-array>
+
+    <string-array name="on_boarding_description">
+        <item>A handful of model sentence structures, too generate Lorem which looks reason able.</item>
+        <item>A handful of model sentence structures, too generate Lorem which looks reason able.</item>
+        <item>A handful of model sentence structures, too generate Lorem which looks reason able.</item>
+        <item>A handful of model sentence structures, too generate Lorem which looks reason able.</item>
+    </string-array>
+
 </resources>
