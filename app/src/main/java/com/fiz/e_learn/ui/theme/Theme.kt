@@ -35,11 +35,15 @@ val Colors.surface2: Color
 
 @get:Composable
 val Colors.border: Color
-    get() = if (isLight) White_500 else Black_500
+    get() = if (isLight) Black_500 else White_500
 
 @get:Composable
 val Colors.greenText: Color
-    get() = if (isLight) White_100 else Black_200
+    get() = if (isLight) Green_100 else Green_200
+
+@get:Composable
+val Colors.editText: Color
+    get() = if (isLight) White_200 else Black_100
 
 
 @Composable

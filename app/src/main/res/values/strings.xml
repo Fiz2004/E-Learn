@@ -14,7 +14,7 @@
     <string name="password">Password</string>
     <string name="email_id">Email id</string>
     <string name="sign_in_with_google">Sign in with Google</string>
-    <string name="don_t_have_an_account">Don’t have an account? </string>
+    <string name="don_t_have_an_account">Don’t have an account?</string>
     <string name="sign_up">Sign up</string>
 
     <string-array name="on_boarding_title">

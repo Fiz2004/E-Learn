@@ -99,22 +99,21 @@ private fun FloatingButton(onBoardingViewModel: OnBoardingViewModel = viewModel(
             .size(70.15.dp, 70.15.dp)
             .clip(CircleShape)
             .clickable { onClickButton() },
-        contentAlignment = Alignment.Center
     ) {
         Image(
             painter = painterResource(
                 id = onBoardingViewModel.getImageFloatingButton()
             ),
             contentDescription = null,
-            modifier = Modifier.size(70.15.dp, 70.15.dp),
-            contentScale = ContentScale.Crop
+            modifier = Modifier.size(70.15.dp, 70.15.dp).align(Alignment.Center),
+            contentScale = ContentScale.Fit
         )
         Image(
             painter = painterResource(
                 id = R.drawable.ic_next
             ),
             contentDescription = null,
-            modifier = Modifier.size(43.84.dp, 43.84.dp),
+            modifier = Modifier.size(43.84.dp, 43.84.dp).align(Alignment.Center),
             contentScale = ContentScale.Crop
         )
     }
@@ -129,7 +128,7 @@ private fun FloatingButton(onBoardingViewModel: OnBoardingViewModel = viewModel(
 fun OnBoardingBodyPreview() {
     ELearnTheme {
         Surface {
-            OnBoardingBody("1")
+            OnBoardingBody("3")
         }
     }
 }
@@ -144,7 +143,7 @@ fun OnBoardingBodyPreview() {
 fun OnBoardingBodyDarkPreview() {
     ELearnTheme {
         Surface {
-            OnBoardingBody("1")
+            OnBoardingBody("3")
         }
     }
 }

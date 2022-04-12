@@ -36,6 +36,16 @@ fun ELearnNavHost(
                     navController.navigate(ELearnScreen.HomeContent.name)
                 })
         }
+        composable(ELearnScreen.CreateAccount.name) {
+            ChangePasswordBody {
+                navController.navigate(ELearnScreen.HomeContent.name)
+            }
+        }
+        composable(ELearnScreen.ForgotPassword.name) {
+            ChangePasswordBody {
+                navController.navigate(ELearnScreen.HomeContent.name)
+            }
+        }
         composable(ELearnScreen.ChangePassword.name) {
             ChangePasswordBody {
                 navController.navigate(ELearnScreen.HomeContent.name)

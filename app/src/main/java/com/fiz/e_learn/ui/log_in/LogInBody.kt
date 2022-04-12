@@ -14,6 +14,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -31,10 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.fiz.e_learn.ui.components.TextDescription
 import com.fiz.e_learn.ui.components.TextTitle
-import com.fiz.e_learn.ui.theme.ELearnTheme
-import com.fiz.e_learn.ui.theme.border
-import com.fiz.e_learn.ui.theme.greenText
-import com.fiz.e_learn.ui.theme.onSurface2
+import com.fiz.e_learn.ui.theme.*
 
 @Composable
 fun LogInBody(
@@ -48,15 +47,17 @@ fun LogInBody(
             .padding(start = 16.dp, end = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box(
+        Image(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .padding(top = 155.dp)
-                .size(78.92.dp)
-                .background(color = Color.Red)
-        ) {
-        }
-
+                .size(78.92.dp),
+            painter = painterResource(
+                id = R.drawable.ic_login_lock
+            ),
+            contentDescription = null,
+            contentScale = ContentScale.Crop
+        )
         TextTitle(
             stringResource(R.string.welcome_back),
             Modifier.padding(top = 16.dp)
@@ -76,14 +77,14 @@ fun LogInBody(
 
         Row(
             modifier = Modifier
-                .padding(top = 16.dp)
+                .padding(top = 16.dp, bottom = 12.dp)
                 .fillMaxWidth()
         ) {
             LogInOutlinedTextField(
                 stringResource(R.string.password), Modifier
                     .height(52.dp)
-                    .padding(end = 10.dp), R.drawable.ic_password
-            )
+                    .padding(end = 10.dp)
+                    .weight(1f), R.drawable.ic_password  )
 
             OutlinedButton(
                 onClick = {},
@@ -91,6 +92,7 @@ fun LogInBody(
                     .height(52.dp)
                     .width(66.dp),
                 border = BorderStroke(1.dp, MaterialTheme.colors.border),
+                colors=ButtonDefaults.outlinedButtonColors(backgroundColor=MaterialTheme.colors.editText,),
                 shape = RoundedCornerShape(18.dp)
             ) {
                 Image(
@@ -105,14 +107,20 @@ fun LogInBody(
             }
         }
 
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 12.dp)
-                .clickable ( onClick={onClickForgotPassword() }),
-            text = stringResource(R.string.forgot_password), color = MaterialTheme.colors.greenText,
-            textAlign = TextAlign.End
-        )
+        Row(modifier = Modifier
+            .fillMaxWidth().padding(bottom = 20.dp),horizontalArrangement = Arrangement.End) {
+            Text(
+                modifier = Modifier
+                    .clickable(onClick = { onClickForgotPassword() }),
+                text = stringResource(R.string.forgot_password),
+                style = TextStyle(
+                    color = MaterialTheme.colors.greenText,
+                    fontFamily = FontFamily(Font(R.font.inter_medium)),
+                    fontWeight = FontWeight.Medium,
+                    fontSize = 16.sp
+                )
+            )
+        }
 
         Button(modifier = Modifier
             .fillMaxWidth()
@@ -138,6 +146,7 @@ fun LogInBody(
         OutlinedButton(modifier = Modifier
             .fillMaxWidth()
             .height(52.dp),
+            border = BorderStroke(1.dp, MaterialTheme.colors.border),
             onClick = { onClickSignIn() }) {
             Image(
                 painter = painterResource(
@@ -170,6 +179,7 @@ fun LogInBody(
                     )
                 ) {
                     append(stringResource(R.string.don_t_have_an_account))
+                    append(" ")
                 }
                 withStyle(
                     style = SpanStyle(
@@ -193,6 +203,10 @@ private fun LogInOutlinedTextField(text: String, modifier: Modifier, icon: Int) 
         value = message.value,
         onValueChange = { message.value = it },
         shape = RoundedCornerShape(18.dp),
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            backgroundColor=MaterialTheme.colors.editText,
+            focusedBorderColor = MaterialTheme.colors.border,
+            unfocusedBorderColor = MaterialTheme.colors.border),
         leadingIcon = {
             Image(
                 painter = painterResource(
