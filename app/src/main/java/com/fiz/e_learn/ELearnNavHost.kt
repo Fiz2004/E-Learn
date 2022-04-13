@@ -5,6 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.fiz.e_learn.ui.screens.change_password.ChangePasswordBody
+import com.fiz.e_learn.ui.screens.create_account.CreateAccountBody
 import com.fiz.e_learn.ui.screens.home_content.HomeContentBody
 import com.fiz.e_learn.ui.screens.on_boarding.OnBoardingBody
 

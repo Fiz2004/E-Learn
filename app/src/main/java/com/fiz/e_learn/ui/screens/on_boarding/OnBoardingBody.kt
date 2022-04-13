@@ -51,7 +51,8 @@ fun OnBoardingBody(
 
         Box(
             modifier = Modifier
-                .requiredSize(608.dp,464.dp)
+                .requiredSize(608.dp, 464.dp)
+                .offset(y = 128.dp)
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
                 .background(
@@ -76,7 +77,9 @@ fun MainText(onBoardingViewModel: OnBoardingViewModel = viewModel(),onClickButto
 
     TextTitle(
         stringArrayResource(R.array.on_boarding_title)[onBoardingViewModel.uiState.page-1],
-        Modifier.padding(bottom = 13.41.dp).width(169.dp)
+        Modifier
+            .padding(bottom = 13.41.dp)
+            .width(280.dp)
     )
     TextDescription(
         stringArrayResource(R.array.on_boarding_description)[onBoardingViewModel.uiState.page-1],
@@ -97,7 +100,9 @@ private fun FloatingButton(onBoardingViewModel: OnBoardingViewModel = viewModel(
                 id = onBoardingViewModel.getImageFloatingButton()
             ),
             contentDescription = null,
-            modifier = Modifier.size(70.15.dp, 70.15.dp).align(Alignment.Center),
+            modifier = Modifier
+                .size(70.15.dp, 70.15.dp)
+                .align(Alignment.Center),
             contentScale = ContentScale.Fit
         )
         Image(
@@ -105,7 +110,9 @@ private fun FloatingButton(onBoardingViewModel: OnBoardingViewModel = viewModel(
                 id = R.drawable.ic_next
             ),
             contentDescription = null,
-            modifier = Modifier.size(43.84.dp, 43.84.dp).align(Alignment.Center),
+            modifier = Modifier
+                .size(43.84.dp, 43.84.dp)
+                .align(Alignment.Center),
             contentScale = ContentScale.Crop
         )
     }

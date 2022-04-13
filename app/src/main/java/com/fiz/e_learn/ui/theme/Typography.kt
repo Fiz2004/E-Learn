@@ -25,10 +25,25 @@ import com.fiz.e_learn.R
             fontWeight = FontWeight.W600,
             fontSize = 24.sp
         ),
+        subtitle1 = TextStyle(
+            fontFamily = Inter,
+            fontWeight = FontWeight.Medium,
+            fontSize = 16.sp
+        ),
         subtitle2 = TextStyle(
             fontFamily = Inter,
             fontWeight = FontWeight.Light,
             fontSize = 14.sp
+        ),
+        overline = TextStyle(
+            fontFamily = Inter,
+            fontWeight = FontWeight.W600,
+            fontSize = 10.sp
+        ),
+        caption = TextStyle(
+            fontFamily = Inter,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 12.sp
         ),
 
 
@@ -36,11 +51,6 @@ import com.fiz.e_learn.R
             fontFamily = Inter,
             fontWeight = FontWeight.W600,
             fontSize = 20.sp
-        ),
-        subtitle1 = TextStyle(
-            fontFamily = Inter,
-            fontWeight = FontWeight.W600,
-            fontSize = 16.sp
         ),
         body1 = TextStyle(
             fontFamily = ZillaSlab,
@@ -56,14 +66,4 @@ import com.fiz.e_learn.R
             fontWeight = FontWeight.W500,
             fontSize = 14.sp
         ),
-        caption = TextStyle(
-            fontFamily = Inter,
-            fontWeight = FontWeight.Normal,
-            fontSize = 12.sp
-        ),
-        overline = TextStyle(
-            fontFamily = Inter,
-            fontWeight = FontWeight.W500,
-            fontSize = 12.sp
-        )
     )

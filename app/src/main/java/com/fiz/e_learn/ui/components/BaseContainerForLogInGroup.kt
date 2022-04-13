@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.screens.create_account
+package com.fiz.e_learn.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,7 +15,7 @@ fun BaseContainerForLogInGroup(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(start = 16.dp, end = 16.dp, top = 144.dp),
+            .padding(start = 16.dp, end = 16.dp, top = 82.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         content?.let {

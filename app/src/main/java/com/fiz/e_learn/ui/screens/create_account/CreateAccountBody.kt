@@ -1,4 +1,4 @@
-package com.fiz.e_learn
+package com.fiz.e_learn.ui.screens.create_account
 
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
@@ -22,12 +22,10 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.components.TextDescription
 import com.fiz.e_learn.ui.components.TextTitle
-import com.fiz.e_learn.ui.screens.create_account.BaseContainerForLogInGroup
-import com.fiz.e_learn.ui.screens.create_account.BaseIconForLogInGroup
-import com.fiz.e_learn.ui.screens.create_account.EmailTextField
-import com.fiz.e_learn.ui.screens.create_account.PasswordFingerPrintTextField
+import com.fiz.e_learn.ui.components.BaseContainerForLogInGroup
 import com.fiz.e_learn.ui.screens.log_in.BaseOutlinedTextField
 import com.fiz.e_learn.ui.theme.ELearnTheme
 import com.fiz.e_learn.ui.theme.greenText

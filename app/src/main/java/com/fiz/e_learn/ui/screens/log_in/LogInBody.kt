@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.fiz.e_learn.ui.components.TextDescription
 import com.fiz.e_learn.ui.components.TextTitle
-import com.fiz.e_learn.ui.screens.create_account.BaseContainerForLogInGroup
+import com.fiz.e_learn.ui.components.BaseContainerForLogInGroup
 import com.fiz.e_learn.ui.screens.create_account.BaseIconForLogInGroup
 import com.fiz.e_learn.ui.screens.create_account.EmailTextField
 import com.fiz.e_learn.ui.screens.create_account.PasswordFingerPrintTextField
