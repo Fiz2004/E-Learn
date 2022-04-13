@@ -1,7 +1,6 @@
 package com.fiz.e_learn.ui.screens.home
 
 import android.content.res.Configuration
-import android.graphics.Color
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -24,7 +23,7 @@ import com.fiz.e_learn.ui.theme.Black_900
 import com.fiz.e_learn.ui.theme.ELearnTheme
 
 @Composable
-fun CourseCard(it: String, countStar: Double) {
+fun CourseCard(course: Course) {
     Column(
         modifier = Modifier
             .size(158.dp, 168.dp)
@@ -34,7 +33,7 @@ fun CourseCard(it: String, countStar: Double) {
         ) {
             Image(
                 painter = painterResource(
-                    id = R.drawable.banner
+                    id = course.img
                 ),
                 contentDescription = null,
                 modifier = Modifier
@@ -58,18 +57,17 @@ fun CourseCard(it: String, countStar: Double) {
         ) {
             Row() {
                 Text(
-                    text = countStar.toString(),
+                    text = course.rating.toString(),
                     style = MaterialTheme.typography.caption,
                     modifier = Modifier
-                        .padding(end=4.dp)
-                        .alpha(0.5f)
-                    ,
+                        .padding(end = 4.dp)
+                        .alpha(0.5f),
                 )
                 for (n in 1..5) {
                     Image(
                         painter = painterResource(
                             id =
-                            if (n > countStar)
+                            if (n > course.rating)
                                 R.drawable.ic_empty_star
                             else
                                 R.drawable.ic_star
@@ -85,7 +83,7 @@ fun CourseCard(it: String, countStar: Double) {
             Text(
                 modifier = Modifier
                     .width(158.dp),
-                text = it,
+                text = course.name,
                 style = MaterialTheme.typography.subtitle1,
             )
         }
@@ -101,8 +99,11 @@ fun CourseCard(it: String, countStar: Double) {
 fun CourseCardPreview() {
     ELearnTheme {
         Surface {
-            CourseCard("""Test
-Test""", 4.5)
+            CourseCard(
+                Course(
+                """Test
+Test""", R.drawable.card1,4.5, )
+            )
         }
     }
 }
@@ -117,7 +118,7 @@ Test""", 4.5)
 fun CourseCardDarkPreview() {
     ELearnTheme {
         Surface {
-            CourseCard("""Test""", 2.0)
+            CourseCard(Course("""Test""", R.drawable.card1, 2.0))
         }
     }
 }

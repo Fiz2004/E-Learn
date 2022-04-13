@@ -1,4 +1,4 @@
-package com.fiz.e_learn
+package com.fiz.e_learn.ui.screens.home
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
@@ -17,10 +17,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.fiz.e_learn.ui.screens.home.Chip
-import com.fiz.e_learn.ui.screens.home.CourseCard
-import com.fiz.e_learn.ui.screens.home.StaggeredGrid
+import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.theme.ELearnTheme
+
+data class Course(val name:String, val img:Int, val rating:Double)
 
 @Composable
 fun HomeBody(navController: NavController? = null) {
@@ -41,12 +41,14 @@ fun HomeBody(navController: NavController? = null) {
         "Business",
     )
     val courses = listOf(
-        "Generator on there Internet tend",
-        "Generator on there Internet tend",
-        "Generator on there Internet tend",
-        "Generator on there Internet tend",
-        "Generator on there Internet tend",
-        "Generator on there Internet tend",
+        Course("Generator on there Internet tend", R.drawable.card1,4.5),
+        Course("Generator on there Internet tend", R.drawable.card2,2.5),
+        Course("Generator on there Internet tend", R.drawable.card1,3.5),
+        Course("Generator on there Internet tend", R.drawable.card2,1.5),
+        Course("Generator on there Internet tend", R.drawable.card1,2.0),
+        Course("Generator on there Internet tend", R.drawable.card2,1.5),
+        Course("Generator on there Internet tend", R.drawable.card1,5.0),
+
     )
     Column(
         modifier = Modifier
@@ -108,7 +110,7 @@ fun HomeBody(navController: NavController? = null) {
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 courses.forEach {
-                    item { CourseCard(it,4.5) }
+                    item { CourseCard(it) }
                 }
             }
         }
