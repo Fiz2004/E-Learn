@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.home_content
+package com.fiz.e_learn.ui.screens.home_content
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*

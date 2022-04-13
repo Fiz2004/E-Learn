@@ -5,8 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.fiz.e_learn.ui.home_content.HomeContentBody
-import com.fiz.e_learn.ui.on_boarding.OnBoardingBody
+import com.fiz.e_learn.ui.screens.home_content.HomeContentBody
+import com.fiz.e_learn.ui.screens.on_boarding.OnBoardingBody
 
 @Composable
 fun ELearnNavHost(
@@ -37,9 +37,20 @@ fun ELearnNavHost(
                 })
         }
         composable(ELearnScreen.CreateAccount.name) {
-            ChangePasswordBody {
-                navController.navigate(ELearnScreen.HomeContent.name)
-            }
+            CreateAccountBody(
+                onClickTermsOfServices = {
+                    navController.navigate(ELearnScreen.Info.name)
+                },
+                onClickPrivacyPolicy = {
+                    navController.navigate(ELearnScreen.Info.name)
+                },
+                onClickCreateAccount = {
+                    navController.navigate(ELearnScreen.HomeContent.name)
+                },
+                onClickSignIn = {
+                    navController.navigate(ELearnScreen.LogIn.name)
+                }
+            )
         }
         composable(ELearnScreen.ForgotPassword.name) {
             ChangePasswordBody {

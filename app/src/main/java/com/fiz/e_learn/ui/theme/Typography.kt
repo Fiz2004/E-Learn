@@ -9,6 +9,7 @@ import androidx.compose.ui.unit.sp
 import com.fiz.e_learn.R
     private val Inter = FontFamily(
         Font(R.font.inter_regular),
+        Font(R.font.inter_light, FontWeight.Light),
         Font(R.font.inter_medium, FontWeight.W500),
         Font(R.font.inter_semibold, FontWeight.W600)
     )
@@ -19,16 +20,18 @@ import com.fiz.e_learn.R
     )
 
     val ELearnTypography = Typography(
-        h4 = TextStyle(
-            fontFamily = Inter,
-            fontWeight = FontWeight.W600,
-            fontSize = 30.sp
-        ),
         h5 = TextStyle(
             fontFamily = Inter,
             fontWeight = FontWeight.W600,
             fontSize = 24.sp
         ),
+        subtitle2 = TextStyle(
+            fontFamily = Inter,
+            fontWeight = FontWeight.Light,
+            fontSize = 14.sp
+        ),
+
+
         h6 = TextStyle(
             fontFamily = Inter,
             fontWeight = FontWeight.W600,
@@ -38,11 +41,6 @@ import com.fiz.e_learn.R
             fontFamily = Inter,
             fontWeight = FontWeight.W600,
             fontSize = 16.sp
-        ),
-        subtitle2 = TextStyle(
-            fontFamily = Inter,
-            fontWeight = FontWeight.W500,
-            fontSize = 14.sp
         ),
         body1 = TextStyle(
             fontFamily = ZillaSlab,

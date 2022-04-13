@@ -1,41 +1,41 @@
 package com.fiz.e_learn.ui.theme
 
-import android.graphics.drawable.ShapeDrawable
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
-import com.fiz.e_learn.R
 
 private val LightColorPalette = lightColors(
-    surface = White_100,
-    onSurface = Black_200,
+    surface = White_800,
+    onSurface = Black_900,
     primary = Green_200,
     onPrimary = Navy,
 )
 
 private val DarkColorPalette = darkColors(
-    surface = Black_100,
-    onSurface = White_200,
+    surface = Black_800,
+    onSurface = White,
     primary = Green_200,
     onPrimary = Chartreuse,
 )
 
 @get:Composable
 val Colors.onSurface2: Color
-    get() = if (isLight) Black_300 else White_300
+    get() = if (isLight) Black_600 else White_600
 
 @get:Composable
 val Colors.surface2: Color
-    get() = if (isLight) White_400 else Black_400
+    get() = if (isLight) White else Black_700
 
 @get:Composable
 val Colors.border: Color
     get() = if (isLight) Black_500 else White_500
+
+@get:Composable
+val Colors.borderIconLogIn: Color
+    get() = White_400
+
+
 
 @get:Composable
 val Colors.greenText: Color
@@ -43,7 +43,7 @@ val Colors.greenText: Color
 
 @get:Composable
 val Colors.editText: Color
-    get() = if (isLight) White_200 else Black_100
+    get() = if (isLight) White else Black_800
 
 
 @Composable

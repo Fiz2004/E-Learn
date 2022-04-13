@@ -1,7 +1,6 @@
-package com.fiz.e_learn.ui.on_boarding
+package com.fiz.e_learn.ui.screens.on_boarding
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import androidx.annotation.ArrayRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -10,7 +9,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,19 +16,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.components.TextDescription
 import com.fiz.e_learn.ui.components.TextTitle
 import com.fiz.e_learn.ui.theme.ELearnTheme
-import com.fiz.e_learn.ui.theme.onSurface2
 import com.fiz.e_learn.ui.theme.surface2
 
 @Composable
@@ -59,12 +51,12 @@ fun OnBoardingBody(
 
         Box(
             modifier = Modifier
-                .height(375.dp)
+                .requiredSize(608.dp,464.dp)
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
                 .background(
                     color = MaterialTheme.colors.surface2,
-                    shape = RoundedCornerShape(topStartPercent = 10, topEndPercent = 10)
+                    shape = RoundedCornerShape(topStartPercent = 100, topEndPercent = 100)
                 )
         )
         Column(

@@ -1,14 +1,14 @@
-package com.fiz.e_learn
+package com.fiz.e_learn.ui.screens.info
 
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun CreateAccountBody(
+fun InfoBody(
     onClickButton :()->Unit={}
 ){
     Button(onClick = { onClickButton() }) {
-        Text(text = "Go ForgotPassword")
+        Text(text = "Go HomeContent")
     }
 }

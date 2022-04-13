@@ -20,10 +20,6 @@ fun TextDescription(text:String,modifier: Modifier=Modifier) {
         textAlign = TextAlign.Center,
         text = text,
         color = MaterialTheme.colors.onSurface2,
-        style = TextStyle(
-            fontFamily = FontFamily(Font(R.font.inter_light)),
-            fontWeight = FontWeight.Light,
-            fontSize = 15.sp
-        ),
+        style = MaterialTheme.typography.subtitle2
     )
 }

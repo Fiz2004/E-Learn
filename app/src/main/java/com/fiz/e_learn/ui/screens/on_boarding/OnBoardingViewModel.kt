@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.on_boarding
+package com.fiz.e_learn.ui.screens.on_boarding
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

@@ -19,10 +19,6 @@ fun TextTitle(text:String,modifier: Modifier=Modifier) {
         text = text,
         textAlign = TextAlign.Center,
         color = MaterialTheme.colors.onSurface,
-        style= TextStyle(
-            fontFamily = FontFamily(Font(R.font.inter_semibold)),
-            fontWeight = FontWeight.W600,
-            fontSize = 25.5.sp
-        )
+        style= MaterialTheme.typography.h5
     )
 }
