@@ -21,6 +21,10 @@
     <string name="create_account_description">Create an Account</string>
     <string name="best_seller">BEST SELLER</string>
     <string name="preferences">com.fiz.e-learn</string>
+    <string name="categories">Categories</string>
+    <string name="see_all">SEE ALL</string>
+    <string name="top_courses">Top Courses</string>
+    <string name="top_courses_in_design">Top Courses in Design</string>
 
     <string-array name="on_boarding_title">
         <item>Online Learning Platform</item>

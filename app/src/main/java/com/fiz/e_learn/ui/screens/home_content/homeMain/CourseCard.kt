@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.screens.home
+package com.fiz.e_learn.ui.screens.home_content.homeMain
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
@@ -40,51 +40,61 @@ fun CourseCard(course: Course) {
                     .size(158.dp, 104.dp),
                 contentScale = ContentScale.Crop
             )
-            Text(
-                modifier = Modifier
-                    .padding(4.dp)
-                    .align(Alignment.BottomStart)
-                    .clip(shape = RoundedCornerShape(8.dp))
-                    .background(MaterialTheme.colors.primary)
-                    .padding(vertical = 4.dp, horizontal = 6.dp),
-                color = Black_900,
-                text = stringResource(R.string.best_seller),
-                style = MaterialTheme.typography.overline
-            )
+            if (course.bestSeller)
+                TextBestSeller(modifier = Modifier.align(Alignment.BottomStart))
         }
         Column(
             modifier = Modifier
         ) {
-            Row() {
-                Text(
-                    text = course.rating.toString(),
-                    style = MaterialTheme.typography.caption,
-                    modifier = Modifier
-                        .padding(end = 4.dp)
-                        .alpha(0.5f),
-                )
-                for (n in 1..5) {
-                    Image(
-                        painter = painterResource(
-                            id =
-                            if (n > course.rating)
-                                R.drawable.ic_empty_star
-                            else
-                                R.drawable.ic_star
-                        ),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(10.dp, 10.dp)
-                            .align(Alignment.CenterVertically),
-                        contentScale = ContentScale.Crop
-                    )
-                }
-            }
+            RatingRow(course.rating)
             Text(
                 modifier = Modifier
                     .width(158.dp),
                 text = course.name,
                 style = MaterialTheme.typography.subtitle1,
+            )
+        }
+    }
+}
+
+@Composable
+fun TextBestSeller(modifier:Modifier = Modifier) {
+    Text(
+        modifier = modifier
+            .padding(4.dp)
+            .clip(shape = RoundedCornerShape(8.dp))
+            .background(MaterialTheme.colors.primary)
+            .padding(vertical = 4.dp, horizontal = 6.dp),
+        color = Black_900,
+        text = stringResource(R.string.best_seller),
+        style = MaterialTheme.typography.overline
+    )
+}
+
+@Composable
+fun RatingRow(rating: Double) {
+    Row() {
+        Text(
+            text = rating.toString(),
+            style = MaterialTheme.typography.caption,
+            modifier = Modifier
+                .padding(end = 4.dp)
+                .alpha(0.5f),
+        )
+        for (n in 1..5) {
+            Image(
+                painter = painterResource(
+                    id =
+                    if (n > rating)
+                        R.drawable.ic_empty_star
+                    else
+                        R.drawable.ic_star
+                ),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(10.dp, 10.dp)
+                    .align(Alignment.CenterVertically),
+                contentScale = ContentScale.Crop
             )
         }
     }
@@ -101,8 +111,9 @@ fun CourseCardPreview() {
         Surface {
             CourseCard(
                 Course(
-                """Test
-Test""", R.drawable.card1,4.5, )
+                    """Test
+Test""", img = R.drawable.card1, rating = 4.5, bestSeller = true
+                )
             )
         }
     }
@@ -118,7 +129,7 @@ Test""", R.drawable.card1,4.5, )
 fun CourseCardDarkPreview() {
     ELearnTheme {
         Surface {
-            CourseCard(Course("""Test""", R.drawable.card1, 2.0))
+            CourseCard(Course("""Test""", img = R.drawable.card1, rating = 2.0, bestSeller = true))
         }
     }
 }

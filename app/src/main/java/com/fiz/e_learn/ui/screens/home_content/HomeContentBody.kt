@@ -1,19 +1,17 @@
 package com.fiz.e_learn.ui.screens.home_content
 
 import android.content.res.Configuration
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -74,7 +72,7 @@ fun HomeContentBody(mainNavController: NavController? = null) {
                         "Search here...",
                         Modifier
                             .fillMaxWidth()
-                            .requiredHeight(48.dp),
+                            .defaultMinSize(minHeight = 48.dp),
                         R.drawable.ic_search,
                         16.dp,
                         16.dp
@@ -93,7 +91,47 @@ fun HomeContentBody(mainNavController: NavController? = null) {
                 val currentDestination = navBackStackEntry?.destination
                 items.forEach { screen ->
                     BottomNavigationItem(
-                        icon = { Icon(Icons.Filled.Favorite, contentDescription = null) },
+                        icon = {
+                            Log.d("AAA", screen.route)
+                            Image(
+                                painter = painterResource(
+                                    when (screen.route) {
+                                        "home" -> {
+
+                                            if (currentDestination?.hierarchy?.any { it.route == screen.route } == true)
+                                                R.drawable.ic_home_selected
+                                            else
+                                                R.drawable.ic_home
+
+                                        }
+                                        "favorite" ->{
+                                            if (currentDestination?.hierarchy?.any { it.route == screen.route } == true)
+                                                R.drawable.ic_favorities_selected
+                                            else
+                                                R.drawable.ic_favorities
+                                        }
+                                        "courses" -> {
+                                            if (currentDestination?.hierarchy?.any { it.route == screen.route } == true)
+                                                R.drawable.ic_learning_selected
+                                            else
+                                                R.drawable.ic_learning
+                                        }
+                                        else ->{
+                                            if (currentDestination?.hierarchy?.any { it.route == screen.route } == true)
+                                                R.drawable.ic_account_selected
+                                            else
+                                                R.drawable.ic_account
+                                        }
+                                    }
+                                ),
+                                contentDescription = null,
+                                colorFilter =
+                                if (currentDestination?.hierarchy?.any { it.route == screen.route } == true)
+                                    ColorFilter.tint(color = MaterialTheme.colors.greenText)
+                                else
+                                    null
+                            )
+                        },
                         selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                         onClick = {
                             navController.navigate(screen.route) {
@@ -120,6 +158,7 @@ fun HomeContentBody(mainNavController: NavController? = null) {
 private fun IconTopBar(icon: Int) {
     Box(
         modifier = Modifier
+            .padding( top = 8.dp, bottom = 8.dp)
             .size(48.dp)
             .background(
                 color = MaterialTheme.colors.surface,
@@ -130,7 +169,6 @@ private fun IconTopBar(icon: Int) {
     {
         Image(
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp)
                 .size(20.dp, 20.dp),
             painter = painterResource(
                 id = icon

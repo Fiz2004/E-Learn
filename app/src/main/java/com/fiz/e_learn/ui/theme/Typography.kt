@@ -25,6 +25,11 @@ import com.fiz.e_learn.R
             fontWeight = FontWeight.W600,
             fontSize = 24.sp
         ),
+        h6 = TextStyle(
+            fontFamily = Inter,
+            fontWeight = FontWeight.W500,
+            fontSize = 20.sp
+        ),
         subtitle1 = TextStyle(
             fontFamily = Inter,
             fontWeight = FontWeight.Medium,
@@ -47,11 +52,6 @@ import com.fiz.e_learn.R
         ),
 
 
-        h6 = TextStyle(
-            fontFamily = Inter,
-            fontWeight = FontWeight.W600,
-            fontSize = 20.sp
-        ),
         body1 = TextStyle(
             fontFamily = ZillaSlab,
             fontWeight = FontWeight.Normal,

@@ -49,7 +49,7 @@ fun LogInBody(
 
         EmailTextField()
 
-        PasswordFingerPrintTextField()
+        PasswordFingerPrintTextField(modifier = Modifier.defaultMinSize(minHeight = 48.dp))
 
         Row(modifier = Modifier
             .fillMaxWidth().padding(bottom = 20.dp),horizontalArrangement = Arrangement.End) {

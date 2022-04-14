@@ -5,7 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.fiz.e_learn.ui.screens.home.HomeBody
+import com.fiz.e_learn.ui.screens.home_content.homeAll.HomeBodyAll
+import com.fiz.e_learn.ui.screens.home_content.homeMain.HomeBodyMain
 
 @Composable
 fun HomeContentNavHost(
@@ -18,7 +19,13 @@ fun HomeContentNavHost(
         modifier = modifier
     ) {
         composable(HomeContentScreen.HomeScreen.route) {
-            HomeBody(navController)
+            HomeBodyMain(navController,onClickSeeAll= {
+                navController.navigate(HomeContentScreen.HomeScreen.route + "/SeeAll")
+            })
+        }
+        composable(HomeContentScreen.HomeScreen.route + "/SeeAll") {
+            HomeBodyAll(navController,onClickSeeAll= {
+            })
         }
         composable(HomeContentScreen.FavoritiesScreen.route) {
             FavoritiesBody(navController)

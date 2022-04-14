@@ -21,9 +21,9 @@ import com.fiz.e_learn.ui.theme.editText
 import com.fiz.e_learn.ui.theme.onSurface2
 
 @Composable
-fun PasswordFingerPrintTextField() {
+fun PasswordFingerPrintTextField(modifier: Modifier=Modifier) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .padding(top = 16.dp, bottom = 12.dp)
             .defaultMinSize(minHeight = 48.dp)
             .fillMaxWidth()

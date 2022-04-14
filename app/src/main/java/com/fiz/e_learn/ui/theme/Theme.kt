@@ -35,7 +35,9 @@ val Colors.border: Color
 val Colors.borderIconLogIn: Color
     get() = White_400
 
-
+@get:Composable
+val Colors.backgroundHome: Color
+    get() = if (isLight) White_900 else Black_800
 
 @get:Composable
 val Colors.greenText: Color
