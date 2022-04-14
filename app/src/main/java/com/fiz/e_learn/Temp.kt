@@ -160,14 +160,6 @@ fun FloatingActionButton(
 ) {
 }
 
-@Composable
-private fun MainActivityScreen(mainViewModel: MainViewModel) {
-    MainScreen(
-        items = mainViewModel.mainItems,
-        onAddItem = { mainViewModel.addItem(it) }, // in the next steps we'll complete this
-        onRemoveItem = { mainViewModel.removeItem(it) } // in the next steps we'll complete this
-    )
-}
 
 @Composable
 private fun MainScreen(

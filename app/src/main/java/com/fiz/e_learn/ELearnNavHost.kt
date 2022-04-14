@@ -2,6 +2,7 @@ package com.fiz.e_learn
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -13,11 +14,17 @@ import com.fiz.e_learn.ui.screens.on_boarding.OnBoardingBody
 @Composable
 fun ELearnNavHost(
     navController: NavHostController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    mainViewModel: MainViewModel = viewModel()
 ) {
+    val startScreen = if (mainViewModel.firstTimeLaunch)
+        ELearnScreen.TitleScreen.name
+    else
+        ELearnScreen.LogIn.name
+
     NavHost(
         navController = navController,
-        startDestination = ELearnScreen.TitleScreen.name,
+        startDestination = startScreen,
         modifier = modifier
     ) {
         composable(ELearnScreen.TitleScreen.name) {
@@ -25,16 +32,17 @@ fun ELearnNavHost(
                 navController.navigate("onBoarding")
             }
         }
-        onBoardingGraph(navController)
+        onBoardingGraph(mainViewModel,navController)
+
         composable(ELearnScreen.LogIn.name) {
-            LogInBody (
-                onClickSignUp={
-                navController.navigate(ELearnScreen.CreateAccount.name)
-            },
-                onClickForgotPassword={
-                navController.navigate(ELearnScreen.ForgotPassword.name)
-            },
-                onClickSignIn={
+            LogInBody(
+                onClickSignUp = {
+                    navController.navigate(ELearnScreen.CreateAccount.name)
+                },
+                onClickForgotPassword = {
+                    navController.navigate(ELearnScreen.ForgotPassword.name)
+                },
+                onClickSignIn = {
                     navController.navigate(ELearnScreen.HomeContent.name)
                 })
         }
@@ -70,7 +78,7 @@ fun ELearnNavHost(
     }
 }
 
-fun NavGraphBuilder.onBoardingGraph(navController: NavController) {
+fun NavGraphBuilder.onBoardingGraph(mainViewModel: MainViewModel,navController: NavController) {
     navigation(startDestination = ELearnScreen.OnBoarding.name + "/1", route = "onBoarding") {
         composable(ELearnScreen.OnBoarding.name + "/1") {
             OnBoardingBody("1") {
@@ -87,7 +95,10 @@ fun NavGraphBuilder.onBoardingGraph(navController: NavController) {
                 when (page) {
                     2 -> navController.navigate(ELearnScreen.OnBoarding.name + "/3")
                     3 -> navController.navigate(ELearnScreen.OnBoarding.name + "/4")
-                    4 -> navController.navigate(ELearnScreen.LogIn.name)
+                    4 -> {
+                        mainViewModel.firstTimeLaunchCompleted()
+                        navController.navigate(ELearnScreen.LogIn.name)
+                    }
                 }
             }
         }

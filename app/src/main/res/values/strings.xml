@@ -20,6 +20,7 @@
     <string name="create_account">Create an Account</string>
     <string name="create_account_description">Create an Account</string>
     <string name="best_seller">BEST SELLER</string>
+    <string name="preferences">com.fiz.e-learn</string>
 
     <string-array name="on_boarding_title">
         <item>Online Learning Platform</item>

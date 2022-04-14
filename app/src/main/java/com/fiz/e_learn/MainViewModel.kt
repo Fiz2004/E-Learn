@@ -1,25 +1,27 @@
 package com.fiz.e_learn
 
+import android.content.SharedPreferences
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MainViewModel:ViewModel() {
-    var mainItems by mutableStateOf<MainItems>(MainItems(0))
+@HiltViewModel
+class MainViewModel @Inject constructor(private val sharedPreferences: SharedPreferences) :
+    ViewModel() {
+    var firstTimeLaunch by mutableStateOf<Boolean>(true)
         private set
 
-    var todoItems = mutableStateListOf<MainItems>()
-        private set
-
-    fun addItem(mainItems:MainItems){
-        this.mainItems =MainItems(this.mainItems.page+1)
+    init {
+        firstTimeLaunch = sharedPreferences.getBoolean("firstTimeLaunch", true)
     }
 
-    fun removeItem(mainItems:MainItems){
-        this.mainItems =MainItems(this.mainItems.page-1)
+    fun firstTimeLaunchCompleted() {
+        firstTimeLaunch = false
+        sharedPreferences.edit()
+            .putBoolean("firstTimeLaunch", false)
+            .apply()
     }
 }

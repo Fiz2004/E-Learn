@@ -6,17 +6,16 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.material.Surface
 import com.fiz.e_learn.ui.theme.ELearnTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-    private val mainViewModel: MainViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ELearnTheme {
                 Surface {
-                    ELearnApp(mainViewModel)
+                    ELearnApp()
                 }
             }
         }
