@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.screens.home_content.homeMain
+package com.fiz.e_learn.ui.screens.home_content.home_main
 
 import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke

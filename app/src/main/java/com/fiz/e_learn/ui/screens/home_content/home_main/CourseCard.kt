@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.screens.home_content.homeMain
+package com.fiz.e_learn.ui.screens.home_content.home_main
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
@@ -67,7 +67,8 @@ fun TextBestSeller(modifier:Modifier = Modifier) {
             .padding(vertical = 4.dp, horizontal = 6.dp),
         color = Black_900,
         text = stringResource(R.string.best_seller),
-        style = MaterialTheme.typography.overline
+        style = MaterialTheme.typography.overline,
+        maxLines = 1
     )
 }
 
@@ -111,7 +112,7 @@ fun CourseCardPreview() {
         Surface {
             CourseCard(
                 Course(
-                    """Test
+                    name="""Test
 Test""", img = R.drawable.card1, rating = 4.5, bestSeller = true
                 )
             )
@@ -129,7 +130,7 @@ Test""", img = R.drawable.card1, rating = 4.5, bestSeller = true
 fun CourseCardDarkPreview() {
     ELearnTheme {
         Surface {
-            CourseCard(Course("""Test""", img = R.drawable.card1, rating = 2.0, bestSeller = true))
+            CourseCard(Course(name="""Test""", img = R.drawable.card1, rating = 2.0, bestSeller = true))
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.screens.home_content.homeAll
+package com.fiz.e_learn.ui.screens.home_content.home_all
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
@@ -19,15 +19,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
-import com.fiz.e_learn.ui.screens.home_content.homeMain.Course
-import com.fiz.e_learn.ui.screens.home_content.homeMain.RatingRow
-import com.fiz.e_learn.ui.screens.home_content.homeMain.TextBestSeller
+import com.fiz.e_learn.ui.screens.home_content.home_main.Course
+import com.fiz.e_learn.ui.screens.home_content.home_main.RatingRow
+import com.fiz.e_learn.ui.screens.home_content.home_main.TextBestSeller
 import com.fiz.e_learn.ui.theme.*
 
 @Composable
-fun FullCourseCard(course: Course) {
+fun FullCourseCard(course: Course, modifier: Modifier = Modifier) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .height(130.dp)
             .fillMaxWidth()
             .clip(shape = RoundedCornerShape(8.dp))

@@ -40,6 +40,11 @@ import com.fiz.e_learn.R
             fontWeight = FontWeight.Light,
             fontSize = 14.sp
         ),
+        body2 = TextStyle(
+            fontFamily = Inter,
+            fontWeight = FontWeight.Light,
+            fontSize = 14.sp
+        ),
         overline = TextStyle(
             fontFamily = Inter,
             fontWeight = FontWeight.W600,
@@ -52,15 +57,13 @@ import com.fiz.e_learn.R
         ),
 
 
+
         body1 = TextStyle(
             fontFamily = ZillaSlab,
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp
         ),
-        body2 = TextStyle(
-            fontFamily = Inter,
-            fontSize = 14.sp
-        ),
+
         button = TextStyle(
             fontFamily = Inter,
             fontWeight = FontWeight.W500,

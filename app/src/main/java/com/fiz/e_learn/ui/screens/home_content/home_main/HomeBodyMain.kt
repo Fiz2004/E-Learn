@@ -1,16 +1,14 @@
-package com.fiz.e_learn.ui.screens.home_content.homeMain
+package com.fiz.e_learn.ui.screens.home_content.home_main
 
 import android.content.res.Configuration
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -25,83 +23,6 @@ import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.theme.ELearnTheme
 import com.fiz.e_learn.ui.theme.backgroundHome
 import com.fiz.e_learn.ui.theme.greenText
-import com.fiz.e_learn.ui.theme.onSurface2
-
-val listCategories = listOf(
-    "Design",
-    "Development",
-    "Business",
-    "Music",
-    "It & Software",
-    "Health@Fitness",
-    "Business",
-    "Design",
-    "Development",
-    "Business",
-    "Music",
-    "It & Software",
-    "Health@Fitness",
-    "Business",
-)
-val courses = listOf(
-    Course(
-        name = "Generator on there Internet tend",
-        author = "Stephen Moris",
-        cost = 14.50,
-        img = R.drawable.card4,
-        rating = 4.5,
-        bestSeller = false
-    ),
-    Course(
-        name = "Coding with Python Interface",
-        author = "Stephen Moris",
-        cost = 14.50,
-        img = R.drawable.card3,
-        rating = 2.5,
-        bestSeller = true
-    ),
-    Course(
-        name = "Basic Intro with the\n" +
-                "Development",
-        img = R.drawable.card4,
-        author = "Stephen Moris",
-        cost = 14.50,
-        rating = 3.5,
-        bestSeller = false
-    ),
-    Course(
-        name = "Generator on there Internet tend",
-        author = "Stephen Moris",
-        cost = 14.50,
-        img = R.drawable.card5,
-        rating = 1.5,
-        bestSeller = true
-    ),
-    Course(
-        name = "Generator on there Internet tend",
-        author = "Stephen Moris",
-        cost = 14.50,
-        img = R.drawable.card3,
-        rating = 2.0,
-        bestSeller = true
-    ),
-    Course(
-        name = "Generator on there Internet tend",
-        author = "Stephen Moris",
-        cost = 14.50,
-        img = R.drawable.card2,
-        rating = 1.5,
-        bestSeller = true
-    ),
-    Course(
-        name = "Generator on there Internet tend",
-        author = "Stephen Moris",
-        cost = 14.50,
-        img = R.drawable.card1,
-        rating = 5.0,
-        bestSeller = false
-    ),
-)
 
 @Composable
 fun HomeBodyMain(navController: NavController? = null, onClickSeeAll: () -> Unit = { }) {

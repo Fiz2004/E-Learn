@@ -1,7 +1,8 @@
-package com.fiz.e_learn.ui.screens.home_content.homeAll
+package com.fiz.e_learn.ui.screens.home_content.home_all
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
@@ -14,12 +15,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.fiz.e_learn.R
-import com.fiz.e_learn.ui.screens.home_content.homeMain.courses
+import com.fiz.e_learn.ui.screens.home_content.home_main.courses
 import com.fiz.e_learn.ui.theme.ELearnTheme
 import com.fiz.e_learn.ui.theme.backgroundHome
 
 @Composable
-fun HomeBodyAll(navController: NavController? = null, onClickSeeAll: () -> Unit = { }) {
+fun HomeBodyAll(navController: NavController? = null, onClickCourse: (Int) -> Unit = { }) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -36,7 +37,12 @@ fun HomeBodyAll(navController: NavController? = null, onClickSeeAll: () -> Unit 
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             courses.forEach {
-                item { FullCourseCard(it) }
+                item {
+                    FullCourseCard(
+                        it,
+                        modifier = Modifier.clickable {onClickCourse(it.id) }
+                    )
+                }
             }
         }
     }
