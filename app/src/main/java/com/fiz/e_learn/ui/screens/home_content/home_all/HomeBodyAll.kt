@@ -13,14 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.screens.home_content.home_main.courses
 import com.fiz.e_learn.ui.theme.ELearnTheme
 import com.fiz.e_learn.ui.theme.backgroundHome
 
 @Composable
-fun HomeBodyAll(navController: NavController? = null, onClickCourse: (Int) -> Unit = { }) {
+fun HomeBodyAll(filter: String?="all", onClickCourse: (Int) -> Unit = { }) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -36,11 +35,17 @@ fun HomeBodyAll(navController: NavController? = null, onClickCourse: (Int) -> Un
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            courses.forEach {
+            courses.filter {
+                when (filter) {
+                    "all" -> true
+                    "top" -> it.bestSeller
+                    else -> it.category == filter
+                }
+            }.forEach {
                 item {
                     FullCourseCard(
                         it,
-                        modifier = Modifier.clickable {onClickCourse(it.id) }
+                        modifier = Modifier.clickable { onClickCourse(it.id) }
                     )
                 }
             }

@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import com.fiz.e_learn.ui.screens.change_password.ChangePasswordBody
 import com.fiz.e_learn.ui.screens.create_account.CreateAccountBody
 import com.fiz.e_learn.ui.screens.home_content.HomeContentBody
+import com.fiz.e_learn.ui.screens.info.InfoBody
 import com.fiz.e_learn.ui.screens.on_boarding.OnBoardingBody
 
 @Composable
@@ -64,6 +65,11 @@ fun ELearnNavHost(
         }
         composable(ELearnScreen.ForgotPassword.name) {
             ChangePasswordBody {
+                navController.navigate(ELearnScreen.HomeContent.name)
+            }
+        }
+        composable(ELearnScreen.Info.name) {
+            InfoBody {
                 navController.navigate(ELearnScreen.HomeContent.name)
             }
         }

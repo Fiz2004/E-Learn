@@ -20,8 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fiz.e_learn.R
-import com.fiz.e_learn.ui.components.TextDescription
-import com.fiz.e_learn.ui.components.TextTitle
+import com.fiz.e_learn.ui.components.TextSubtitle2
+import com.fiz.e_learn.ui.components.TextH5
 import com.fiz.e_learn.ui.theme.ELearnTheme
 import com.fiz.e_learn.ui.theme.surface2
 
@@ -75,13 +75,13 @@ fun OnBoardingBody(
 @Composable
 fun MainText(onBoardingViewModel: OnBoardingViewModel = viewModel(),onClickButton: () -> Unit = {}) {
 
-    TextTitle(
+    TextH5(
         stringArrayResource(R.array.on_boarding_title)[onBoardingViewModel.uiState.page-1],
         Modifier
             .padding(bottom = 13.41.dp)
             .width(280.dp)
     )
-    TextDescription(
+    TextSubtitle2(
         stringArrayResource(R.array.on_boarding_description)[onBoardingViewModel.uiState.page-1],
         Modifier.padding(start = 50.dp, end = 50.dp, bottom = 68.4.dp))
     FloatingButton(onBoardingViewModel, onClickButton)

@@ -15,14 +15,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.screens.home_content.home_main.Course
 import com.fiz.e_learn.ui.screens.home_content.home_main.RatingRow
 import com.fiz.e_learn.ui.screens.home_content.home_main.TextBestSeller
-import com.fiz.e_learn.ui.theme.*
+import com.fiz.e_learn.ui.theme.ELearnTheme
+import com.fiz.e_learn.ui.theme.greenText
+import com.fiz.e_learn.ui.theme.onSurface2
+import com.fiz.e_learn.ui.theme.surface2
 
 @Composable
 fun FullCourseCard(course: Course, modifier: Modifier = Modifier) {
@@ -41,16 +43,23 @@ fun FullCourseCard(course: Course, modifier: Modifier = Modifier) {
             contentDescription = null,
             modifier = Modifier
                 .padding(4.dp)
-                .size(136.dp, 122.dp)
+                .height(122.dp)
+                .weight(0.45f)
                 .clip(shape = RoundedCornerShape(8.dp)),
             contentScale = ContentScale.Crop
         )
+
         Spacer(
             modifier = Modifier
-                .weight(1f)
+                .weight(0.05f)
                 .defaultMinSize(minWidth = 22.dp)
         )
-        Column() {
+
+        Column(
+            modifier = Modifier
+                .padding(end = 8.dp)
+                .weight(0.5f)
+        ) {
             RatingRow(course.rating)
             Text(
                 text = course.name,
@@ -83,33 +92,6 @@ fun FullCourseCard(course: Course, modifier: Modifier = Modifier) {
                 if (course.bestSeller)
                     TextBestSeller()
             }
-        }
-
-        Box(
-            modifier = Modifier.clip(shape = RoundedCornerShape(8.dp))
-        ) {
-            Text(
-                modifier = Modifier
-                    .padding(4.dp)
-                    .align(Alignment.BottomStart)
-                    .clip(shape = RoundedCornerShape(8.dp))
-                    .background(MaterialTheme.colors.primary)
-                    .padding(vertical = 4.dp, horizontal = 6.dp),
-                color = Black_900,
-                text = stringResource(R.string.best_seller),
-                style = MaterialTheme.typography.overline
-            )
-        }
-        Column(
-            modifier = Modifier
-        ) {
-            RatingRow(course.rating)
-            Text(
-                modifier = Modifier
-                    .width(158.dp),
-                text = course.name,
-                style = MaterialTheme.typography.subtitle1,
-            )
         }
     }
 }

@@ -7,8 +7,10 @@ data class Course(
     val name: String="",
     val category: String="",
     val author:String="",
+    val structure:List<String> =listOf(),
     val includes:List<String> =listOf(),
     val willLearn:List<String> =listOf(),
+    val annotation:String="",
     val description:String="",
     val img: Int=0,
     val video:Int=0,
@@ -47,14 +49,27 @@ val courses = listOf(
         bestSeller = false
     ),
     Course(
-        id=1,
+        id = 1,
         name = "Coding with Python Interface",
         author = "Stephen Moris",
-        description="A long established fact that a reader will beens distract by the readable content of a page when looking attes its layout... read more A long established fact that a reader will beens distract by the readable content of a page when looking attes its layout... read more",
+        annotation = "A long established fact that a reader will beens distract by the readable content of a page when looking attes its layout. A long established fact that a reader will beens distract by the readable content of a page when looking attes its layout... read more",
+        description = "There are many variations of passages Ipsum’s available, but the majority will have suffered were going to use a passage. All the Lorem Ipsum generators on the Internets tend to repeat predefined chunks.",
         cost = 14.50,
-        countVoted=122,
-        allVoted=25190,
+        countVoted = 122,
+        allVoted = 25190,
         img = R.drawable.card3,
+        includes = listOf(
+            "10.5 hrs on demand video",
+            "15 Question Patterns",
+            "Support Files",
+            "Access on all Devices",
+            "Certificate of Completions"
+        ),
+        willLearn = listOf(
+            "There are many variations of passages of Ipsum available, but the majority will have suffered alteration.",
+            "What is some form by injected, orients slightly believable if you are going to use a passage.",
+            "A handful of model sentence what are which looks reasonable.",
+        ),
         rating = 2.5,
         bestSeller = true
     ),

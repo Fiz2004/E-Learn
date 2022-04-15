@@ -22,10 +22,9 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.fiz.e_learn.HomeContentNavHost
 import com.fiz.e_learn.R
-import com.fiz.e_learn.items
-import com.fiz.e_learn.ui.screens.log_in.BaseOutlinedTextField
+import com.fiz.e_learn.ui.components.BaseOutlinedTextField
+import com.fiz.e_learn.ui.components.BaseOutlinedTextFieldWithState
 import com.fiz.e_learn.ui.theme.ELearnTheme
 import com.fiz.e_learn.ui.theme.greenText
 import com.fiz.e_learn.ui.theme.onSurface2
@@ -68,14 +67,14 @@ fun HomeContentBody(mainNavController: NavController? = null) {
 
                         IconTopBar(R.drawable.ic_basket)
                     }
-                    BaseOutlinedTextField(
+                    BaseOutlinedTextFieldWithState(
                         "Search here...",
-                        Modifier
-                            .fillMaxWidth()
-                            .defaultMinSize(minHeight = 48.dp),
                         R.drawable.ic_search,
                         16.dp,
-                        16.dp
+                        16.dp,
+                        modifier=Modifier
+                            .fillMaxWidth()
+                            .defaultMinSize(minHeight = 48.dp)
                     )
                 }
             }

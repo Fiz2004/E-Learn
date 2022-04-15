@@ -17,20 +17,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.ui.theme.ELearnTheme
-import com.fiz.e_learn.ui.theme.border
+import com.fiz.e_learn.ui.theme.backgroundHome
+import com.fiz.e_learn.ui.theme.borderChip
+import com.fiz.e_learn.ui.theme.textChip
 
 @Composable
 fun Chip(modifier: Modifier = Modifier, text: String) {
     Card(
-        modifier = modifier.height(44.dp).background(color=MaterialTheme.colors.surface),
-        border = BorderStroke(color = MaterialTheme.colors.border, width = 1.dp),
+        modifier = modifier
+            .height(44.dp)
+            .background(MaterialTheme.colors.backgroundHome),
+        backgroundColor = MaterialTheme.colors.backgroundHome,
+        border = BorderStroke(color = MaterialTheme.colors.borderChip, width = 1.dp),
         shape = RoundedCornerShape(16.dp)
     ) {
         Row(
-            modifier = Modifier.padding(start = 16.dp, top = 12.dp, end = 16.dp, bottom = 12.dp),
+            modifier = Modifier
+                .padding(start = 16.dp, top = 12.dp, end = 16.dp, bottom = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = text)
+            Text(
+                text = text,
+                style = MaterialTheme.typography.subtitle1,
+                color = MaterialTheme.colors.textChip
+            )
         }
     }
 }

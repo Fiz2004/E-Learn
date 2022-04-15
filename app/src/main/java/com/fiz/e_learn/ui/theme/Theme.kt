@@ -32,6 +32,14 @@ val Colors.border: Color
     get() = if (isLight) Black_500 else White_500
 
 @get:Composable
+val Colors.borderChip: Color
+    get() = if (isLight) Black_900 else White_500
+
+@get:Composable
+val Colors.textChip: Color
+    get() = if (isLight) Black_900 else White_900
+
+@get:Composable
 val Colors.borderIconLogIn: Color
     get() = White_400
 

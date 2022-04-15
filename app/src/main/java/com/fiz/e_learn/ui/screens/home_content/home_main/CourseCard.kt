@@ -23,21 +23,20 @@ import com.fiz.e_learn.ui.theme.Black_900
 import com.fiz.e_learn.ui.theme.ELearnTheme
 
 @Composable
-fun CourseCard(course: Course) {
+fun CourseCard(course: Course,modifier:Modifier = Modifier) {
     Column(
-        modifier = Modifier
-            .size(158.dp, 168.dp)
+        modifier = modifier.fillMaxWidth().height(183.dp)
     ) {
         Box(
-            modifier = Modifier.clip(shape = RoundedCornerShape(8.dp))
+            modifier = Modifier.fillMaxWidth().clip(shape = RoundedCornerShape(8.dp))
         ) {
             Image(
                 painter = painterResource(
                     id = course.img
                 ),
                 contentDescription = null,
-                modifier = Modifier
-                    .size(158.dp, 104.dp),
+                modifier = Modifier.fillMaxWidth()
+                    .height( 120.dp),
                 contentScale = ContentScale.Crop
             )
             if (course.bestSeller)
@@ -49,7 +48,7 @@ fun CourseCard(course: Course) {
             RatingRow(course.rating)
             Text(
                 modifier = Modifier
-                    .width(158.dp),
+                    .fillMaxWidth(),
                 text = course.name,
                 style = MaterialTheme.typography.subtitle1,
             )

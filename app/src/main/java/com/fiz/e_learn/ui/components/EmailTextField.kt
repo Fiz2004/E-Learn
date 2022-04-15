@@ -1,20 +1,28 @@
-package com.fiz.e_learn.ui.screens.create_account
+package com.fiz.e_learn.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.fiz.e_learn.ui.screens.log_in.BaseOutlinedTextField
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.fiz.e_learn.ui.components.BaseOutlinedTextField
 import com.fiz.e_learn.R
+import com.fiz.e_learn.ui.screens.create_account.CreateAccountViewModel
 
 @Composable
-fun EmailTextField() {
+fun EmailTextField(
+    modifier:Modifier=Modifier,
+    createAccountViewModel: CreateAccountViewModel = viewModel(),
+) {
     BaseOutlinedTextField(
-        stringResource(R.string.email_id), Modifier
-            .padding(top = 24.dp)
-            .fillMaxWidth(), R.drawable.ic_email,
-        20.dp, 16.dp
+        text=createAccountViewModel.emailId,
+        textChange={emailId->createAccountViewModel.newEmailId(emailId)},
+        icon=R.drawable.ic_email,
+        iconSizeWidth = 20.dp,
+        iconSizeHeight = 16.dp,
+        placeholderText = stringResource(R.string.email_id),
+        modifier = Modifier
+            .fillMaxWidth()
     )
 }

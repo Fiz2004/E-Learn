@@ -1,32 +1,27 @@
 package com.fiz.e_learn.ui.screens.create_account
 
 import android.content.res.Configuration
+import android.widget.Toast
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fiz.e_learn.R
-import com.fiz.e_learn.ui.components.TextDescription
-import com.fiz.e_learn.ui.components.TextTitle
-import com.fiz.e_learn.ui.components.BaseContainerForLogInGroup
-import com.fiz.e_learn.ui.screens.log_in.BaseOutlinedTextField
+import com.fiz.e_learn.ui.screens.log_in.TextSubtitle1
+import com.fiz.e_learn.ui.components.*
+import com.fiz.e_learn.ui.theme.Black_900
 import com.fiz.e_learn.ui.theme.ELearnTheme
 import com.fiz.e_learn.ui.theme.greenText
 
@@ -40,112 +35,189 @@ fun CreateAccountBody(
     BaseContainerForLogInGroup {
         BaseIconForLogInGroup(R.drawable.ic_people, 48.dp, 32.dp)
 
-        TextTitle(
-            stringResource(R.string.create_account),
-            Modifier.padding(top = 16.dp)
-        )
+        Spacer(modifier = Modifier.padding(12.dp))
 
-        TextDescription(
-            stringResource(R.string.create_account_description),
-            Modifier.padding(top = 4.dp)
-        )
+        TextH5(R.string.create_account)
 
-        BaseOutlinedTextField(
-            stringResource(R.string.username), Modifier
-                .padding(top = 24.dp)
-                .fillMaxWidth(), R.drawable.ic_username,
-            16.dp, 20.dp
-        )
+        Spacer(modifier = Modifier.padding(4.dp))
+
+        TextSubtitle2(R.string.create_account_description)
+
+        Spacer(modifier = Modifier.padding(20.dp))
+
+        UserNameTextField()
+
+        Spacer(modifier = Modifier.padding(12.dp))
 
         EmailTextField()
 
+        Spacer(modifier = Modifier.padding(12.dp))
+
         PasswordFingerPrintTextField()
 
-        Row(modifier = Modifier.padding(end = 48.dp)) {
-            val checkedState = remember { mutableStateOf(false) }
-            Checkbox(checked = checkedState.value, onCheckedChange = { checkedState.value = it })
+        Spacer(modifier = Modifier.padding(8.dp))
 
+        TextPrivacy(onClickTermsOfServices, onClickPrivacyPolicy)
 
-            Text(
-                modifier = Modifier
-                    .padding(top = 16.dp)
-                    .clickable(onClick = { onClickTermsOfServices(); onClickPrivacyPolicy() }),
-                text = buildAnnotatedString {
-                    withStyle(
-                        style = SpanStyle(
-                            color = MaterialTheme.colors.onSurface
-                        )
-                    ) {
-                        append("I hereby agree to the")
-                        append(" ")
-                    }
-                    withStyle(
-                        style = SpanStyle(
-                            color = MaterialTheme.colors.greenText
-                        )
-                    ) {
-                        append("terms of services")
-                    }
-                    withStyle(
-                        style = SpanStyle(
-                            color = MaterialTheme.colors.onSurface
-                        )
-                    ) {
-                        append(" ")
-                        append("and")
-                        append(" ")
-                    }
-                    withStyle(
-                        style = SpanStyle(
-                            color = MaterialTheme.colors.greenText
-                        )
-                    ) {
-                        append("privacy policy")
-                    }
-                },
-                color = MaterialTheme.colors.primary,
-            )
-        }
+        Spacer(modifier = Modifier.padding(8.dp))
 
-        Button(modifier = Modifier
-            .padding(top = 24.dp)
-            .height(48.dp)
-            .fillMaxWidth(),
-            onClick = { onClickCreateAccount() }) {
-            Text(
-                text = "Create account",
-                style = TextStyle(
-                    fontFamily = FontFamily(Font(R.font.inter_medium)),
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 16.sp
-                )
-            )
-        }
-
-        Text(
-            modifier = Modifier
-                .padding(top = 16.dp)
-                .clickable(onClick = { onClickSignIn() }),
-            text = buildAnnotatedString {
-                withStyle(
-                    style = SpanStyle(
-                        color = MaterialTheme.colors.onSurface
-                    )
-                ) {
-                    append("Already have an account?")
-                    append(" ")
-                }
-                withStyle(
-                    style = SpanStyle(
-                        color = MaterialTheme.colors.greenText
-                    )
-                ) {
-                    append("Sign in")
-                }
-            },
-            color = MaterialTheme.colors.primary,
+        CreateAccountButton(
+            onClickCreateAccount=onClickCreateAccount
         )
 
+        Spacer(modifier = Modifier.padding(8.dp))
+
+        SignInText(onClickSignIn)
+
+    }
+}
+
+@Composable
+private fun SignInText(onClickSignIn: () -> Unit) {
+    Text(
+        modifier = Modifier
+            .clickable(onClick = { onClickSignIn() }),
+        text = buildAnnotatedString {
+            withStyle(
+                style = SpanStyle(
+                    color = MaterialTheme.colors.onSurface
+                )
+            ) {
+                append("Already have an account?")
+                append(" ")
+            }
+            withStyle(
+                style = SpanStyle(
+                    color = MaterialTheme.colors.greenText
+                )
+            ) {
+                append("Sign in")
+            }
+        },
+        color = MaterialTheme.colors.primary,
+    )
+}
+
+@Composable
+private fun CreateAccountButton(
+    modifier: Modifier=Modifier,
+    createAccountViewModel: CreateAccountViewModel = viewModel(),
+    onClickCreateAccount: () -> Unit) {
+
+    val context= LocalContext.current
+
+    Button(modifier = modifier
+        .height(54.dp)
+        .fillMaxWidth(),
+        enabled = createAccountViewModel.isCreateAccountButtonEnabled(),
+        onClick = {
+            if (createAccountViewModel.clickCreateAccount())
+                onClickCreateAccount()
+            else
+                Toast.makeText(context,"Error Create Account",Toast.LENGTH_SHORT).show()
+        }) {
+
+        TextSubtitle1(
+            text = "Create account",
+            color = Black_900,
+        )
+    }
+}
+
+@Composable
+private fun UserNameTextField(createAccountViewModel: CreateAccountViewModel = viewModel()) {
+    BaseOutlinedTextField(
+        text=createAccountViewModel.userName,
+        textChange={userName->createAccountViewModel.newUserName(userName)},
+        icon=R.drawable.ic_username,
+        iconSizeWidth = 16.dp,
+        iconSizeHeight = 20.dp,
+        placeholderText = stringResource(R.string.username),
+        modifier = Modifier
+            .fillMaxWidth()
+    )
+}
+
+@Composable
+private fun TextPrivacy(
+    onClickTermsOfServices: () -> Unit,
+    onClickPrivacyPolicy: () -> Unit
+) {
+    Row(modifier = Modifier.padding(end = 48.dp)) {
+        val checkedState = remember { mutableStateOf(false) }
+        Checkbox(checked = checkedState.value, onCheckedChange = { checkedState.value = it })
+
+        val annotatedText = buildAnnotatedString {
+            withStyle(
+                style = SpanStyle(
+                    color = MaterialTheme.colors.onSurface
+                )
+            ) {
+                append("I hereby agree to the")
+                append(" ")
+            }
+            pushStringAnnotation(
+                tag = "terms of services",
+                annotation = "terms of services"
+            )
+            withStyle(
+                style = SpanStyle(
+                    color = MaterialTheme.colors.greenText
+                )
+            ) {
+                append("terms of services")
+            }
+            pop()
+
+            withStyle(
+                style = SpanStyle(
+                    color = MaterialTheme.colors.onSurface
+                )
+            ) {
+                append(" ")
+                append("and")
+                append(" ")
+            }
+
+            pushStringAnnotation(
+                tag = "privacy policy",
+                annotation = "privacy policy"
+            )
+            withStyle(
+                style = SpanStyle(
+                    color = MaterialTheme.colors.greenText
+                )
+            ) {
+                append("privacy policy")
+            }
+            pop()
+        }
+
+        ClickableText(
+            modifier = Modifier
+                .padding(top = 16.dp),
+            onClick = { offset ->
+
+                annotatedText.getStringAnnotations(
+                    tag = "terms of services", start = offset,
+                    end = offset
+                )
+                    .firstOrNull()?.let {
+                        onClickTermsOfServices();
+                    }
+
+                annotatedText.getStringAnnotations(
+                    tag = "privacy policy", start = offset,
+                    end = offset
+                )
+                    .firstOrNull()?.let {
+                        onClickPrivacyPolicy()
+                    }
+
+
+            },
+            text = annotatedText,
+        )
     }
 }
 
