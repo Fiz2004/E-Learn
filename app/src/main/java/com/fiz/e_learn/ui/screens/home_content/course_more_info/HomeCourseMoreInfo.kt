@@ -4,35 +4,29 @@ import android.content.res.Configuration
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
 import com.fiz.e_learn.R
-import com.fiz.e_learn.ui.screens.home_content.home_course_base.HomeCourseBaseBody
-import com.fiz.e_learn.ui.screens.home_content.home_main.*
+import com.fiz.e_learn.ui.screens.home_content.home_main.courses
 import com.fiz.e_learn.ui.theme.ELearnTheme
 import com.fiz.e_learn.ui.theme.backgroundHome
 import com.fiz.e_learn.ui.theme.greenText
 import com.fiz.e_learn.ui.theme.surface2
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.ui.StyledPlayerView
-import com.google.android.exoplayer2.upstream.DataSource
-import com.google.android.exoplayer2.upstream.DefaultDataSource
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import org.threeten.bp.format.DateTimeFormatter
 
 @Composable
 fun HomeCourseMoreInfoBody(
@@ -56,87 +50,122 @@ fun HomeCourseMoreInfoBody(
                 Text(
                     modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),
                     text = "Curricullum:",
-                    style = MaterialTheme.typography.body2,
+                    style = MaterialTheme.typography.h6,
                 )
 
                 Text(
                     modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),
-                    text = "179 Lectures   /   20h 4min Length",
+                    text = "${course.countLectures} Lectures   /   ${course.length.toInt()}h ${course.length%1}min Length",
                     style = MaterialTheme.typography.body2,
                 )
 
-                for ((index,episode) in course.structure.withIndex())
+                for ((index, episode) in course.structure.withIndex()) {
                     Row(
                         modifier = Modifier.padding(bottom = 8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
                             modifier = Modifier.padding(start = 12.dp),
-                            text = "Episode $index - ",
+                            text = "Episode ${index+1} - ",
                             style = MaterialTheme.typography.body2,
                         )
                         Text(
                             modifier = Modifier.padding(start = 12.dp),
-                            text = episode,
+                            text = episode.nameEpisode,
                             style = MaterialTheme.typography.body2,
                         )
                     }
+                    if (episode.description.isNotBlank()){
+                        Text(
+                            modifier = Modifier.padding(start = 12.dp,bottom = 8.dp),
+                            text = episode.description,
+                            style = MaterialTheme.typography.body2,
+                        )
+                    }
+                }
             }
         }
 
         Text(
             modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),
             text = "Course Info:",
-            style = MaterialTheme.typography.body2,
+            style = MaterialTheme.typography.h6,
         )
 
-        Row() {
-            Image(
-                modifier = Modifier.padding(start=6.dp),
-                colorFilter = ColorFilter.tint(color = MaterialTheme.colors.greenText),
-                painter = painterResource(
-                    id = R.drawable.ic_account
-                ),
-                contentDescription = null,
-            )
-            Text(
-                modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),
-                text = "Last Updated on June 02, 2021",
-                style = MaterialTheme.typography.body2,
-            )
-        }
-        Row() {
-            Image(
-                modifier = Modifier.padding(start=6.dp),
-                colorFilter = ColorFilter.tint(color = MaterialTheme.colors.greenText),
-                painter = painterResource(
-                    id = R.drawable.ic_account
-                ),
-                contentDescription = null,
-            )
-            Text(
-                modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)
-                    .clickable { onClickAuthor() },
-                text = "Author : Stephen Moris",
-                style = MaterialTheme.typography.body2,
-            )
-        }
-        Row() {
-            Image(
-                modifier = Modifier.padding(start=6.dp),
-                colorFilter = ColorFilter.tint(color = MaterialTheme.colors.greenText),
-                painter = painterResource(
-                    id = R.drawable.ic_account
-                ),
-                contentDescription = null,
-            )
-            Text(
-                modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),
-                text = "English, French",
-                style = MaterialTheme.typography.body2,
-            )
-        }
+        CourseInfoItem(R.drawable.ic_update,"Last Updated on ${
+            DateTimeFormatter.ofPattern("MMMM dd, yyyy").format(course.lastUpdate)}")
+        CourseInfoItemWithClickedText(R.drawable.ic_users,"Author : ","${course.author}",onClickAuthor)
+        CourseInfoItem(R.drawable.ic_local,"English, French")
+    }
+}
 
+@Composable
+fun CourseInfoItem(icon:Int,text:String) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Image(
+            modifier = Modifier.padding(start = 6.dp, end = 10.dp),
+            colorFilter = ColorFilter.tint(color = MaterialTheme.colors.greenText),
+            painter = painterResource(
+                id = icon
+            ),
+            contentDescription = null,
+        )
+        Text(
+            modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),
+            text = text,
+            style = MaterialTheme.typography.body2,
+        )
+    }
+}
+
+@Composable
+private fun CourseInfoItemWithClickedText(icon:Int,text:String,clickedText:String,onClickAuthor: () -> Unit = { }) {
+    val annotatedText = buildAnnotatedString {
+        withStyle(
+            style = SpanStyle(
+                color = MaterialTheme.colors.onSurface
+            )
+        ) {
+            append(text)
+            append(" ")
+        }
+        pushStringAnnotation(
+            tag = "author",
+            annotation = "author"
+        )
+        withStyle(
+            style = SpanStyle(
+                color = MaterialTheme.colors.greenText
+            )
+        ) {
+            append(clickedText)
+        }
+    }
+
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Image(
+            modifier = Modifier.padding(start = 6.dp, end = 10.dp),
+            colorFilter = ColorFilter.tint(color = MaterialTheme.colors.greenText),
+            painter = painterResource(
+                id = icon
+            ),
+            contentDescription = null,
+        )
+        ClickableText(
+            modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),
+            text = annotatedText,
+            style = MaterialTheme.typography.body2,
+            onClick = { offset ->
+
+                annotatedText.getStringAnnotations(
+                    tag = "sign up", start = offset,
+                    end = offset
+                )
+                    .firstOrNull()?.let {
+                        onClickAuthor()
+                    }
+            },
+        )
     }
 }
 

@@ -1,26 +1,29 @@
 package com.fiz.e_learn.ui.screens.home_content.home_main
 
 import com.fiz.e_learn.R
+import org.threeten.bp.LocalDate
 
 data class Course(
-    val id:Int=0,
-    val name: String="",
-    val category: String="",
-    val author:String="",
-    val structure:List<String> =listOf(),
-    val includes:List<String> =listOf(),
-    val willLearn:List<String> =listOf(),
-    val annotation:String="",
-    val description:String="",
-    val img: Int=0,
-    val video:Int=0,
-    val rating: Double=0.0,
-    val countVoted:Int=0,
-    val allVoted:Int=0,
-    val cost:Double=0.0,
-    val bestSeller: Boolean=false
+    val id: Int = 0,
+    val name: String = "",
+    val category: String = "",
+    val author: String = "",
+    val structure: List<StructureItem> = listOf(),
+    val includes: List<String> = listOf(),
+    val willLearn: List<String> = listOf(),
+    val annotation: String = "",
+    val description: String = "",
+    val countLectures: Int = 0,
+    val length: Double = 0.0,
+    val lastUpdate: LocalDate =LocalDate.now(),
+    val img: Int = 0,
+    val video: Int = 0,
+    val rating: Double = 0.0,
+    val countVoted: Int = 0,
+    val allVoted: Int = 0,
+    val cost: Double = 0.0,
+    val bestSeller: Boolean = false
 )
-
 
 val listCategories = listOf(
     "Design",
@@ -38,9 +41,12 @@ val listCategories = listOf(
     "Health@Fitness",
     "Business",
 )
+
+data class StructureItem(val nameEpisode:String, val description:String="")
+
 val courses = listOf(
     Course(
-        id=0,
+        id = 0,
         name = "Generator on there Internet tend",
         author = "Stephen Moris",
         cost = 14.50,
@@ -58,12 +64,23 @@ val courses = listOf(
         countVoted = 122,
         allVoted = 25190,
         img = R.drawable.card3,
+        lastUpdate=LocalDate.of(2021,6,2),
         includes = listOf(
             "10.5 hrs on demand video",
             "15 Question Patterns",
             "Support Files",
             "Access on all Devices",
             "Certificate of Completions"
+        ),
+        countLectures=179,
+        length=20.4        ,
+        structure = listOf(
+            StructureItem("Introduction to 3D Animations & tools"),
+            StructureItem("Basics of 3D Animation Theory", "All the Lorem Ipsum generators on the tools repeat predefined chunks."),
+            StructureItem("What are Tools use in Design"),
+            StructureItem("The Selection Tools"),
+            StructureItem("Objective of the 3D Animations"),
+            StructureItem("The Conclusion"),
         ),
         willLearn = listOf(
             "There are many variations of passages of Ipsum available, but the majority will have suffered alteration.",
@@ -74,7 +91,7 @@ val courses = listOf(
         bestSeller = true
     ),
     Course(
-        id=2,
+        id = 2,
         name = "Basic Intro with the\n" +
                 "Development",
         img = R.drawable.card4,
@@ -84,7 +101,7 @@ val courses = listOf(
         bestSeller = false
     ),
     Course(
-        id=3,
+        id = 3,
         name = "Generator on there Internet tend",
         author = "Stephen Moris",
         cost = 14.50,
@@ -93,7 +110,7 @@ val courses = listOf(
         bestSeller = true
     ),
     Course(
-        id=4,
+        id = 4,
         name = "Generator on there Internet tend",
         author = "Stephen Moris",
         cost = 14.50,
@@ -102,7 +119,7 @@ val courses = listOf(
         bestSeller = true
     ),
     Course(
-        id=5,
+        id = 5,
         name = "Generator on there Internet tend",
         author = "Stephen Moris",
         cost = 14.50,
@@ -111,7 +128,7 @@ val courses = listOf(
         bestSeller = true
     ),
     Course(
-        id=6,
+        id = 6,
         name = "Generator on there Internet tend",
         author = "Stephen Moris",
         cost = 14.50,

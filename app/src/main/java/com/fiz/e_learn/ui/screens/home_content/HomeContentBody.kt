@@ -1,7 +1,6 @@
 package com.fiz.e_learn.ui.screens.home_content
 
 import android.content.res.Configuration
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,6 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -23,9 +23,9 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.fiz.e_learn.R
-import com.fiz.e_learn.ui.components.BaseOutlinedTextField
 import com.fiz.e_learn.ui.components.BaseOutlinedTextFieldWithState
 import com.fiz.e_learn.ui.theme.ELearnTheme
+import com.fiz.e_learn.ui.theme.backgroundHome
 import com.fiz.e_learn.ui.theme.greenText
 import com.fiz.e_learn.ui.theme.onSurface2
 
@@ -38,8 +38,8 @@ fun HomeContentBody(mainNavController: NavController? = null) {
     Scaffold(
         topBar = {
             TopAppBar(
-                modifier = Modifier.defaultMinSize(minHeight = 120.dp),
-                backgroundColor = MaterialTheme.colors.background
+                modifier = Modifier.defaultMinSize(minHeight = 150.dp),
+                backgroundColor = MaterialTheme.colors.backgroundHome
             ) {
                 Column(
                     modifier = Modifier.padding(
@@ -51,17 +51,18 @@ fun HomeContentBody(mainNavController: NavController? = null) {
                 ) {
                     Row(
                         modifier = Modifier
-                            .padding(bottom = 16.dp)
+                            .padding(bottom = 16.dp),
+                        verticalAlignment = Alignment.CenterVertically
 
                     ) {
                         IconTopBar(R.drawable.ic_category)
-
 //                        if (currentScreen != null) {
                         Text(
                             text = "Hi, Alex Joe",
                             modifier = Modifier
-                                .weight(1f)
-                                .align(Alignment.CenterVertically)
+                                .weight(1f),
+                            textAlign= TextAlign.Center,
+                            style=MaterialTheme.typography.h6
                         )
 //                        }
 
@@ -72,9 +73,8 @@ fun HomeContentBody(mainNavController: NavController? = null) {
                         R.drawable.ic_search,
                         16.dp,
                         16.dp,
-                        modifier=Modifier
+                        modifier = Modifier
                             .fillMaxWidth()
-                            .defaultMinSize(minHeight = 48.dp)
                     )
                 }
             }
@@ -91,11 +91,10 @@ fun HomeContentBody(mainNavController: NavController? = null) {
                 items.forEach { screen ->
                     BottomNavigationItem(
                         icon = {
-                            Log.d("AAA", screen.route)
                             Image(
                                 painter = painterResource(
-                                    when (screen.route) {
-                                        "home" -> {
+                                    when {
+                                        screen.route.contains("home") -> {
 
                                             if (currentDestination?.hierarchy?.any { it.route == screen.route } == true)
                                                 R.drawable.ic_home_selected
@@ -103,19 +102,19 @@ fun HomeContentBody(mainNavController: NavController? = null) {
                                                 R.drawable.ic_home
 
                                         }
-                                        "favorite" ->{
+                                        screen.route.contains("favorite") -> {
                                             if (currentDestination?.hierarchy?.any { it.route == screen.route } == true)
                                                 R.drawable.ic_favorities_selected
                                             else
                                                 R.drawable.ic_favorities
                                         }
-                                        "courses" -> {
+                                        screen.route.contains("courses") -> {
                                             if (currentDestination?.hierarchy?.any { it.route == screen.route } == true)
                                                 R.drawable.ic_learning_selected
                                             else
                                                 R.drawable.ic_learning
                                         }
-                                        else ->{
+                                        else -> {
                                             if (currentDestination?.hierarchy?.any { it.route == screen.route } == true)
                                                 R.drawable.ic_account_selected
                                             else
@@ -157,10 +156,10 @@ fun HomeContentBody(mainNavController: NavController? = null) {
 private fun IconTopBar(icon: Int) {
     Box(
         modifier = Modifier
-            .padding( top = 8.dp, bottom = 8.dp)
+            .padding(top = 8.dp, bottom = 8.dp)
             .size(48.dp)
             .background(
-                color = MaterialTheme.colors.surface,
+                color = MaterialTheme.colors.background,
                 shape = RoundedCornerShape(12.dp)
             ),
         contentAlignment = Alignment.Center
