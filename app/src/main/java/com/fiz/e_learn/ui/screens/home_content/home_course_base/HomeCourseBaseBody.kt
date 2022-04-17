@@ -3,8 +3,6 @@ package com.fiz.e_learn.ui.screens.home_content.home_course_base
 import android.content.res.Configuration
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -19,13 +17,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.fiz.e_learn.R
-import com.fiz.e_learn.ui.screens.home_content.home_main.*
+import com.fiz.e_learn.ui.data.courses
+import com.fiz.e_learn.ui.screens.home_content.home_main.RatingRow
+import com.fiz.e_learn.ui.screens.home_content.home_main.TextBestSeller
 import com.fiz.e_learn.ui.theme.ELearnTheme
 import com.fiz.e_learn.ui.theme.backgroundHome
 import com.fiz.e_learn.ui.theme.greenText
-import com.fiz.e_learn.ui.theme.surface2
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
@@ -57,22 +57,30 @@ fun HomeCourseBaseBody(
                 TextBestSeller(modifier = Modifier.weight(1f))
         }
 
-        RatingRow(course.rating)
+        Spacer(modifier = Modifier.padding(8.dp))
 
-        Text(
-            text = "(${course.countVoted}) ratings ${course.allVoted} Students",
-            style = MaterialTheme.typography.caption
-        )
+        Row() {
+            RatingRow(course.rating)
+
+            Text(
+                text = "(${course.countVoted}) ratings ${course.allVoted} Students",
+                style = MaterialTheme.typography.caption
+            )
+        }
+
+        Spacer(modifier = Modifier.padding(4.dp))
 
         Text(
             text = course.annotation,
             style = MaterialTheme.typography.body2,
+            letterSpacing = 1.sp,
             maxLines = 3,
             overflow = TextOverflow.Ellipsis,
         )
+
         Text(
             text = "read more",
-            color=MaterialTheme.colors.greenText,
+            color = MaterialTheme.colors.greenText,
             style = MaterialTheme.typography.body2,
             modifier = Modifier.clickable { onClickReadMore() }
         )

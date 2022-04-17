@@ -24,7 +24,12 @@
     <string name="categories">Categories</string>
     <string name="see_all">SEE ALL</string>
     <string name="top_courses">Top Courses</string>
-    <string name="top_courses_in_design">Top Courses in Design</string>
+    <string name="top_courses_in_category">%1$s Courses %2$s</string>
+    <string name="explore">Explore</string>
+    <string name="real_world">A Real-World</string>
+    <string name="expirience">Experience!!!</string>
+    <string name="all">All</string>
+    <string name="top">Top</string>
 
     <string-array name="on_boarding_title">
         <item>Online Learning Platform</item>

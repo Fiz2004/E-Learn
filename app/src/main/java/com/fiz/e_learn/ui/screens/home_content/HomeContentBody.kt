@@ -38,7 +38,7 @@ fun HomeContentBody(mainNavController: NavController? = null) {
     Scaffold(
         topBar = {
             TopAppBar(
-                modifier = Modifier.defaultMinSize(minHeight = 150.dp),
+                modifier = Modifier.defaultMinSize(minHeight = 138.dp),
                 backgroundColor = MaterialTheme.colors.backgroundHome
             ) {
                 Column(
@@ -51,7 +51,7 @@ fun HomeContentBody(mainNavController: NavController? = null) {
                 ) {
                     Row(
                         modifier = Modifier
-                            .padding(bottom = 16.dp),
+                            .padding(bottom = 4.dp),
                         verticalAlignment = Alignment.CenterVertically
 
                     ) {

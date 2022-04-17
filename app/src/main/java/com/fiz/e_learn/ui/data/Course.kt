@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.screens.home_content.home_main
+package com.fiz.e_learn.ui.data
 
 import com.fiz.e_learn.R
 import org.threeten.bp.LocalDate
@@ -15,7 +15,7 @@ data class Course(
     val description: String = "",
     val countLectures: Int = 0,
     val length: Double = 0.0,
-    val lastUpdate: LocalDate =LocalDate.now(),
+//    val lastUpdate: LocalDate =LocalDate.now(),
     val img: Int = 0,
     val video: Int = 0,
     val rating: Double = 0.0,
@@ -64,7 +64,7 @@ val courses = listOf(
         countVoted = 122,
         allVoted = 25190,
         img = R.drawable.card3,
-        lastUpdate=LocalDate.of(2021,6,2),
+//        lastUpdate=LocalDate.of(2021,6,2),
         includes = listOf(
             "10.5 hrs on demand video",
             "15 Question Patterns",

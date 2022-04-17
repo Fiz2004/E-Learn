@@ -14,14 +14,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
-import com.fiz.e_learn.ui.screens.home_content.home_main.courses
+import com.fiz.e_learn.ui.data.courses
 import com.fiz.e_learn.ui.theme.ELearnTheme
 import com.fiz.e_learn.ui.theme.backgroundHome
 import com.fiz.e_learn.ui.theme.greenText
@@ -92,8 +91,8 @@ fun HomeCourseMoreInfoBody(
             style = MaterialTheme.typography.h6,
         )
 
-        CourseInfoItem(R.drawable.ic_update,"Last Updated on ${
-            DateTimeFormatter.ofPattern("MMMM dd, yyyy").format(course.lastUpdate)}")
+//        CourseInfoItem(R.drawable.ic_update,"Last Updated on ${
+//            DateTimeFormatter.ofPattern("MMMM dd, yyyy").format(course.lastUpdate)}")
         CourseInfoItemWithClickedText(R.drawable.ic_users,"Author : ","${course.author}",onClickAuthor)
         CourseInfoItem(R.drawable.ic_local,"English, French")
     }

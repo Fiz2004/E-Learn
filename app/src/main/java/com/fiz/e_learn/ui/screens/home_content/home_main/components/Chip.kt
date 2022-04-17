@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.screens.home_content.home_main
+package com.fiz.e_learn.ui.screens.home_content.home_main.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
@@ -33,7 +33,7 @@ fun Chip(modifier: Modifier = Modifier, text: String) {
     ) {
         Row(
             modifier = Modifier
-                .padding(start = 16.dp, top = 12.dp, end = 16.dp, bottom = 12.dp),
+                .padding(start = 16.dp, end = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(

@@ -3,32 +3,18 @@ package com.fiz.e_learn.ui.screens.home_content.course_author
 import android.content.res.Configuration
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
 import com.fiz.e_learn.R
+import com.fiz.e_learn.ui.data.courses
 import com.fiz.e_learn.ui.screens.home_content.course_more_info.CourseInfoItem
-import com.fiz.e_learn.ui.screens.home_content.home_course_base.HomeCourseBaseBody
 import com.fiz.e_learn.ui.screens.home_content.home_main.*
 import com.fiz.e_learn.ui.screens.log_in.TextSubtitle1
 import com.fiz.e_learn.ui.theme.*
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.ui.StyledPlayerView
-import com.google.android.exoplayer2.upstream.DataSource
-import com.google.android.exoplayer2.upstream.DefaultDataSource
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 
 @Composable
 fun HomeCourseAuthorBody(

@@ -14,12 +14,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
-import com.fiz.e_learn.ui.screens.home_content.home_main.courses
+import com.fiz.e_learn.ui.data.courses
 import com.fiz.e_learn.ui.theme.ELearnTheme
 import com.fiz.e_learn.ui.theme.backgroundHome
 
 @Composable
-fun HomeBodyAll(filter: String?="all", onClickCourse: (Int) -> Unit = { }) {
+fun HomeBodyAll(filter: String? = "all", onClickCourse: (Int) -> Unit = { }) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -28,9 +28,22 @@ fun HomeBodyAll(filter: String?="all", onClickCourse: (Int) -> Unit = { }) {
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = stringResource(R.string.top_courses_in_design),
+            text = stringResource(
+                R.string.top_courses_in_category, when (filter) {
+                    "all" -> stringResource(R.string.all)
+                    "top" -> stringResource(R.string.top)
+                    else -> ""
+                }, when (filter) {
+                    "all" -> ""
+                    "top" -> ""
+                    else -> "in " + filter!!
+                }
+            ),
             style = MaterialTheme.typography.h6
         )
+
+        Spacer(modifier = Modifier.padding(4.dp))
+
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(12.dp)

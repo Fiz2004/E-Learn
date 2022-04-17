@@ -19,11 +19,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
+import com.fiz.e_learn.ui.data.Course
 import com.fiz.e_learn.ui.theme.Black_900
 import com.fiz.e_learn.ui.theme.ELearnTheme
 
 @Composable
-fun CourseCard(course: Course,modifier:Modifier = Modifier) {
+fun CourseCard(course: Course, modifier:Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxWidth().height(183.dp)
     ) {

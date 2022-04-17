@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.screens.home_content.home_main
+package com.fiz.e_learn.ui.screens.home_content.home_main.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
