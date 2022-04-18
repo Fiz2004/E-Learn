@@ -2,14 +2,17 @@ package com.fiz.e_learn
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.fiz.e_learn.ui.screens.change_password.ChangePasswordBody
 import com.fiz.e_learn.ui.screens.create_account.CreateAccountBody
+import com.fiz.e_learn.ui.screens.create_account.CreateAccountViewModel
 import com.fiz.e_learn.ui.screens.home_content.HomeContentBody
 import com.fiz.e_learn.ui.screens.info.InfoBody
+import com.fiz.e_learn.ui.screens.log_in.LogInViewModel
 import com.fiz.e_learn.ui.screens.on_boarding.OnBoardingBody
 
 @Composable
@@ -36,7 +39,10 @@ fun ELearnNavHost(
         onBoardingGraph(mainViewModel,navController)
 
         composable(ELearnScreen.LogIn.name) {
+            val viewModel = hiltViewModel<LogInViewModel>()
+
             LogInBody(
+                viewModel = viewModel,
                 onClickSignUp = {
                     navController.navigate(ELearnScreen.CreateAccount.name)
                 },
@@ -47,8 +53,12 @@ fun ELearnNavHost(
                     navController.navigate(ELearnScreen.HomeContent.name)
                 })
         }
+
         composable(ELearnScreen.CreateAccount.name) {
+            val viewModel = hiltViewModel<CreateAccountViewModel>()
+
             CreateAccountBody(
+                viewModel = viewModel,
                 onClickTermsOfServices = {
                     navController.navigate(ELearnScreen.Info.name)
                 },
@@ -63,21 +73,25 @@ fun ELearnNavHost(
                 }
             )
         }
+
         composable(ELearnScreen.ForgotPassword.name) {
             ChangePasswordBody {
                 navController.navigate(ELearnScreen.HomeContent.name)
             }
         }
+
         composable(ELearnScreen.Info.name) {
             InfoBody {
                 navController.navigate(ELearnScreen.HomeContent.name)
             }
         }
+
         composable(ELearnScreen.ChangePassword.name) {
             ChangePasswordBody {
                 navController.navigate(ELearnScreen.HomeContent.name)
             }
         }
+
         composable(ELearnScreen.HomeContent.name) {
             HomeContentBody(navController)
         }

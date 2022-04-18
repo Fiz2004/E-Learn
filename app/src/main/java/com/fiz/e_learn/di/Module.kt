@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import com.fiz.e_learn.R
+import com.fiz.e_learn.data.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,5 +24,4 @@ class Module {
             AppCompatActivity.MODE_PRIVATE
         )
     }
-
 }

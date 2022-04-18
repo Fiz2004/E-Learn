@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
-import com.fiz.e_learn.ui.data.courses
+import com.fiz.e_learn.data.courses
 import com.fiz.e_learn.ui.screens.home_content.home_main.CourseCard
 import com.fiz.e_learn.ui.theme.ELearnTheme
 

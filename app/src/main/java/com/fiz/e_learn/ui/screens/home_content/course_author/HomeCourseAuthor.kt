@@ -10,7 +10,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
-import com.fiz.e_learn.ui.data.courses
+import com.fiz.e_learn.data.courses
 import com.fiz.e_learn.ui.screens.home_content.course_more_info.CourseInfoItem
 import com.fiz.e_learn.ui.screens.home_content.home_main.*
 import com.fiz.e_learn.ui.screens.log_in.TextSubtitle1

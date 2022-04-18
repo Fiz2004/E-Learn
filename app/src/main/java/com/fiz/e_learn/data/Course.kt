@@ -1,7 +1,6 @@
-package com.fiz.e_learn.ui.data
+package com.fiz.e_learn.data
 
 import com.fiz.e_learn.R
-import org.threeten.bp.LocalDate
 
 data class Course(
     val id: Int = 0,

@@ -8,7 +8,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.fiz.e_learn.ui.data.listCategories
+import com.fiz.e_learn.data.listCategories
 
 @Composable
 fun CategoriesChips(onClickCategory: (String) -> Unit) {

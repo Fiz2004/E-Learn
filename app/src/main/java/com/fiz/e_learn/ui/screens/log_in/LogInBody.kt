@@ -1,6 +1,5 @@
 package com.fiz.e_learn
 
-import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -14,7 +13,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.ui.components.BaseContainerForLogInGroup
 import com.fiz.e_learn.ui.components.EmailTextField
@@ -22,11 +20,13 @@ import com.fiz.e_learn.ui.components.TextH5
 import com.fiz.e_learn.ui.components.TextSubtitle2
 import com.fiz.e_learn.ui.screens.create_account.BaseIconForLogInGroup
 import com.fiz.e_learn.ui.components.PasswordFingerPrintTextField
+import com.fiz.e_learn.ui.screens.log_in.LogInViewModel
 import com.fiz.e_learn.ui.screens.log_in.TextSubtitle1
 import com.fiz.e_learn.ui.theme.*
 
 @Composable
 fun LogInBody(
+    viewModel: LogInViewModel,
     onClickSignUp: () -> Unit = {},
     onClickForgotPassword: () -> Unit = {},
     onClickSignIn: () -> Unit = {},
@@ -45,11 +45,11 @@ fun LogInBody(
 
         Spacer(modifier = Modifier.padding(20.dp))
 
-        EmailTextField()
+        EmailTextField(text=viewModel.emailId, textChange = {emailId->viewModel.newEmailId(emailId)})
 
         Spacer(modifier = Modifier.padding(12.dp))
 
-        PasswordFingerPrintTextField()
+        PasswordFingerPrintTextField(text=viewModel.password, textChange = {password->viewModel.newPassword(password)})
 
         Spacer(modifier = Modifier.padding(8.dp))
 
@@ -172,31 +172,31 @@ private fun GoggleButton(onClickSignIn: () -> Unit) {
 }
 
 
-@Preview(
-    showBackground = true,
-    widthDp = 375,
-    heightDp = 812
-)
-@Composable
-fun OnBoardingBodyPreview() {
-    ELearnTheme {
-        Surface {
-            LogInBody()
-        }
-    }
-}
-
-@Preview(
-    showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    widthDp = 375,
-    heightDp = 812
-)
-@Composable
-fun OnBoardingBodyDarkPreview() {
-    ELearnTheme {
-        Surface {
-            LogInBody()
-        }
-    }
-}
+//@Preview(
+//    showBackground = true,
+//    widthDp = 375,
+//    heightDp = 812
+//)
+//@Composable
+//fun OnBoardingBodyPreview() {
+//    ELearnTheme {
+//        Surface {
+//            LogInBody()
+//        }
+//    }
+//}
+//
+//@Preview(
+//    showBackground = true,
+//    uiMode = Configuration.UI_MODE_NIGHT_YES,
+//    widthDp = 375,
+//    heightDp = 812
+//)
+//@Composable
+//fun OnBoardingBodyDarkPreview() {
+//    ELearnTheme {
+//        Surface {
+//            LogInBody()
+//        }
+//    }
+//}

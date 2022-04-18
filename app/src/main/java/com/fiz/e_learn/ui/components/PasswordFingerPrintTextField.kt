@@ -17,7 +17,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.screens.create_account.CreateAccountViewModel
 import com.fiz.e_learn.ui.theme.ELearnTheme
@@ -28,15 +27,16 @@ import com.fiz.e_learn.ui.theme.onSurface2
 @Composable
 fun PasswordFingerPrintTextField(
     modifier: Modifier=Modifier,
-    createAccountViewModel: CreateAccountViewModel = viewModel(),
+    text:String,
+    textChange:(String)->Unit
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
     ) {
         BaseOutlinedTextField(
-            text=createAccountViewModel.password,
-            textChange={password->createAccountViewModel.newPassword(password)},
+            text=text,
+            textChange=textChange,
             placeholderText = stringResource(R.string.password),
             modifier = Modifier
                 .padding(end = 16.dp)
@@ -72,31 +72,31 @@ fun PasswordFingerPrintTextField(
 }
 
 
-@Preview(
-    showBackground = true,
-    widthDp = 375,
-    heightDp = 300
-)
-@Composable
-fun OnBoardingBodyPreview() {
-    ELearnTheme {
-        Surface {
-            PasswordFingerPrintTextField()
-        }
-    }
-}
-
-@Preview(
-    showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    widthDp = 375,
-    heightDp = 300
-)
-@Composable
-fun OnBoardingBodyDarkPreview() {
-    ELearnTheme {
-        Surface {
-            PasswordFingerPrintTextField()
-        }
-    }
-}
+//@Preview(
+//    showBackground = true,
+//    widthDp = 375,
+//    heightDp = 300
+//)
+//@Composable
+//fun OnBoardingBodyPreview() {
+//    ELearnTheme {
+//        Surface {
+//            PasswordFingerPrintTextField()
+//        }
+//    }
+//}
+//
+//@Preview(
+//    showBackground = true,
+//    uiMode = Configuration.UI_MODE_NIGHT_YES,
+//    widthDp = 375,
+//    heightDp = 300
+//)
+//@Composable
+//fun OnBoardingBodyDarkPreview() {
+//    ELearnTheme {
+//        Surface {
+//            PasswordFingerPrintTextField()
+//        }
+//    }
+//}

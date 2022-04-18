@@ -30,6 +30,10 @@
     <string name="expirience">Experience!!!</string>
     <string name="all">All</string>
     <string name="top">Top</string>
+    <string name="i_hereby_agree_to_the">I hereby agree to the</string>
+    <string name="terms_of_services">terms of services</string>
+    <string name="privacy_police">privacy policy</string>
+    <string name="and">and</string>
 
     <string-array name="on_boarding_title">
         <item>Online Learning Platform</item>

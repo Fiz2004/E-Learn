@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.screens.home_content.home_main.components.IconSeeAll
 import com.fiz.e_learn.ui.screens.home_content.home_main.components.TextSeeAll
-import com.fiz.e_learn.ui.data.courses
+import com.fiz.e_learn.data.courses
 import com.fiz.e_learn.ui.theme.ELearnTheme
 import com.fiz.e_learn.ui.theme.backgroundHome
 import com.fiz.e_learn.ui.theme.greenText

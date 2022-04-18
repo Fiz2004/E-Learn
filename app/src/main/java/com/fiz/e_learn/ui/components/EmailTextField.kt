@@ -13,16 +13,17 @@ import com.fiz.e_learn.ui.screens.create_account.CreateAccountViewModel
 @Composable
 fun EmailTextField(
     modifier:Modifier=Modifier,
-    createAccountViewModel: CreateAccountViewModel = viewModel(),
+    text:String,
+    textChange:(String)->Unit
 ) {
     BaseOutlinedTextField(
-        text=createAccountViewModel.emailId,
-        textChange={emailId->createAccountViewModel.newEmailId(emailId)},
+        text=text,
+        textChange=textChange,
         icon=R.drawable.ic_email,
         iconSizeWidth = 20.dp,
         iconSizeHeight = 16.dp,
         placeholderText = stringResource(R.string.email_id),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
     )
 }

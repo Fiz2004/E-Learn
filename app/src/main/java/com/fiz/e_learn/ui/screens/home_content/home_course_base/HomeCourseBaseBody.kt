@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.fiz.e_learn.R
-import com.fiz.e_learn.ui.data.courses
+import com.fiz.e_learn.data.courses
 import com.fiz.e_learn.ui.screens.home_content.home_main.RatingRow
 import com.fiz.e_learn.ui.screens.home_content.home_main.TextBestSeller
 import com.fiz.e_learn.ui.theme.ELearnTheme

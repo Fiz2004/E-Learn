@@ -96,26 +96,26 @@ fun HomeContentBody(mainNavController: NavController? = null) {
                                     when {
                                         screen.route.contains("home") -> {
 
-                                            if (currentDestination?.hierarchy?.any { it.route == screen.route } == true)
+                                            if (currentDestination?.hierarchy?.any { it.route?.contains("home") == true } == true)
                                                 R.drawable.ic_home_selected
                                             else
                                                 R.drawable.ic_home
 
                                         }
                                         screen.route.contains("favorite") -> {
-                                            if (currentDestination?.hierarchy?.any { it.route == screen.route } == true)
+                                            if (currentDestination?.hierarchy?.any { it.route?.contains("favorite") == true } == true)
                                                 R.drawable.ic_favorities_selected
                                             else
                                                 R.drawable.ic_favorities
                                         }
                                         screen.route.contains("courses") -> {
-                                            if (currentDestination?.hierarchy?.any { it.route == screen.route } == true)
+                                            if (currentDestination?.hierarchy?.any { it.route?.contains("courses") == true } == true)
                                                 R.drawable.ic_learning_selected
                                             else
                                                 R.drawable.ic_learning
                                         }
                                         else -> {
-                                            if (currentDestination?.hierarchy?.any { it.route == screen.route } == true)
+                                            if (currentDestination?.hierarchy?.any { it.route?.contains("settings") == true  } == true)
                                                 R.drawable.ic_account_selected
                                             else
                                                 R.drawable.ic_account
