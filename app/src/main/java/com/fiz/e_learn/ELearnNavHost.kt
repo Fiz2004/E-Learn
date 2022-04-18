@@ -36,6 +36,7 @@ fun ELearnNavHost(
                 navController.navigate("onBoarding")
             }
         }
+
         onBoardingGraph(mainViewModel,navController)
 
         composable(ELearnScreen.LogIn.name) {
@@ -105,6 +106,7 @@ fun NavGraphBuilder.onBoardingGraph(mainViewModel: MainViewModel,navController: 
                 navController.navigate(ELearnScreen.OnBoarding.name + "/2")
             }
         }
+
         composable(
             route = ELearnScreen.OnBoarding.name + "/{page}",
             arguments = listOf(navArgument("page") { type = NavType.StringType })

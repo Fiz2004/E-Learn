@@ -4,9 +4,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.fiz.e_learn.data.UserRepository
+import androidx.lifecycle.viewModelScope
+import com.fiz.e_learn.data.repositories.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+sealed class CreateAccountState{
+    object Create:CreateAccountState()
+    object Save:CreateAccountState()
+    object LogIn:CreateAccountState()
+    object Error:CreateAccountState()
+}
+
+
 
 @HiltViewModel
 class CreateAccountViewModel @Inject constructor (private val userRepository: UserRepository) : ViewModel() {
@@ -22,11 +33,23 @@ class CreateAccountViewModel @Inject constructor (private val userRepository: Us
     var isPrivacy by mutableStateOf<Boolean>(false)
         private set
 
-    fun clickCreateAccount(): Boolean {
-        val simpleCheck=emailId.contains("@")&&emailId.contains(".")
-        if (!simpleCheck) return false
+    var UIState by mutableStateOf<CreateAccountState>(CreateAccountState.Create)
+    private set
 
-        return userRepository.saveUser(userName,emailId,password)
+    fun clickCreateAccount() {
+        val simpleCheck=emailId.contains("@")&&emailId.contains(".")
+        if (!simpleCheck) {
+            UIState = CreateAccountState.Error
+            return
+        }
+
+        viewModelScope.launch {
+            UIState=CreateAccountState.Save
+            UIState = if (userRepository.saveUser(userName, emailId, password))
+                CreateAccountState.LogIn
+            else
+                CreateAccountState.Error
+        }
     }
 
     fun newUserName(userName: String) {
@@ -47,5 +70,13 @@ class CreateAccountViewModel @Inject constructor (private val userRepository: Us
 
     fun clickPrivacyCheckBox(isPrivacy: Boolean) {
         this.isPrivacy=isPrivacy
+    }
+
+    fun onErrorShow() {
+        UIState=CreateAccountState.Create
+    }
+
+    fun onClickCreateAccount() {
+        UIState=CreateAccountState.Save
     }
 }

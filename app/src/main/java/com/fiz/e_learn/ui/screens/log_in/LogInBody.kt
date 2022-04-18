@@ -1,28 +1,24 @@
 package com.fiz.e_learn
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
+import android.content.res.Configuration
+import android.widget.Toast
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.*
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.fiz.e_learn.ui.components.BaseContainerForLogInGroup
-import com.fiz.e_learn.ui.components.EmailTextField
-import com.fiz.e_learn.ui.components.TextH5
-import com.fiz.e_learn.ui.components.TextSubtitle2
+import com.fiz.e_learn.ui.components.*
 import com.fiz.e_learn.ui.screens.create_account.BaseIconForLogInGroup
-import com.fiz.e_learn.ui.components.PasswordFingerPrintTextField
-import com.fiz.e_learn.ui.screens.log_in.LogInViewModel
-import com.fiz.e_learn.ui.screens.log_in.TextSubtitle1
-import com.fiz.e_learn.ui.theme.*
+import com.fiz.e_learn.ui.screens.create_account.Progress
+import com.fiz.e_learn.ui.screens.log_in.*
+import com.fiz.e_learn.ui.screens.log_in.components.TextSignUp
+import com.fiz.e_learn.ui.theme.ELearnTheme
 
 @Composable
 fun LogInBody(
@@ -31,8 +27,10 @@ fun LogInBody(
     onClickForgotPassword: () -> Unit = {},
     onClickSignIn: () -> Unit = {},
 ) {
+    val context = LocalContext.current
+    val viewState = viewModel.UIState
 
-    BaseContainerForLogInGroup{
+    BaseContainerForLogInGroup {
         BaseIconForLogInGroup(R.drawable.ic_login_lock, 36.dp, 40.dp)
 
         Spacer(modifier = Modifier.padding(12.dp))
@@ -45,26 +43,33 @@ fun LogInBody(
 
         Spacer(modifier = Modifier.padding(20.dp))
 
-        EmailTextField(text=viewModel.emailId, textChange = {emailId->viewModel.newEmailId(emailId)})
+        EmailTextField(
+            text = viewModel.emailId,
+            textChange = { emailId -> viewModel.newEmailId(emailId) })
 
         Spacer(modifier = Modifier.padding(12.dp))
 
-        PasswordFingerPrintTextField(text=viewModel.password, textChange = {password->viewModel.newPassword(password)})
+        PasswordFingerPrintTextField(
+            text = viewModel.password,
+            textChange = { password -> viewModel.newPassword(password) })
 
         Spacer(modifier = Modifier.padding(8.dp))
 
         TextSubtitle1Green(
-            text=R.string.forgot_password,
+            text = R.string.forgot_password,
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable(onClick = { onClickForgotPassword() }),
-            textAlign = TextAlign.End)
+            textAlign = TextAlign.End
+        )
 
         Spacer(modifier = Modifier.padding(8.dp))
 
-        Button(
+        ELearnButton(
             R.string.sign_in,
-            onClickSignIn=onClickSignIn
+            onClick = {
+                viewModel.clickSignIn()
+            }
         )
 
         Spacer(modifier = Modifier.padding(8.dp))
@@ -77,126 +82,50 @@ fun LogInBody(
 
         Spacer(modifier = Modifier.padding(8.dp))
 
-        TextSignUp( onClickSignUp)
+        TextSignUp(onClickSignUp)
+    }
+
+    if (viewState == LogInState.Error) {
+        Toast.makeText(context, "Error SignIn Account", Toast.LENGTH_SHORT).show()
+        viewModel.onErrorShow()
+    }
+
+    if (viewState == LogInState.Access) {
+        onClickSignIn()
+        viewModel.onClickSignIn()
+    }
+
+    if (viewState == LogInState.Load) {
+        Progress()
     }
 }
 
-@Composable
-private fun Button(text:Int,modifier:Modifier = Modifier,onClickSignIn: () -> Unit) {
-    Button(modifier = modifier
-        .height(54.dp)
-        .fillMaxWidth(),
-        onClick = { onClickSignIn() }) {
-        TextSubtitle1(
-            text = text,
-            color = Black_900,
-        )
-    }
-}
 
+@Preview(
+    showBackground = true,
+    widthDp = 375,
+    heightDp = 812
+)
 @Composable
-private fun TextSubtitle1Green(text:Int,
-                               modifier:Modifier = Modifier,
-                               textAlign:TextAlign? = null
-                               ) {
-    Text(
-        modifier = modifier,
-        textAlign = textAlign,
-        text = stringResource(text),
-        style = MaterialTheme.typography.subtitle1Green
-    )
-}
-
-@Composable
-private fun TextSignUp(
-    onClickSignUp: () -> Unit
-) {
-    val annotatedText = buildAnnotatedString {
-        withStyle(
-            style = SpanStyle(
-                color = MaterialTheme.colors.onSurface
-            )
-        ) {
-            append(stringResource(R.string.don_t_have_an_account))
-            append(" ")
-        }
-        pushStringAnnotation(
-            tag = "sign up",
-            annotation = "sign up"
-        )
-        withStyle(
-            style = SpanStyle(
-                color = MaterialTheme.colors.greenText
-            )
-        ) {
-            append(stringResource(R.string.sign_up))
+fun OnBoardingBodyPreview() {
+    ELearnTheme {
+        Surface {
+            Progress()
         }
     }
-
-    ClickableText(
-        text = annotatedText,
-        onClick = { offset ->
-
-            annotatedText.getStringAnnotations(
-                tag = "sign up", start = offset,
-                end = offset
-            )
-                .firstOrNull()?.let {
-                    onClickSignUp()
-                }
-        },
-    )
 }
 
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    widthDp = 375,
+    heightDp = 812
+)
 @Composable
-private fun GoggleButton(onClickSignIn: () -> Unit) {
-    OutlinedButton(modifier = Modifier
-        .fillMaxWidth()
-        .height(54.dp),
-        border = BorderStroke(1.dp, MaterialTheme.colors.border),
-        onClick = { onClickSignIn() }) {
-        Image(
-            painter = painterResource(
-                id = R.drawable.ic_char_g
-            ),
-            contentDescription = null,
-            modifier = Modifier.size(20.dp, 24.dp),
-            contentScale = ContentScale.Crop
-        )
-        Text(
-            modifier = Modifier.padding(start = 12.dp),
-            text = stringResource(R.string.sign_in_with_google),
-            style = MaterialTheme.typography.subtitle1OnSurface
-        )
+fun OnBoardingBodyDarkPreview() {
+    ELearnTheme {
+        Surface {
+            Progress()
+        }
     }
 }
-
-
-//@Preview(
-//    showBackground = true,
-//    widthDp = 375,
-//    heightDp = 812
-//)
-//@Composable
-//fun OnBoardingBodyPreview() {
-//    ELearnTheme {
-//        Surface {
-//            LogInBody()
-//        }
-//    }
-//}
-//
-//@Preview(
-//    showBackground = true,
-//    uiMode = Configuration.UI_MODE_NIGHT_YES,
-//    widthDp = 375,
-//    heightDp = 812
-//)
-//@Composable
-//fun OnBoardingBodyDarkPreview() {
-//    ELearnTheme {
-//        Surface {
-//            LogInBody()
-//        }
-//    }
-//}

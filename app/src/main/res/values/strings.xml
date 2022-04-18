@@ -34,6 +34,7 @@
     <string name="terms_of_services">terms of services</string>
     <string name="privacy_police">privacy policy</string>
     <string name="and">and</string>
+    <string name="proceed_to_checkout">Proceed to Checkout</string>
 
     <string-array name="on_boarding_title">
         <item>Online Learning Platform</item>

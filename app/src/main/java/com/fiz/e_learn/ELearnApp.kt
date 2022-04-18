@@ -12,18 +12,9 @@ import com.fiz.e_learn.ui.theme.ELearnTheme
 fun ELearnApp() {
     ELearnTheme {
         val navController = rememberNavController()
+
         ELearnNavHost(
             navController = navController
         )
-    }
-}
-
-@Preview(showBackground = true, widthDp = 320, heightDp = 320)
-@Composable
-fun DefaultPreview() {
-    ELearnTheme {
-        Surface {
-            ELearnApp()
-        }
     }
 }

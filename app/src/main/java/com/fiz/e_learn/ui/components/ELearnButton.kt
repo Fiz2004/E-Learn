@@ -12,7 +12,7 @@ import com.fiz.e_learn.ui.theme.Black_900
 
 @Composable
 fun ELearnButton(
-    text:String,
+    text:Int,
     modifier: Modifier = Modifier,
     enabled:Boolean=true,
     onClick: () -> Unit = {}
