@@ -1,6 +1,6 @@
 package com.fiz.e_learn
 
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -14,6 +14,7 @@ import com.fiz.e_learn.ui.screens.home_content.HomeContentBody
 import com.fiz.e_learn.ui.screens.info.InfoBody
 import com.fiz.e_learn.ui.screens.log_in.LogInViewModel
 import com.fiz.e_learn.ui.screens.on_boarding.OnBoardingBody
+import com.fiz.e_learn.ui.screens.title.TitleScreenBody
 
 @Composable
 fun ELearnNavHost(
@@ -21,19 +22,19 @@ fun ELearnNavHost(
     modifier: Modifier = Modifier,
     mainViewModel: MainViewModel = viewModel()
 ) {
-    val startScreen = if (mainViewModel.firstTimeLaunch)
-        ELearnScreen.TitleScreen.name
-    else
-        ELearnScreen.LogIn.name
+    val showLandingScreen by remember { mutableStateOf(mainViewModel.firstTimeLaunch) }
 
     NavHost(
         navController = navController,
-        startDestination = startScreen,
+        startDestination = ELearnScreen.TitleScreen.name,
         modifier = modifier
     ) {
         composable(ELearnScreen.TitleScreen.name) {
             TitleScreenBody {
-                navController.navigate("onBoarding")
+                if (showLandingScreen)
+                    navController.navigate("onBoarding")
+                else
+                    navController.navigate(ELearnScreen.LogIn.name)
             }
         }
 
