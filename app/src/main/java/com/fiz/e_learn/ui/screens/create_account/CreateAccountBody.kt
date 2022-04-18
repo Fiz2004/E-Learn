@@ -1,20 +1,15 @@
 package com.fiz.e_learn.ui.screens.create_account
 
-import android.content.res.Configuration
+import android.widget.Toast
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.components.*
-import com.fiz.e_learn.ui.screens.create_account.components.CreateAccountButton
-import com.fiz.e_learn.ui.screens.create_account.components.SignInText
-import com.fiz.e_learn.ui.screens.create_account.components.TextPrivacy
-import com.fiz.e_learn.ui.screens.create_account.components.UserNameTextField
-import com.fiz.e_learn.ui.theme.ELearnTheme
+import com.fiz.e_learn.ui.screens.create_account.components.*
 
 @Composable
 fun CreateAccountBody(
@@ -24,6 +19,8 @@ fun CreateAccountBody(
     onClickCreateAccount: () -> Unit = {},
     onClickSignIn: () -> Unit = {},
 ) {
+    val context = LocalContext.current
+
     BaseContainerForLogInGroup {
         BaseIconForLogInGroup(R.drawable.ic_people, 48.dp, 32.dp)
 
@@ -56,7 +53,13 @@ fun CreateAccountBody(
 
         Spacer(modifier = Modifier.padding(8.dp))
 
-        CreateAccountButton(viewModel=viewModel,onClickCreateAccount = onClickCreateAccount)
+        ELearnButton("Create account",enabled=viewModel.isCreateAccountButtonEnabled(),onClick = {
+
+            if (viewModel.clickCreateAccount())
+                onClickCreateAccount()
+            else
+                Toast.makeText(context, "Error Create Account", Toast.LENGTH_SHORT).show()
+        })
 
         Spacer(modifier = Modifier.padding(8.dp))
 
