@@ -1,6 +1,9 @@
 package com.fiz.e_learn
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -12,6 +15,7 @@ import com.fiz.e_learn.ui.screens.create_account.CreateAccountBody
 import com.fiz.e_learn.ui.screens.create_account.CreateAccountViewModel
 import com.fiz.e_learn.ui.screens.home_content.HomeContentBody
 import com.fiz.e_learn.ui.screens.info.InfoBody
+import com.fiz.e_learn.ui.screens.log_in.LogInBody
 import com.fiz.e_learn.ui.screens.log_in.LogInViewModel
 import com.fiz.e_learn.ui.screens.on_boarding.OnBoardingBody
 import com.fiz.e_learn.ui.screens.title.TitleScreenBody
@@ -45,13 +49,13 @@ fun ELearnNavHost(
 
             LogInBody(
                 viewModel = viewModel,
-                onClickSignUp = {
+                moveSignUp = {
                     navController.navigate(ELearnScreen.CreateAccount.name)
                 },
-                onClickForgotPassword = {
+                moveForgotPassword = {
                     navController.navigate(ELearnScreen.ForgotPassword.name)
                 },
-                onClickSignIn = {
+                moveHomeContent = {
                     navController.navigate(ELearnScreen.HomeContent.name)
                 })
         }

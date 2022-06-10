@@ -96,7 +96,7 @@ fun HomeCourseDetailsBody(
         Spacer(modifier = Modifier.padding(bottom = 8.dp))
 
         Row() {
-            TextSeeAll({})
+            TextSeeAll(onClickSeeAll)
             IconSeeAll()
         }
     }

@@ -12,7 +12,7 @@ import com.fiz.e_learn.ui.theme.greenText
 
 @Composable
 fun TextSignUp(
-    onClickSignUp: () -> Unit
+    onClick: () -> Unit
 ) {
     val annotatedText = buildAnnotatedString {
         withStyle(
@@ -45,7 +45,7 @@ fun TextSignUp(
                 end = offset
             )
                 .firstOrNull()?.let {
-                    onClickSignUp()
+                    onClick()
                 }
         },
     )

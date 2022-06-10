@@ -1,4 +1,4 @@
-package com.fiz.e_learn
+package com.fiz.e_learn.ui.screens.log_in
 
 import android.content.res.Configuration
 import android.widget.Toast
@@ -8,27 +8,53 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.components.*
 import com.fiz.e_learn.ui.screens.create_account.BaseIconForLogInGroup
 import com.fiz.e_learn.ui.screens.create_account.Progress
-import com.fiz.e_learn.ui.screens.log_in.*
+import com.fiz.e_learn.ui.screens.log_in.components.GoggleButton
 import com.fiz.e_learn.ui.screens.log_in.components.TextSignUp
 import com.fiz.e_learn.ui.theme.ELearnTheme
 
 @Composable
 fun LogInBody(
-    viewModel: LogInViewModel,
-    onClickSignUp: () -> Unit = {},
-    onClickForgotPassword: () -> Unit = {},
-    onClickSignIn: () -> Unit = {},
+    viewModel: LogInViewModel = viewModel(),
+    moveSignUp: () -> Unit = {},
+    moveForgotPassword: () -> Unit = {},
+    moveHomeContent: () -> Unit = {},
 ) {
     val context = LocalContext.current
-    val viewState = viewModel.UIState
+    val viewState = viewModel.viewState
+    val viewAction = viewModel.viewAction
+    val errorText = stringResource(R.string.error_signin_account)
+
+    LaunchedEffect(Unit) {
+        viewAction.collect {
+            when (it) {
+                LogInAction.MoveForgotPassword -> {
+                    moveForgotPassword()
+                }
+                LogInAction.MoveHomeContent -> {
+                    moveHomeContent()
+                }
+                LogInAction.MoveSignUp -> {
+                    moveSignUp()
+                }
+                LogInAction.ShowError -> {
+                    Toast.makeText(context, errorText, Toast.LENGTH_SHORT).show()
+
+                }
+            }
+        }
+    }
 
     BaseContainerForLogInGroup {
         BaseIconForLogInGroup(R.drawable.ic_login_lock, 36.dp, 40.dp)
@@ -43,23 +69,31 @@ fun LogInBody(
 
         Spacer(modifier = Modifier.padding(20.dp))
 
-        EmailTextField(
-            text = viewModel.emailId,
-            textChange = { emailId -> viewModel.newEmailId(emailId) })
+        ELearnOutlinedTextField(
+            text = viewState.email,
+            textChange = { it: String -> viewModel.reduce(LogInEvent.EmailChanged(it)) },
+            icon = R.drawable.ic_email,
+            iconSizeWidth = 20.dp,
+            iconSizeHeight = 16.dp,
+            placeholderText = stringResource(R.string.email_id),
+            modifier = Modifier
+                .fillMaxWidth()
+        )
 
         Spacer(modifier = Modifier.padding(12.dp))
 
         PasswordFingerPrintTextField(
-            text = viewModel.password,
-            textChange = { password -> viewModel.newPassword(password) })
+            text = viewState.password,
+            textChange = { viewModel.reduce(LogInEvent.FingerprintClicked) }
+        )
 
         Spacer(modifier = Modifier.padding(8.dp))
 
         TextSubtitle1Green(
-            text = R.string.forgot_password,
+            text = R.string.forgot_password_question,
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable(onClick = { onClickForgotPassword() }),
+                .clickable(onClick = { viewModel.reduce(LogInEvent.ForgotPasswordClicked) }),
             textAlign = TextAlign.End
         )
 
@@ -68,7 +102,7 @@ fun LogInBody(
         ELearnButton(
             R.string.sign_in,
             onClick = {
-                viewModel.clickSignIn()
+                viewModel.reduce(LogInEvent.SignInClicked)
             }
         )
 
@@ -78,24 +112,16 @@ fun LogInBody(
 
         Spacer(modifier = Modifier.padding(8.dp))
 
-        GoggleButton(onClickSignIn)
+        GoggleButton(onClick = { viewModel.reduce(LogInEvent.SignInWithGoogleClicked) })
 
         Spacer(modifier = Modifier.padding(8.dp))
 
-        TextSignUp(onClickSignUp)
+        TextSignUp(onClick={
+            viewModel.reduce(LogInEvent.SignUpClicked)
+        })
     }
 
-    if (viewState == LogInState.Error) {
-        Toast.makeText(context, "Error SignIn Account", Toast.LENGTH_SHORT).show()
-        viewModel.onErrorShow()
-    }
-
-    if (viewState == LogInState.Access) {
-        onClickSignIn()
-        viewModel.onClickSignIn()
-    }
-
-    if (viewState == LogInState.Load) {
+    if (viewState.isLoading) {
         Progress()
     }
 }

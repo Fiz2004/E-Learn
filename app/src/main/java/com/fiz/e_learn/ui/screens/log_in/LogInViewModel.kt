@@ -5,59 +5,78 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fiz.e_learn.data.repositories.User
 import com.fiz.e_learn.data.repositories.UserRepository
-import com.fiz.e_learn.ui.screens.create_account.CreateAccountState
+import com.fiz.e_learn.ui.screens.create_account.CreateAccountAction
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-sealed class LogInState{
-    object Create:LogInState()
-    object Load:LogInState()
-    object Access:LogInState()
-    object Error:LogInState()
-}
-
 @HiltViewModel
-class LogInViewModel @Inject constructor(private val userRepository: UserRepository):ViewModel() {
-    var emailId by mutableStateOf<String>("")
+class LogInViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
+
+    var viewState by mutableStateOf(LogInViewState())
         private set
 
-    var password by mutableStateOf<String>("")
+    var viewAction: MutableSharedFlow<LogInAction> = MutableSharedFlow()
         private set
 
-    var UIState by mutableStateOf<LogInState>(LogInState.Create)
-        private set
-
-    fun newEmailId(emailId: String) {
-        this.emailId=emailId
+    fun reduce(event: LogInEvent) {
+        when (event) {
+            LogInEvent.FingerprintClicked -> {}
+            LogInEvent.ForgotPasswordClicked -> forgotPasswordClicked()
+            LogInEvent.SignInClicked -> signInClicked()
+            LogInEvent.SignInWithGoogleClicked -> signInWithGoogleClicked()
+            LogInEvent.SignUpClicked -> signUpClicked()
+            is LogInEvent.EmailChanged -> emailChanged(event.value)
+            is LogInEvent.PasswordChanged -> passwordChanged(event.value)
+        }
     }
 
-    fun newPassword(password: String) {
-        this.password=password
+    private fun signUpClicked() {
+        viewModelScope.launch {
+            viewAction.emit(LogInAction.MoveSignUp)
+        }
     }
 
-    fun clickSignIn() {
-        UIState=LogInState.Load
+    private fun forgotPasswordClicked() {
+        viewModelScope.launch {
+            viewAction.emit(LogInAction.MoveForgotPassword)
+        }
+    }
+
+    private fun emailChanged(value: String) {
+        viewState = viewState.copy(email = value)
+    }
+
+    private fun passwordChanged(value: String) {
+        viewState = viewState.copy(password = value)
+    }
+
+    private fun signInClicked() {
+        viewState = viewState.copy(isLoading = true)
         viewModelScope.launch {
             userRepository.loadUser().collectLatest {
-                if (it.firstOrNull{it.email==emailId && it.password==password}!=null){
-                    UIState=LogInState.Access
-                }
-                else {
-                    UIState = LogInState.Error
-                }
+                if (validate(it))
+                    viewAction.emit(LogInAction.MoveHomeContent)
+                else
+                    viewAction.emit(LogInAction.ShowError)
+
+                viewState = viewState.copy(
+                    isLoading = false
+                )
             }
         }
     }
 
-    fun onErrorShow(){
-        UIState = LogInState.Create
-    }
+    private fun validate(allUsers: List<User>) =
+        allUsers.firstOrNull { it.email == viewState.email && it.password == viewState.password } != null
 
-    fun onClickSignIn() {
-        UIState = LogInState.Load
+    private fun signInWithGoogleClicked() {
+        viewModelScope.launch {
+            viewAction.emit(LogInAction.MoveHomeContent)
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.screens.log_in
+package com.fiz.e_learn.ui.screens.log_in.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -20,12 +20,12 @@ import com.fiz.e_learn.ui.theme.border
 import com.fiz.e_learn.ui.theme.subtitle1OnSurface
 
 @Composable
-fun GoggleButton(onClickSignIn: () -> Unit) {
+fun GoggleButton(onClick: () -> Unit) {
     OutlinedButton(modifier = Modifier
         .fillMaxWidth()
         .height(54.dp),
         border = BorderStroke(1.dp, MaterialTheme.colors.border),
-        onClick = { onClickSignIn() }) {
+        onClick = { onClick() }) {
         Image(
             painter = painterResource(
                 id = R.drawable.ic_char_g
