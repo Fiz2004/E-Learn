@@ -8,7 +8,7 @@
     <string name="settings">Settings</string>
     <string name="welcome_back">Welcome Back!</string>
     <string name="login_description">A handful of model sentence structures</string>
-    <string name="forgot_password">Forgot Password?</string>
+    <string name="forgot_password_question">Forgot Password?</string>
     <string name="sign_in">Sign in</string>
     <string name="or">(or)</string>
     <string name="password">Password</string>
@@ -35,6 +35,18 @@
     <string name="privacy_police">privacy policy</string>
     <string name="and">and</string>
     <string name="proceed_to_checkout">Proceed to Checkout</string>
+    <string name="error_sent_verification_code">Error sent Verification Code</string>
+    <string name="error_create_account">Error Create Account</string>
+    <string name="error_signin_account">Error SignIn Account</string>
+
+    <!--    Forgot Screen-->
+    <string name="forgot_password">Forgot Password</string>
+    <string name="forgot_description">A handful of model sentence structures</string>
+    <string name="phone_hint">Phone</string>
+    <string name="continue_text">Continue</string>
+    <string name="verification_code_part1">We sent a</string>
+    <string name="verification_code_part2">Verification Code</string>
+    <string name="verification_code_part3">to your Phone Number</string>
 
     <string-array name="on_boarding_title">
         <item>Online Learning Platform</item>

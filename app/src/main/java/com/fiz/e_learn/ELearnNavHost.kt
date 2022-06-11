@@ -13,6 +13,8 @@ import androidx.navigation.compose.composable
 import com.fiz.e_learn.ui.screens.change_password.ChangePasswordBody
 import com.fiz.e_learn.ui.screens.create_account.CreateAccountBody
 import com.fiz.e_learn.ui.screens.create_account.CreateAccountViewModel
+import com.fiz.e_learn.ui.screens.forgot_password.ForgotPasswordBody
+import com.fiz.e_learn.ui.screens.forgot_password.ForgotPasswordViewModel
 import com.fiz.e_learn.ui.screens.home_content.HomeContentBody
 import com.fiz.e_learn.ui.screens.info.InfoBody
 import com.fiz.e_learn.ui.screens.log_in.LogInBody
@@ -81,9 +83,13 @@ fun ELearnNavHost(
         }
 
         composable(ELearnScreen.ForgotPassword.name) {
-            ChangePasswordBody {
-                navController.navigate(ELearnScreen.HomeContent.name)
-            }
+            val viewModel = hiltViewModel<ForgotPasswordViewModel>()
+
+            ForgotPasswordBody(
+                viewModel = viewModel,
+                moveEnterCodeScreen = {
+                    navController.navigate(ELearnScreen.HomeContent.name)
+                })
         }
 
         composable(ELearnScreen.Info.name) {
