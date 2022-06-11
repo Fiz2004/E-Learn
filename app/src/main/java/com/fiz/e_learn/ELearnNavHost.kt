@@ -65,16 +65,16 @@ fun ELearnNavHost(
 
             CreateAccountBody(
                 viewModel = viewModel,
-                onClickTermsOfServices = {
+                moveTermsOfServicesInfo = {
                     navController.navigate(ELearnScreen.Info.name)
                 },
-                onClickPrivacyPolicy = {
+                movePrivacyPolicyInfo = {
                     navController.navigate(ELearnScreen.Info.name)
                 },
-                onClickCreateAccount = {
+                moveHomeContent = {
                     navController.navigate(ELearnScreen.HomeContent.name)
                 },
-                onClickSignIn = {
+                moveSignInScreen = {
                     navController.navigate(ELearnScreen.LogIn.name)
                 }
             )

@@ -11,12 +11,15 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.components.*
 import com.fiz.e_learn.ui.screens.create_account.components.SignInText
@@ -28,14 +31,29 @@ import com.fiz.e_learn.ui.theme.greenText
 
 @Composable
 fun CreateAccountBody(
-    viewModel: CreateAccountViewModel,
-    onClickTermsOfServices: () -> Unit = {},
-    onClickPrivacyPolicy: () -> Unit = {},
-    onClickCreateAccount: () -> Unit = {},
-    onClickSignIn: () -> Unit = {},
+    viewModel: CreateAccountViewModel = viewModel(),
+    moveTermsOfServicesInfo: () -> Unit = {},
+    movePrivacyPolicyInfo: () -> Unit = {},
+    moveHomeContent: () -> Unit = {},
+    moveSignInScreen: () -> Unit = {},
 ) {
     val context = LocalContext.current
-    val viewState = viewModel.UIState
+    val viewState = viewModel.viewState
+    val viewAction = viewModel.viewAction
+    val errorText = stringResource(R.string.error_create_account)
+
+    LaunchedEffect(Unit) {
+        viewAction.collect {
+            when (it) {
+                CreateAccountAction.Create -> {
+                    moveHomeContent()
+                }
+                CreateAccountAction.Error -> {
+                    Toast.makeText(context, errorText, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 
     BaseContainerForLogInGroup {
         BaseIconForLogInGroup(R.drawable.ic_people, 48.dp, 32.dp)
@@ -50,54 +68,56 @@ fun CreateAccountBody(
 
         Spacer(modifier = Modifier.padding(20.dp))
 
-        UserNameTextField()
+        UserNameTextField(
+            text = viewState.userName,
+            textChange = { viewModel.reduce(CreateAccountEvent.UsernameChanged(it)) }
+        )
 
         Spacer(modifier = Modifier.padding(12.dp))
 
-        EmailTextField(
-            text = viewModel.emailId,
-            textChange = { emailId -> viewModel.newEmailId(emailId) })
+        ELearnOutlinedTextField(
+            text = viewState.email,
+            textChange = { it: String -> viewModel.reduce(CreateAccountEvent.EmailChanged(it)) },
+            icon = R.drawable.ic_email,
+            iconSizeWidth = 20.dp,
+            iconSizeHeight = 16.dp,
+            placeholderText = stringResource(R.string.email_id),
+            modifier = Modifier
+                .fillMaxWidth()
+        )
 
         Spacer(modifier = Modifier.padding(12.dp))
 
         PasswordFingerPrintTextField(
-            text = viewModel.password,
-            textChange = { password -> viewModel.newPassword(password) })
+            text = viewState.password,
+            textChange = { viewModel.reduce(CreateAccountEvent.PasswordChanged(it)) })
 
         Spacer(modifier = Modifier.padding(8.dp))
 
         TextPrivacy(
-            onClickTermsOfServices = onClickTermsOfServices,
-            onClickPrivacyPolicy = onClickPrivacyPolicy
+            checked = viewState.privacy,
+            onCheckedChange = { viewModel.reduce(CreateAccountEvent.PrivacyChanged(it)) },
+            onClickTermsOfServices = moveTermsOfServicesInfo,
+            onClickPrivacyPolicy = movePrivacyPolicyInfo
         )
 
         Spacer(modifier = Modifier.padding(8.dp))
 
         ELearnButton(
             R.string.create_account,
-            enabled = viewModel.isCreateAccountButtonEnabled(),
+            enabled = viewState.isCreateAccountButtonEnabled,
             onClick = {
-                viewModel.clickCreateAccount()
+                viewModel.reduce(CreateAccountEvent.CreateAccountClicked)
             })
 
         Spacer(modifier = Modifier.padding(8.dp))
 
-        SignInText(onClickSignIn)
+        SignInText(onClick = moveSignInScreen)
     }
 
-    if (viewState == CreateAccountState.Error) {
-        Toast.makeText(context, "Error Create Account", Toast.LENGTH_SHORT).show()
-        viewModel.onErrorShow()
-    }
-
-    if (viewState == CreateAccountState.Save) {
+    if (viewState.isLoading) {
         Progress()
     }
-    if (viewState == CreateAccountState.LogIn) {
-        onClickCreateAccount()
-        viewModel.onClickCreateAccount()
-    }
-
 }
 
 @Composable

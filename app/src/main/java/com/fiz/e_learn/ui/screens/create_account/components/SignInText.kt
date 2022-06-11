@@ -11,10 +11,10 @@ import androidx.compose.ui.text.withStyle
 import com.fiz.e_learn.ui.theme.greenText
 
 @Composable
-fun SignInText(onClickSignIn: () -> Unit) {
+fun SignInText(onClick: () -> Unit) {
     Text(
         modifier = Modifier
-            .clickable(onClick = { onClickSignIn() }),
+            .clickable(onClick = onClick),
         text = buildAnnotatedString {
             withStyle(
                 style = SpanStyle(

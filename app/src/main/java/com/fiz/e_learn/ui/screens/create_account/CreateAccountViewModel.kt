@@ -7,76 +7,68 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fiz.e_learn.data.repositories.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-sealed class CreateAccountState{
-    object Create:CreateAccountState()
-    object Save:CreateAccountState()
-    object LogIn:CreateAccountState()
-    object Error:CreateAccountState()
-}
-
-
-
 @HiltViewModel
-class CreateAccountViewModel @Inject constructor (private val userRepository: UserRepository) : ViewModel() {
-    var userName by mutableStateOf<String>("")
+class CreateAccountViewModel @Inject constructor(private val userRepository: UserRepository) :
+    ViewModel() {
+
+    var viewState by mutableStateOf(CreateAccountViewState())
         private set
 
-    var emailId by mutableStateOf<String>("")
+    var viewAction: MutableSharedFlow<CreateAccountAction> = MutableSharedFlow()
         private set
 
-    var password by mutableStateOf<String>("")
-        private set
-
-    var isPrivacy by mutableStateOf<Boolean>(false)
-        private set
-
-    var UIState by mutableStateOf<CreateAccountState>(CreateAccountState.Create)
-    private set
-
-    fun clickCreateAccount() {
-        val simpleCheck=emailId.contains("@")&&emailId.contains(".")
-        if (!simpleCheck) {
-            UIState = CreateAccountState.Error
-            return
+    fun reduce(event: CreateAccountEvent) {
+        when (event) {
+            CreateAccountEvent.CreateAccountClicked -> createAccountClicked()
+            CreateAccountEvent.FingerprintClicked -> TODO()
+            CreateAccountEvent.SignInClicked -> TODO()
+            is CreateAccountEvent.UsernameChanged -> usernameChanged(event.value)
+            is CreateAccountEvent.EmailChanged -> emailChanged(event.value)
+            is CreateAccountEvent.PasswordChanged -> passwordChanged(event.value)
+            is CreateAccountEvent.PrivacyChanged -> privacyChanged(event.value)
+            CreateAccountEvent.PrivacyPolicyClicked -> TODO()
+            CreateAccountEvent.TermsOfServicesClicked -> TODO()
         }
+    }
 
+    private fun usernameChanged(value: String) {
+        viewState = viewState.copy(userName = value)
+    }
+
+    private fun emailChanged(value: String) {
+        viewState = viewState.copy(email = value)
+    }
+
+    private fun passwordChanged(value: String) {
+        viewState = viewState.copy(password = value)
+    }
+
+    private fun privacyChanged(value: Boolean) {
+        viewState = viewState.copy(privacy = value)
+    }
+
+    private fun createAccountClicked() {
         viewModelScope.launch {
-            UIState=CreateAccountState.Save
-            UIState = if (userRepository.saveUser(userName, emailId, password))
-                CreateAccountState.LogIn
-            else
-                CreateAccountState.Error
+            viewState = viewState.copy(isLoading = true)
+            val simpleCheck = viewState.email.contains("@") && viewState.email.contains(".")
+            if (!simpleCheck) {
+                viewAction.emit(CreateAccountAction.Error)
+            } else {
+                if (userRepository.saveUser(
+                        viewState.userName,
+                        viewState.email,
+                        viewState.password
+                    )
+                )
+                    viewAction.emit(CreateAccountAction.Create)
+                else
+                    viewAction.emit(CreateAccountAction.Error)
+            }
+            viewState = viewState.copy(isLoading = false)
         }
-    }
-
-    fun newUserName(userName: String) {
-        this.userName=userName
-    }
-
-    fun newEmailId(emailId: String) {
-        this.emailId=emailId
-    }
-
-    fun newPassword(password: String) {
-        this.password=password
-    }
-
-    fun isCreateAccountButtonEnabled(): Boolean {
-        return userName.isNotBlank() && emailId.isNotBlank() && password.isNotBlank() && isPrivacy
-    }
-
-    fun clickPrivacyCheckBox(isPrivacy: Boolean) {
-        this.isPrivacy=isPrivacy
-    }
-
-    fun onErrorShow() {
-        UIState=CreateAccountState.Create
-    }
-
-    fun onClickCreateAccount() {
-        UIState=CreateAccountState.Save
     }
 }
