@@ -3,7 +3,7 @@ package com.fiz.e_learn.ui.screens
 enum class ELearnScreens {
     TitleScreens(),
     OnBoarding(),
-    LogIn(),
+    SignIn(),
     CreateAccount(),
     Info(),
     ForgotPassword(),

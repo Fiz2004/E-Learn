@@ -5,14 +5,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fiz.e_learn.data.repositories.UserRepository
+import com.fiz.e_learn.domain.repositories.UserRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CreateAccountViewModel @Inject constructor(private val userRepository: UserRepository) :
+class CreateAccountViewModel @Inject constructor(private val userRepository: UserRepositoryImpl) :
     ViewModel() {
 
     var viewState by mutableStateOf(CreateAccountViewState())
@@ -24,15 +24,42 @@ class CreateAccountViewModel @Inject constructor(private val userRepository: Use
     fun reduce(event: CreateAccountEvent) {
         when (event) {
             CreateAccountEvent.CreateAccountClicked -> createAccountClicked()
-            CreateAccountEvent.FingerprintClicked -> TODO()
-            CreateAccountEvent.SignInClicked -> TODO()
+            CreateAccountEvent.FingerprintClicked -> fingerprintClicked()
+            CreateAccountEvent.SignInClicked -> signInClicked()
             is CreateAccountEvent.UsernameChanged -> usernameChanged(event.value)
             is CreateAccountEvent.EmailChanged -> emailChanged(event.value)
             is CreateAccountEvent.PasswordChanged -> passwordChanged(event.value)
             is CreateAccountEvent.PrivacyChanged -> privacyChanged(event.value)
-            CreateAccountEvent.PrivacyPolicyClicked -> TODO()
-            CreateAccountEvent.TermsOfServicesClicked -> TODO()
+            CreateAccountEvent.PrivacyPolicyClicked -> privacyPolicyClicked()
+            CreateAccountEvent.TermsOfServicesClicked -> termsOfServicesClicked()
+            is CreateAccountEvent.PhoneNumberChanged -> phoneNumberChanged(event.value)
         }
+    }
+
+    private fun phoneNumberChanged(value: String) {
+        viewState = viewState.copy(phoneNumber = value)
+    }
+
+    private fun termsOfServicesClicked() {
+        viewModelScope.launch {
+            viewAction.emit(CreateAccountAction.MoveTermsOfServicesInfoScreen)
+        }
+    }
+
+    private fun privacyPolicyClicked() {
+        viewModelScope.launch {
+            viewAction.emit(CreateAccountAction.MovePrivacyPolicyInfoScreen)
+        }
+    }
+
+    private fun signInClicked() {
+        viewModelScope.launch {
+            viewAction.emit(CreateAccountAction.MoveSignInScreen)
+        }
+    }
+
+    private fun fingerprintClicked() {
+
     }
 
     private fun usernameChanged(value: String) {
@@ -56,17 +83,18 @@ class CreateAccountViewModel @Inject constructor(private val userRepository: Use
             viewState = viewState.copy(isLoading = true)
             val simpleCheck = viewState.email.contains("@") && viewState.email.contains(".")
             if (!simpleCheck) {
-                viewAction.emit(CreateAccountAction.Error)
+                viewAction.emit(CreateAccountAction.ShowError)
             } else {
                 if (userRepository.saveUser(
                         viewState.userName,
                         viewState.email,
+                        viewState.phoneNumber,
                         viewState.password
                     )
                 )
-                    viewAction.emit(CreateAccountAction.Create)
+                    viewAction.emit(CreateAccountAction.MoveHomeContentScreen)
                 else
-                    viewAction.emit(CreateAccountAction.Error)
+                    viewAction.emit(CreateAccountAction.ShowError)
             }
             viewState = viewState.copy(isLoading = false)
         }

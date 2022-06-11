@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import com.fiz.e_learn.ui.theme.greenText
 
@@ -15,6 +16,7 @@ fun SignInText(onClick: () -> Unit) {
     Text(
         modifier = Modifier
             .clickable(onClick = onClick),
+        style = MaterialTheme.typography.subtitle2,
         text = buildAnnotatedString {
             withStyle(
                 style = SpanStyle(
@@ -26,7 +28,8 @@ fun SignInText(onClick: () -> Unit) {
             }
             withStyle(
                 style = SpanStyle(
-                    color = MaterialTheme.colors.greenText
+                    color = MaterialTheme.colors.greenText,
+                    textDecoration = TextDecoration.Underline,
                 )
             ) {
                 append("Sign in")

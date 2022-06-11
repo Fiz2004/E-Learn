@@ -1,7 +1,6 @@
 package com.fiz.e_learn.ui.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
@@ -55,9 +54,14 @@ fun ELearnOutlinedTextFieldWithIcon(
                 contentScale = ContentScale.Crop
             )
         },
-        textStyle = MaterialTheme.typography.subtitle2,
+        textStyle = MaterialTheme.typography.subtitle2.copy(
+            color = MaterialTheme.colors.onSurface
+        ),
         placeholder = {
-            Text(text = placeholderText, modifier = Modifier.padding(start = 12.dp))
+            Text(
+                text = placeholderText,
+                color = MaterialTheme.colors.onSurface2
+            )
         },
     )
 }

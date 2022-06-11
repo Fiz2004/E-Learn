@@ -4,9 +4,14 @@ data class CreateAccountViewState(
     val userName: String = "",
     val email: String = "",
     val password: String = "",
+    val phoneNumber: String = "",
     val privacy: Boolean = false,
     val isLoading: Boolean = false,
 ) {
     val isCreateAccountButtonEnabled: Boolean
-        get() = userName.isNotBlank() && email.isNotBlank() && password.isNotBlank() && privacy
+        get() = userName.isNotBlank() &&
+                email.isNotBlank() &&
+                password.isNotBlank() &&
+                phoneNumber.isNotBlank() &&
+                privacy
 }

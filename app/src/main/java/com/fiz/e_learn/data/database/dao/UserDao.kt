@@ -2,15 +2,14 @@ package com.fiz.e_learn.data.database.dao
 
 import androidx.room.*
 import com.fiz.e_learn.data.entity.UserEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDao {
     @Query("SELECT * FROM UserEntity")
-    fun getAll(): Flow<List<UserEntity>>
+    fun getAll(): List<UserEntity>
 
     @Query("SELECT * FROM UserEntity WHERE id =:id")
-    fun getById(id: String): Flow<UserEntity>
+    fun getById(id: String): UserEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(categoryEntity: UserEntity)

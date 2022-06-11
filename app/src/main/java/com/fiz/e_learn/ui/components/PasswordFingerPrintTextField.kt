@@ -24,7 +24,8 @@ import com.fiz.e_learn.ui.theme.onSurface2
 fun PasswordFingerPrintTextField(
     modifier: Modifier = Modifier,
     text: String,
-    textChange: (String) -> Unit
+    textChange: (String) -> Unit,
+    fingerPrintOnClick: () -> Unit
 ) {
     Row(
         modifier = modifier
@@ -49,7 +50,7 @@ fun PasswordFingerPrintTextField(
         )
 
         IconButton(
-            onClick = {},
+            onClick = fingerPrintOnClick,
             modifier = Modifier
                 .size(64.dp, 54.dp)
                 .background(MaterialTheme.colors.editText)

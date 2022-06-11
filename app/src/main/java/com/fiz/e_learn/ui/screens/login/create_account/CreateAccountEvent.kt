@@ -9,5 +9,6 @@ sealed class CreateAccountEvent {
     data class UsernameChanged(val value: String) : CreateAccountEvent()
     data class EmailChanged(val value: String) : CreateAccountEvent()
     data class PasswordChanged(val value: String) : CreateAccountEvent()
+    data class PhoneNumberChanged(val value: String) : CreateAccountEvent()
     data class PrivacyChanged(val value: Boolean) : CreateAccountEvent()
 }

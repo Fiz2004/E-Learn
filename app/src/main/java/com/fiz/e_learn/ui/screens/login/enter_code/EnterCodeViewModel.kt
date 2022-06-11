@@ -40,8 +40,8 @@ class EnterCodeViewModel @Inject constructor() : ViewModel() {
             // Отправляем запрос на проверку кода
             val response = run {
                 delay(3000)
-                val isVerificationCodeSend = true
-                isVerificationCodeSend
+                val isVerificationCodeTrue = true
+                isVerificationCodeTrue
             }
 
             val action = if (response)

@@ -5,12 +5,15 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fiz.e_learn.R
@@ -19,7 +22,7 @@ import com.fiz.e_learn.ui.screens.create_account.BaseIconForLogInGroup
 import com.fiz.e_learn.ui.screens.login.sigin.components.GoggleButton
 import com.fiz.e_learn.ui.screens.login.sigin.components.TextSignUp
 import com.fiz.e_learn.ui.screens.sigin.TextSubtitle1
-import com.fiz.e_learn.ui.screens.sigin.TextSubtitle1Green
+import com.fiz.e_learn.ui.theme.subtitle1Green
 
 @Composable
 fun SignInBody(
@@ -36,13 +39,13 @@ fun SignInBody(
     LaunchedEffect(Unit) {
         viewAction.collect {
             when (it) {
-                SignInAction.MoveForgotPassword -> {
+                SignInAction.MoveForgotPasswordScreen -> {
                     moveForgotPassword()
                 }
-                SignInAction.MoveHomeContent -> {
+                SignInAction.MoveHomeContentScreen -> {
                     moveHomeContent()
                 }
-                SignInAction.MoveSignUp -> {
+                SignInAction.MoveSignUpScreen -> {
                     moveSignUp()
                 }
                 SignInAction.ShowError -> {
@@ -68,7 +71,7 @@ fun SignInBody(
 
         ELearnOutlinedTextFieldWithIcon(
             text = viewState.email,
-            textChange = { it: String -> viewModel.reduce(SignInEvent.EmailChanged(it)) },
+            textChange = { viewModel.reduce(SignInEvent.EmailChanged(it)) },
             icon = R.drawable.ic_email,
             iconSizeWidth = 20.dp,
             iconSizeHeight = 16.dp,
@@ -81,17 +84,20 @@ fun SignInBody(
 
         PasswordFingerPrintTextField(
             text = viewState.password,
-            textChange = { viewModel.reduce(SignInEvent.FingerprintClicked) }
+            textChange = { viewModel.reduce(SignInEvent.PasswordChanged(it)) },
+            fingerPrintOnClick = { viewModel.reduce(SignInEvent.FingerprintClicked) }
         )
 
         Spacer(modifier = Modifier.padding(8.dp))
 
-        TextSubtitle1Green(
-            text = R.string.forgot_password_question,
+        Text(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable(onClick = { viewModel.reduce(SignInEvent.ForgotPasswordClicked) }),
-            textAlign = TextAlign.End
+            textAlign = TextAlign.End,
+            text = stringResource(id = R.string.forgot_password_question),
+            style = MaterialTheme.typography.subtitle1Green,
+            textDecoration = TextDecoration.Underline
         )
 
         Spacer(modifier = Modifier.padding(8.dp))

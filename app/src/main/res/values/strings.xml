@@ -52,9 +52,24 @@
     <string name="error_resend_code">Resend Code Error</string>
     <string name="resend_code_send">New resend code send</string>
     <string name="enter_code">Enter a Code</string>
-    <string name="enter_code_description">"We sent a verification code to your phone number "</string>
+    <string name="enter_code_description">We sent a verification code to your phone number</string>
     <string name="change_password">Change Password</string>
     <string name="resend_code">Resend Code</string>
+
+    <!--    Change Password Screen-->
+    <string name="error_change_password">Error change password</string>
+    <string name="change_password_description">Your password length consists of 6-characters</string>
+    <string name="new_password_hint">New Password</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="save_password">Save Password</string>
+
+    <!--    Info Screen-->
+    <string name="account_created_title">Account Created Successfully!</string>
+    <string name="account_created_description">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing.</string>
+    <string name="next">Next</string>
+    <string name="password_changed_title">Password Changed Successfully!</string>
+    <string name="password_changed_description"> If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing.</string>
+
 
     <string-array name="on_boarding_title">
         <item>Online Learning Platform</item>

@@ -9,7 +9,7 @@ import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.components.ELearnOutlinedTextFieldWithIcon
 
 @Composable
-fun UserNameTextField(
+fun PhoneTextField(
     modifier: Modifier = Modifier,
     text: String,
     textChange: (String) -> Unit
@@ -17,12 +17,11 @@ fun UserNameTextField(
     ELearnOutlinedTextFieldWithIcon(
         text = text,
         textChange = textChange,
-        icon = R.drawable.ic_username,
+        icon = R.drawable.ic_phone,
         iconSizeWidth = 16.dp,
         iconSizeHeight = 20.dp,
-        placeholderText = stringResource(R.string.username),
+        placeholderText = stringResource(R.string.phone_hint),
         modifier = modifier
             .fillMaxWidth()
     )
 }
-

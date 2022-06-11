@@ -15,7 +15,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
@@ -80,7 +79,7 @@ fun EnterCodeBody(
                 append(stringResource(R.string.enter_code_description))
 
                 withStyle(style = SpanStyle(color = MaterialTheme.colors.greenText)) {
-                    append(numberPhone)
+                    append(" $numberPhone")
                 }
 
             }
@@ -92,44 +91,41 @@ fun EnterCodeBody(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            ELearnOutlinedTextField(
+            VerificationCodeTextField(
+                0,
                 modifier = Modifier.weight(1f),
-                text = viewState.codes[0],
-                textChange = { viewModel.reduce(EnterCodeEvent.CodeChanged(0, it)) },
-                placeholderText = "0",
+                viewState,
+                viewModel
             )
 
             Spacer(modifier = Modifier.weight(0.33f))
 
 
-            ELearnOutlinedTextField(
+            VerificationCodeTextField(
+                1,
                 modifier = Modifier.weight(1f),
-
-                text = viewState.codes[1],
-                textChange = { viewModel.reduce(EnterCodeEvent.CodeChanged(1, it)) },
-                placeholderText = "0",
+                viewState,
+                viewModel
             )
 
             Spacer(modifier = Modifier.weight(0.33f))
 
 
-            ELearnOutlinedTextField(
+            VerificationCodeTextField(
+                2,
                 modifier = Modifier.weight(1f),
-
-                text = viewState.codes[2],
-                textChange = { viewModel.reduce(EnterCodeEvent.CodeChanged(2, it)) },
-                placeholderText = "0",
+                viewState,
+                viewModel
             )
 
             Spacer(modifier = Modifier.weight(0.33f))
 
 
-            ELearnOutlinedTextField(
+            VerificationCodeTextField(
+                3,
                 modifier = Modifier.weight(1f),
-
-                text = viewState.codes[3],
-                textChange = { viewModel.reduce(EnterCodeEvent.CodeChanged(3, it)) },
-                placeholderText = "0",
+                viewState,
+                viewModel
             )
         }
 
@@ -165,35 +161,42 @@ fun EnterCodeBody(
 }
 
 @Composable
-fun ELearnOutlinedTextField(
-    text: String,
-    textChange: (String) -> Unit,
+private fun VerificationCodeTextField(
+    number: Int,
     modifier: Modifier = Modifier,
-    placeholderText: String,
-    visualTransformation: VisualTransformation = VisualTransformation.None
+    viewState: EnterCodeViewState,
+    viewModel: EnterCodeViewModel
 ) {
     OutlinedTextField(
         modifier = modifier,
-        value = text,
-        onValueChange = { textChange(it) },
+        value = viewState.codes[number],
+        onValueChange = {
+            viewModel.reduce(EnterCodeEvent.CodeChanged(number, it))
+        },
         shape = RoundedCornerShape(16.dp),
         maxLines = 1,
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            textColor = MaterialTheme.colors.onSurface2,
+            textColor = MaterialTheme.colors.onSurface,
             backgroundColor = MaterialTheme.colors.editText,
             focusedBorderColor = MaterialTheme.colors.border,
             unfocusedBorderColor = MaterialTheme.colors.border
         ),
-        visualTransformation = visualTransformation,
         textStyle = MaterialTheme.typography.subtitle2.copy(
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colors.onSurface
         ),
         placeholder = {
             Text(
-                text = placeholderText,
+                text = "0",
                 modifier = Modifier.padding(start = 12.dp),
-                textAlign = TextAlign.Center
+                style = MaterialTheme.typography.subtitle2.copy(
+                    color = MaterialTheme.colors.onSurface2,
+                    textAlign = TextAlign.Center
+                )
             )
         },
     )
+
+
 }
+

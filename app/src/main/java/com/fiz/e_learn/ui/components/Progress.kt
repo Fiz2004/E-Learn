@@ -14,7 +14,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.fiz.e_learn.ui.theme.greenText
 
 @Composable
 fun Progress() {
@@ -36,7 +35,7 @@ fun Progress() {
                 .size(50.dp),
             strokeWidth = 8.dp,
             progress = progressAnimationValue,
-            color = MaterialTheme.colors.greenText
+            color = MaterialTheme.colors.onPrimary
         )
     }
 }

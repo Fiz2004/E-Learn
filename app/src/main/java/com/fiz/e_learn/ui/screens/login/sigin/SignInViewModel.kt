@@ -5,16 +5,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fiz.e_learn.data.repositories.User
-import com.fiz.e_learn.data.repositories.UserRepository
+import com.fiz.e_learn.domain.repositories.UserRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignInViewModel @Inject constructor(private val userRepository: UserRepository) :
+class SignInViewModel @Inject constructor(private val userRepository: UserRepositoryImpl) :
     ViewModel() {
 
     var viewState by mutableStateOf(SignInViewState())
@@ -37,13 +35,13 @@ class SignInViewModel @Inject constructor(private val userRepository: UserReposi
 
     private fun signUpClicked() {
         viewModelScope.launch {
-            viewAction.emit(SignInAction.MoveSignUp)
+            viewAction.emit(SignInAction.MoveSignUpScreen)
         }
     }
 
     private fun forgotPasswordClicked() {
         viewModelScope.launch {
-            viewAction.emit(SignInAction.MoveForgotPassword)
+            viewAction.emit(SignInAction.MoveForgotPasswordScreen)
         }
     }
 
@@ -58,25 +56,23 @@ class SignInViewModel @Inject constructor(private val userRepository: UserReposi
     private fun signInClicked() {
         viewState = viewState.copy(isLoading = true)
         viewModelScope.launch {
-            userRepository.loadUser().collectLatest {
-                if (validate(it))
-                    viewAction.emit(SignInAction.MoveHomeContent)
-                else
-                    viewAction.emit(SignInAction.ShowError)
+            val email = viewState.email
+            val password = viewState.password
+            val response = userRepository.validateEmailPassword(email, password)
+            if (response)
+                viewAction.emit(SignInAction.MoveHomeContentScreen)
+            else
+                viewAction.emit(SignInAction.ShowError)
 
-                viewState = viewState.copy(
-                    isLoading = false
-                )
-            }
+            viewState = viewState.copy(
+                isLoading = false
+            )
         }
     }
 
-    private fun validate(allUsers: List<User>) =
-        allUsers.firstOrNull { it.email == viewState.email && it.password == viewState.password } != null
-
     private fun signInWithGoogleClicked() {
         viewModelScope.launch {
-            viewAction.emit(SignInAction.MoveHomeContent)
+            viewAction.emit(SignInAction.MoveHomeContentScreen)
         }
     }
 }

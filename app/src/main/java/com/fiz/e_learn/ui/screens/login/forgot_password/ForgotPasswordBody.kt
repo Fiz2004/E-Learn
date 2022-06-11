@@ -81,4 +81,8 @@ fun ForgotPasswordBody(
                     viewModel.reduce(ForgotPasswordEvent.VerificationCodeClicked)
                 })
     }
+
+    if (viewState.isLoading) {
+        Progress()
+    }
 }

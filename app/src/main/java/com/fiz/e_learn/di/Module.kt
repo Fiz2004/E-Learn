@@ -9,6 +9,7 @@ import com.fiz.e_learn.data.data_source.UserLocalDataSource
 import com.fiz.e_learn.data.database.ElearnDatabase
 import com.fiz.e_learn.data.database.dao.UserDao
 import com.fiz.e_learn.data.repositories.UserRepository
+import com.fiz.e_learn.domain.repositories.UserRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -51,12 +52,18 @@ class Module {
 
     @Provides
     @Singleton
-    fun provideUserRepository(userLocalDataSource: UserLocalDataSource): UserRepository =
-        UserRepository(userLocalDataSource)
+    fun provideUserRepository(userLocalDataSource: UserLocalDataSource): UserRepositoryImpl =
+        UserRepositoryImpl(userLocalDataSource)
 
     @Provides
     @Singleton
     fun provideUserLocalDataSource(userDao: UserDao): UserLocalDataSource =
         UserLocalDataSource(userDao)
 
+    @Module
+    @InstallIn(SingletonComponent::class)
+    interface Bindings {
+        @dagger.Binds
+        fun provideUserRepository(UserRepositoryImpl: UserRepositoryImpl): UserRepository
+    }
 }

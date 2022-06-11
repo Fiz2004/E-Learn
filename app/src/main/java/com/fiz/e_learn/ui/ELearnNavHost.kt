@@ -7,16 +7,18 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.fiz.e_learn.ui.screens.ELearnScreens
 import com.fiz.e_learn.ui.screens.login.change_password.ChangePasswordBody
+import com.fiz.e_learn.ui.screens.login.change_password.ChangePasswordViewModel
 import com.fiz.e_learn.ui.screens.login.create_account.CreateAccountBody
 import com.fiz.e_learn.ui.screens.login.create_account.CreateAccountViewModel
 import com.fiz.e_learn.ui.screens.login.enter_code.EnterCodeBody
 import com.fiz.e_learn.ui.screens.login.enter_code.EnterCodeViewModel
 import com.fiz.e_learn.ui.screens.login.forgot_password.ForgotPasswordBody
 import com.fiz.e_learn.ui.screens.login.forgot_password.ForgotPasswordViewModel
-import com.fiz.e_learn.ui.screens.login.info.InfoBody
 import com.fiz.e_learn.ui.screens.login.on_boarding.OnBoardingBody
 import com.fiz.e_learn.ui.screens.login.sigin.SignInBody
 import com.fiz.e_learn.ui.screens.login.sigin.SignInViewModel
+import com.fiz.e_learn.ui.screens.login.sigin.info.InfoBody
+import com.fiz.e_learn.ui.screens.login.sigin.info.InfoViewModel
 import com.fiz.e_learn.ui.screens.main_content.home_content.HomeContentBody
 import com.fiz.e_learn.ui.screens.title.TitleScreenBody
 import com.fiz.e_learn.ui.screens.title.TitleViewModel
@@ -35,13 +37,13 @@ fun ELearnNavHost(
             TitleScreenBody(
                 viewModel = viewModel,
                 moveOnBoardingScreen = { navController.navigate("onBoarding") },
-                moveLogInScreen = { navController.navigate(ELearnScreens.LogIn.name) }
+                moveLogInScreen = { navController.navigate(ELearnScreens.SignIn.name) }
             )
         }
 
         onBoardingGraph(navController)
 
-        composable(ELearnScreens.LogIn.name) {
+        composable(ELearnScreens.SignIn.name) {
             val viewModel = hiltViewModel<SignInViewModel>()
 
             SignInBody(
@@ -63,16 +65,16 @@ fun ELearnNavHost(
             CreateAccountBody(
                 viewModel = viewModel,
                 moveTermsOfServicesInfo = {
-                    navController.navigate(ELearnScreens.Info.name)
+                    navController.navigate(ELearnScreens.Info.name + "/TermsOfServices")
                 },
                 movePrivacyPolicyInfo = {
-                    navController.navigate(ELearnScreens.Info.name)
+                    navController.navigate(ELearnScreens.Info.name + "/PrivacyPolicy")
                 },
-                moveHomeContent = {
-                    navController.navigate(ELearnScreens.HomeContent.name)
+                moveInfoScreen = {
+                    navController.navigate(ELearnScreens.Info.name + "/CreateAccount")
                 },
                 moveSignInScreen = {
-                    navController.navigate(ELearnScreens.LogIn.name)
+                    navController.navigate(ELearnScreens.SignIn.name)
                 }
             )
         }
@@ -104,17 +106,31 @@ fun ELearnNavHost(
             )
         }
 
-        composable(ELearnScreens.Info.name) {
-            InfoBody {
-                navController.navigate(ELearnScreens.HomeContent.name)
-            }
+        composable(ELearnScreens.ChangePassword.name) {
+            val viewModel = hiltViewModel<ChangePasswordViewModel>()
+
+            ChangePasswordBody(
+                viewModel = viewModel,
+                moveInfoScreen = { navController.navigate(ELearnScreens.HomeContent.name + "/ChangePassword") }
+            )
         }
 
-        composable(ELearnScreens.ChangePassword.name) {
-            ChangePasswordBody {
-                navController.navigate(ELearnScreens.HomeContent.name)
-            }
+        composable(
+            route = ELearnScreens.Info.name + "/{previewScreen}",
+            arguments = listOf(navArgument("previewScreen") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val viewModel = hiltViewModel<InfoViewModel>()
+
+            val previewScreen = backStackEntry.arguments?.getString("previewScreen") ?: ""
+
+            InfoBody(
+                viewModel = viewModel,
+                previewScreen = previewScreen,
+                moveSignInScreen = { navController.navigate(ELearnScreens.SignIn.name) }
+            )
         }
+
+
 
         composable(ELearnScreens.HomeContent.name) {
             HomeContentBody(navController)
@@ -144,7 +160,7 @@ fun NavGraphBuilder.onBoardingGraph(navController: NavController) {
                     3 -> navController.navigate(ELearnScreens.OnBoarding.name + "/4")
                     4 -> {
                         viewModel.firstTimeLaunchCompleted()
-                        navController.navigate(ELearnScreens.LogIn.name)
+                        navController.navigate(ELearnScreens.SignIn.name)
                     }
                 }
             }

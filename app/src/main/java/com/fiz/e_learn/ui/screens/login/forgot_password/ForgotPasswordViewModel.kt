@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fiz.e_learn.data.repositories.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -12,7 +13,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ForgotPasswordViewModel @Inject constructor() : ViewModel() {
+class ForgotPasswordViewModel @Inject constructor(private val userRepository: UserRepository) :
+    ViewModel() {
 
     var viewState by mutableStateOf(ForgotPasswordViewState())
         private set
@@ -40,12 +42,25 @@ class ForgotPasswordViewModel @Inject constructor() : ViewModel() {
 
     private fun continueClicked() {
         viewModelScope.launch {
+            viewState = viewState.copy(isLoading = true)
+            val numberPhone = viewState.numberPhone
+            // Проверяем есть ли такой номер в базе
+            val responseValidate = run {
+                val response = userRepository.validateNumberPhone(numberPhone)
+                delay(3000)
+                response
+            }
+            if (!responseValidate) {
+                viewAction.emit(ForgotPasswordAction.ShowError)
+                viewState = viewState.copy(isLoading = false)
+                viewState = viewState.copy(isShowLabelSentVerificationCode = false)
+            }
+
             viewState = viewState.copy(isShowLabelSentVerificationCode = true)
-            // Отправляем запрос на получение кода
+            // Ждем ответа что сообщение отправлено
             val response = run {
                 delay(3000)
-                val isVerificationCodeSend = true
-                isVerificationCodeSend
+                true
             }
 
             val action = if (response)
@@ -53,7 +68,7 @@ class ForgotPasswordViewModel @Inject constructor() : ViewModel() {
             else
                 ForgotPasswordAction.ShowError
             viewAction.emit(action)
-
+            viewState = viewState.copy(isLoading = false)
             viewState = viewState.copy(isShowLabelSentVerificationCode = false)
         }
     }

@@ -14,6 +14,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.components.*
 import com.fiz.e_learn.ui.screens.create_account.BaseIconForLogInGroup
+import com.fiz.e_learn.ui.screens.login.create_account.components.PhoneTextField
 import com.fiz.e_learn.ui.screens.login.create_account.components.SignInText
 import com.fiz.e_learn.ui.screens.login.create_account.components.TextPrivacy
 import com.fiz.e_learn.ui.screens.login.create_account.components.UserNameTextField
@@ -24,7 +25,7 @@ fun CreateAccountBody(
     viewModel: CreateAccountViewModel = viewModel(),
     moveTermsOfServicesInfo: () -> Unit = {},
     movePrivacyPolicyInfo: () -> Unit = {},
-    moveHomeContent: () -> Unit = {},
+    moveInfoScreen: () -> Unit = {},
     moveSignInScreen: () -> Unit = {},
 ) {
     val context = LocalContext.current
@@ -35,10 +36,19 @@ fun CreateAccountBody(
     LaunchedEffect(Unit) {
         viewAction.collect {
             when (it) {
-                CreateAccountAction.Create -> {
-                    moveHomeContent()
+                CreateAccountAction.MoveHomeContentScreen -> {
+                    moveInfoScreen()
                 }
-                CreateAccountAction.Error -> {
+                CreateAccountAction.MovePrivacyPolicyInfoScreen -> {
+                    movePrivacyPolicyInfo()
+                }
+                CreateAccountAction.MoveSignInScreen -> {
+                    moveSignInScreen()
+                }
+                CreateAccountAction.MoveTermsOfServicesInfoScreen -> {
+                    moveTermsOfServicesInfo()
+                }
+                CreateAccountAction.ShowError -> {
                     Toast.makeText(context, errorText, Toast.LENGTH_SHORT).show()
                 }
             }
@@ -65,9 +75,16 @@ fun CreateAccountBody(
 
         Spacer(modifier = Modifier.padding(12.dp))
 
+        PhoneTextField(
+            text = viewState.phoneNumber,
+            textChange = { viewModel.reduce(CreateAccountEvent.PhoneNumberChanged(it)) }
+        )
+
+        Spacer(modifier = Modifier.padding(12.dp))
+
         ELearnOutlinedTextFieldWithIcon(
             text = viewState.email,
-            textChange = { it: String -> viewModel.reduce(CreateAccountEvent.EmailChanged(it)) },
+            textChange = { viewModel.reduce(CreateAccountEvent.EmailChanged(it)) },
             icon = R.drawable.ic_email,
             iconSizeWidth = 20.dp,
             iconSizeHeight = 16.dp,
@@ -80,7 +97,8 @@ fun CreateAccountBody(
 
         PasswordFingerPrintTextField(
             text = viewState.password,
-            textChange = { viewModel.reduce(CreateAccountEvent.PasswordChanged(it)) })
+            textChange = { viewModel.reduce(CreateAccountEvent.PasswordChanged(it)) },
+            fingerPrintOnClick = {})
 
         Spacer(modifier = Modifier.padding(8.dp))
 
@@ -103,6 +121,8 @@ fun CreateAccountBody(
         Spacer(modifier = Modifier.padding(8.dp))
 
         SignInText(onClick = moveSignInScreen)
+
+        Spacer(modifier = Modifier.padding(40.dp))
     }
 
     if (viewState.isLoading) {
