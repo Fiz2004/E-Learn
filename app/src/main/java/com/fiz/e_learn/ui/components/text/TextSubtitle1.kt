@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.screens.log_in
+package com.fiz.e_learn.ui.screens.sigin
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text

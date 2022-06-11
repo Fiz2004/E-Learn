@@ -6,8 +6,7 @@ import androidx.compose.material.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.fiz.e_learn.ui.screens.create_account.CreateAccountViewModel
-import com.fiz.e_learn.ui.screens.log_in.TextSubtitle1
+import com.fiz.e_learn.ui.screens.sigin.TextSubtitle1
 import com.fiz.e_learn.ui.theme.Black_900
 
 @Composable
