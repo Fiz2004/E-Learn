@@ -54,7 +54,7 @@ fun CreateAccountBody(
 
         Spacer(modifier = Modifier.padding(4.dp))
 
-        TextSubtitle2(R.string.create_account_description)
+        TextSubtitle2(stringResource(id = R.string.create_account_description))
 
         Spacer(modifier = Modifier.padding(20.dp))
 
@@ -65,7 +65,7 @@ fun CreateAccountBody(
 
         Spacer(modifier = Modifier.padding(12.dp))
 
-        ELearnOutlinedTextField(
+        ELearnOutlinedTextFieldWithIcon(
             text = viewState.email,
             textChange = { it: String -> viewModel.reduce(CreateAccountEvent.EmailChanged(it)) },
             icon = R.drawable.ic_email,
@@ -94,7 +94,7 @@ fun CreateAccountBody(
         Spacer(modifier = Modifier.padding(8.dp))
 
         ELearnButton(
-            R.string.create_account,
+            stringResource(id = R.string.create_account),
             enabled = viewState.isCreateAccountButtonEnabled,
             onClick = {
                 viewModel.reduce(CreateAccountEvent.CreateAccountClicked)

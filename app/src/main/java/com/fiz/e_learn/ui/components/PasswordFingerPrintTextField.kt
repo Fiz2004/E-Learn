@@ -30,7 +30,7 @@ fun PasswordFingerPrintTextField(
         modifier = modifier
             .fillMaxWidth()
     ) {
-        ELearnOutlinedTextField(
+        ELearnOutlinedTextFieldWithIcon(
             text = text,
             textChange = textChange,
             placeholderText = stringResource(R.string.password),

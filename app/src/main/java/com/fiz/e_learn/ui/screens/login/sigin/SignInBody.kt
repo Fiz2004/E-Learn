@@ -62,11 +62,11 @@ fun SignInBody(
 
         Spacer(modifier = Modifier.padding(4.dp))
 
-        TextSubtitle2(R.string.login_description)
+        TextSubtitle2(stringResource(id = R.string.login_description))
 
         Spacer(modifier = Modifier.padding(20.dp))
 
-        ELearnOutlinedTextField(
+        ELearnOutlinedTextFieldWithIcon(
             text = viewState.email,
             textChange = { it: String -> viewModel.reduce(SignInEvent.EmailChanged(it)) },
             icon = R.drawable.ic_email,
@@ -97,7 +97,7 @@ fun SignInBody(
         Spacer(modifier = Modifier.padding(8.dp))
 
         ELearnButton(
-            R.string.sign_in,
+            stringResource(id = R.string.sign_in),
             onClick = {
                 viewModel.reduce(SignInEvent.SignInClicked)
             }

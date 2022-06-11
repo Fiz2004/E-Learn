@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
-import com.fiz.e_learn.ui.components.ELearnOutlinedTextField
+import com.fiz.e_learn.ui.components.ELearnOutlinedTextFieldWithIcon
 import com.fiz.e_learn.ui.theme.backgroundHome
 
 @Composable
@@ -46,7 +46,7 @@ fun ELearnTopAppBar() {
 
                 IconTopBar(R.drawable.ic_basket)
             }
-            ELearnOutlinedTextField(
+            ELearnOutlinedTextFieldWithIcon(
                 text = "",
                 textChange = {},
                 placeholderText = "Search here...",

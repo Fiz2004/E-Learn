@@ -18,7 +18,7 @@ import com.fiz.e_learn.ui.screens.create_account.BaseIconForLogInGroup
 @Composable
 fun ForgotPasswordBody(
     viewModel: ForgotPasswordViewModel = viewModel(),
-    moveEnterCodeScreen: () -> Unit = {},
+    moveEnterCodeScreen: (String) -> Unit = {},
 ) {
     val context = LocalContext.current
     val viewState = viewModel.viewState
@@ -29,8 +29,8 @@ fun ForgotPasswordBody(
     LaunchedEffect(Unit) {
         viewAction.collect {
             when (it) {
-                ForgotPasswordAction.MoveEnterCode -> {
-                    moveEnterCodeScreen()
+                is ForgotPasswordAction.MoveEnterCode -> {
+                    moveEnterCodeScreen(it.numberPhone)
                 }
                 ForgotPasswordAction.ShowError -> {
                     Toast.makeText(context, errorText, Toast.LENGTH_SHORT).show()
@@ -48,12 +48,12 @@ fun ForgotPasswordBody(
 
         Spacer(modifier = Modifier.padding(4.dp))
 
-        TextSubtitle2(R.string.forgot_description)
+        TextSubtitle2(stringResource(id = R.string.forgot_description))
 
         Spacer(modifier = Modifier.padding(20.dp))
 
-        ELearnOutlinedTextField(
-            text = viewState.phone,
+        ELearnOutlinedTextFieldWithIcon(
+            text = viewState.numberPhone,
             textChange = { viewModel.reduce(ForgotPasswordEvent.PhoneChanged(it)) },
             icon = R.drawable.ic_phone,
             iconSizeWidth = 20.dp,
@@ -66,7 +66,7 @@ fun ForgotPasswordBody(
         Spacer(modifier = Modifier.padding(8.dp))
 
         ELearnButton(
-            R.string.continue_text,
+            stringResource(id = R.string.continue_text),
             enabled = viewState.isContinueButtonEnabled,
             onClick = {
                 viewModel.reduce(ForgotPasswordEvent.ContinueClicked)
@@ -75,13 +75,10 @@ fun ForgotPasswordBody(
 
         Spacer(modifier = Modifier.padding(8.dp))
 
-        TextSentVerificationCode(
-            onClick = {
-                viewModel.reduce(ForgotPasswordEvent.VerificationCodeClicked)
-            })
-    }
-
-    if (viewState.isLoading) {
-        Progress()
+        if (viewState.isShowLabelSentVerificationCode)
+            TextSentVerificationCode(
+                onClick = {
+                    viewModel.reduce(ForgotPasswordEvent.VerificationCodeClicked)
+                })
     }
 }

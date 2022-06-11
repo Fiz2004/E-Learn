@@ -1,4 +1,4 @@
-package com.fiz.e_learn
+package com.fiz.e_learn.ui.screens.main_content.courses
 
 import androidx.compose.material.Button
 import androidx.compose.material.Text

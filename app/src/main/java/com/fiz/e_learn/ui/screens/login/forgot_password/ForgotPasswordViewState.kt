@@ -1,10 +1,9 @@
 package com.fiz.e_learn.ui.screens.login.forgot_password
 
 data class ForgotPasswordViewState(
-    val phone: String = "",
+    val numberPhone: String = "",
     val isShowLabelSentVerificationCode: Boolean = false,
-    val isLoading: Boolean = false,
 ) {
     val isContinueButtonEnabled: Boolean
-        get() = phone.isNotBlank()
+        get() = numberPhone.isNotBlank() && !isShowLabelSentVerificationCode
 }

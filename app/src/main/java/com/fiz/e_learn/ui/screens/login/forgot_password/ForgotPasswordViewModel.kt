@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,18 +29,32 @@ class ForgotPasswordViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun phoneChanged(value: String) {
-        viewState = viewState.copy(phone = value)
+        viewState = viewState.copy(numberPhone = value)
     }
 
     private fun verificationCodeClicked() {
         viewModelScope.launch {
-            viewAction.emit(ForgotPasswordAction.MoveEnterCode)
+            viewAction.emit(ForgotPasswordAction.MoveEnterCode(viewState.numberPhone))
         }
     }
 
     private fun continueClicked() {
         viewModelScope.launch {
-            viewAction.emit(ForgotPasswordAction.MoveEnterCode)
+            viewState = viewState.copy(isShowLabelSentVerificationCode = true)
+            // Отправляем запрос на получение кода
+            val response = run {
+                delay(3000)
+                val isVerificationCodeSend = true
+                isVerificationCodeSend
+            }
+
+            val action = if (response)
+                ForgotPasswordAction.MoveEnterCode(viewState.numberPhone)
+            else
+                ForgotPasswordAction.ShowError
+            viewAction.emit(action)
+
+            viewState = viewState.copy(isShowLabelSentVerificationCode = false)
         }
     }
 

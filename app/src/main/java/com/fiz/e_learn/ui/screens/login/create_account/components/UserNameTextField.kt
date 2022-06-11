@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
-import com.fiz.e_learn.ui.components.ELearnOutlinedTextField
+import com.fiz.e_learn.ui.components.ELearnOutlinedTextFieldWithIcon
 
 @Composable
 fun UserNameTextField(
@@ -14,7 +14,7 @@ fun UserNameTextField(
     text: String,
     textChange: (String) -> Unit
 ) {
-    ELearnOutlinedTextField(
+    ELearnOutlinedTextFieldWithIcon(
         text = text,
         textChange = textChange,
         icon = R.drawable.ic_username,

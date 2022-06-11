@@ -21,7 +21,7 @@ import com.fiz.e_learn.ui.theme.editText
 import com.fiz.e_learn.ui.theme.onSurface2
 
 @Composable
-fun ELearnOutlinedTextField(
+fun ELearnOutlinedTextFieldWithIcon(
     text: String,
     textChange: (String) -> Unit,
     icon: Int,

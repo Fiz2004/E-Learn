@@ -48,6 +48,14 @@
     <string name="verification_code_part2">Verification Code</string>
     <string name="verification_code_part3">to your Phone Number</string>
 
+    <!--    Enter Code Screen-->
+    <string name="error_resend_code">Resend Code Error</string>
+    <string name="resend_code_send">New resend code send</string>
+    <string name="enter_code">Enter a Code</string>
+    <string name="enter_code_description">"We sent a verification code to your phone number "</string>
+    <string name="change_password">Change Password</string>
+    <string name="resend_code">Resend Code</string>
+
     <string-array name="on_boarding_title">
         <item>Online Learning Platform</item>
         <item>Learn on your Schedule</item>

@@ -7,10 +7,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.fiz.e_learn.CoursesBody
-import com.fiz.e_learn.FavoritiesBody
 import com.fiz.e_learn.SettingsBody
 import com.fiz.e_learn.ui.screens.ELearnScreens
+import com.fiz.e_learn.ui.screens.main_content.courses.CoursesBody
+import com.fiz.e_learn.ui.screens.main_content.favorities.FavoritiesBody
 import com.fiz.e_learn.ui.screens.main_content.home_content.buy.HomeBuyBody
 import com.fiz.e_learn.ui.screens.main_content.home_content.course_author.HomeCourseAuthorBody
 import com.fiz.e_learn.ui.screens.main_content.home_content.course_details.HomeCourseDetailsBody
