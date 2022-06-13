@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -12,6 +13,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -75,18 +77,16 @@ fun SignInBody(
             icon = R.drawable.ic_email,
             iconSizeWidth = 20.dp,
             iconSizeHeight = 16.dp,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             placeholderText = stringResource(R.string.email_id),
-            modifier = Modifier
-                .fillMaxWidth()
+            modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.padding(12.dp))
 
-        PasswordFingerPrintTextField(
-            text = viewState.password,
+        PasswordFingerPrintTextField(text = viewState.password,
             textChange = { viewModel.reduce(SignInEvent.PasswordChanged(it)) },
-            fingerPrintOnClick = { viewModel.reduce(SignInEvent.FingerprintClicked) }
-        )
+            fingerPrintOnClick = { viewModel.reduce(SignInEvent.FingerprintClicked) })
 
         Spacer(modifier = Modifier.padding(8.dp))
 
@@ -102,12 +102,9 @@ fun SignInBody(
 
         Spacer(modifier = Modifier.padding(8.dp))
 
-        ELearnButton(
-            stringResource(id = R.string.sign_in),
-            onClick = {
-                viewModel.reduce(SignInEvent.SignInClicked)
-            }
-        )
+        ELearnButton(stringResource(id = R.string.sign_in), onClick = {
+            viewModel.reduce(SignInEvent.SignInClicked)
+        })
 
         Spacer(modifier = Modifier.padding(8.dp))
 

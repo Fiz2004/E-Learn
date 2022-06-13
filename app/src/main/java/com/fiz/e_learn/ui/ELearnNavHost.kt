@@ -6,12 +6,12 @@ import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.fiz.e_learn.ui.screens.ELearnScreens
+import com.fiz.e_learn.ui.screens.enter_code.EnterCodeBody
+import com.fiz.e_learn.ui.screens.enter_code.EnterCodeViewModel
 import com.fiz.e_learn.ui.screens.login.change_password.ChangePasswordBody
 import com.fiz.e_learn.ui.screens.login.change_password.ChangePasswordViewModel
 import com.fiz.e_learn.ui.screens.login.create_account.CreateAccountBody
 import com.fiz.e_learn.ui.screens.login.create_account.CreateAccountViewModel
-import com.fiz.e_learn.ui.screens.login.enter_code.EnterCodeBody
-import com.fiz.e_learn.ui.screens.login.enter_code.EnterCodeViewModel
 import com.fiz.e_learn.ui.screens.login.forgot_password.ForgotPasswordBody
 import com.fiz.e_learn.ui.screens.login.forgot_password.ForgotPasswordViewModel
 import com.fiz.e_learn.ui.screens.login.on_boarding.OnBoardingBody
@@ -100,18 +100,24 @@ fun ELearnNavHost(
             EnterCodeBody(
                 viewModel = viewModel,
                 moveChangePasswordScreen = {
-                    navController.navigate(ELearnScreens.ChangePassword.name)
+                    navController.navigate(ELearnScreens.ChangePassword.name + "/${numberPhone}")
                 },
                 numberPhone = numberPhone
             )
         }
 
-        composable(ELearnScreens.ChangePassword.name) {
+        composable(
+            route = ELearnScreens.ChangePassword.name + "/{numberPhone}",
+            arguments = listOf(navArgument("numberPhone") { type = NavType.StringType })
+        ) { backStackEntry ->
             val viewModel = hiltViewModel<ChangePasswordViewModel>()
+
+            val numberPhone = backStackEntry.arguments?.getString("numberPhone") ?: ""
 
             ChangePasswordBody(
                 viewModel = viewModel,
-                moveInfoScreen = { navController.navigate(ELearnScreens.HomeContent.name + "/ChangePassword") }
+                moveInfoScreen = { navController.navigate(ELearnScreens.Info.name + "/ChangePassword") },
+                numberPhone = numberPhone
             )
         }
 

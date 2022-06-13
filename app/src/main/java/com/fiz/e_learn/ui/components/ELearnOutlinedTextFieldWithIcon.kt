@@ -3,6 +3,7 @@ package com.fiz.e_learn.ui.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -28,6 +29,7 @@ fun ELearnOutlinedTextFieldWithIcon(
     iconSizeHeight: Dp,
     modifier: Modifier = Modifier,
     placeholderText: String,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     visualTransformation: VisualTransformation = VisualTransformation.None
 ) {
     OutlinedTextField(
@@ -42,6 +44,7 @@ fun ELearnOutlinedTextFieldWithIcon(
             focusedBorderColor = MaterialTheme.colors.border,
             unfocusedBorderColor = MaterialTheme.colors.border
         ),
+        keyboardOptions = keyboardOptions,
         visualTransformation = visualTransformation,
         leadingIcon = {
             Image(

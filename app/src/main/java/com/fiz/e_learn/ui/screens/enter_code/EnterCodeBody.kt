@@ -1,9 +1,10 @@
-package com.fiz.e_learn.ui.screens.login.enter_code
+package com.fiz.e_learn.ui.screens.enter_code
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -15,9 +16,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fiz.e_learn.R
@@ -34,7 +37,7 @@ import com.fiz.e_learn.ui.theme.onSurface2
 @Composable
 fun EnterCodeBody(
     viewModel: EnterCodeViewModel = viewModel(),
-    moveChangePasswordScreen: () -> Unit = {},
+    moveChangePasswordScreen: (String) -> Unit = {},
     numberPhone: String
 ) {
     val context = LocalContext.current
@@ -47,8 +50,8 @@ fun EnterCodeBody(
     LaunchedEffect(Unit) {
         viewAction.collect {
             when (it) {
-                EnterCodeAction.MoveChangePasswordScreen -> {
-                    moveChangePasswordScreen()
+                is EnterCodeAction.MoveChangePasswordScreen -> {
+                    moveChangePasswordScreen(it.numberPhone)
                 }
                 EnterCodeAction.ShowError -> {
                     Toast.makeText(context, errorText, Toast.LENGTH_SHORT).show()
@@ -58,6 +61,10 @@ fun EnterCodeBody(
                 }
             }
         }
+    }
+
+    LaunchedEffect(numberPhone) {
+        viewModel.reduce(EnterCodeEvent.LoadScreen(numberPhone))
     }
 
     BaseContainerForLogInGroup {
@@ -92,40 +99,44 @@ fun EnterCodeBody(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             VerificationCodeTextField(
-                0,
                 modifier = Modifier.weight(1f),
-                viewState,
-                viewModel
+                value = viewState.codes[0],
+                onValueChange = {
+                    viewModel.reduce(EnterCodeEvent.CodeChanged(0, it))
+                }
             )
 
             Spacer(modifier = Modifier.weight(0.33f))
 
 
             VerificationCodeTextField(
-                1,
                 modifier = Modifier.weight(1f),
-                viewState,
-                viewModel
+                value = viewState.codes[1],
+                onValueChange = {
+                    viewModel.reduce(EnterCodeEvent.CodeChanged(1, it))
+                }
             )
 
             Spacer(modifier = Modifier.weight(0.33f))
 
 
             VerificationCodeTextField(
-                2,
                 modifier = Modifier.weight(1f),
-                viewState,
-                viewModel
+                value = viewState.codes[2],
+                onValueChange = {
+                    viewModel.reduce(EnterCodeEvent.CodeChanged(2, it))
+                }
             )
 
             Spacer(modifier = Modifier.weight(0.33f))
 
 
             VerificationCodeTextField(
-                3,
                 modifier = Modifier.weight(1f),
-                viewState,
-                viewModel
+                value = viewState.codes[3],
+                onValueChange = {
+                    viewModel.reduce(EnterCodeEvent.CodeChanged(3, it))
+                }
             )
         }
 
@@ -162,19 +173,16 @@ fun EnterCodeBody(
 
 @Composable
 private fun VerificationCodeTextField(
-    number: Int,
     modifier: Modifier = Modifier,
-    viewState: EnterCodeViewState,
-    viewModel: EnterCodeViewModel
+    value: String,
+    onValueChange: (String) -> Unit = {}
 ) {
     OutlinedTextField(
         modifier = modifier,
-        value = viewState.codes[number],
-        onValueChange = {
-            viewModel.reduce(EnterCodeEvent.CodeChanged(number, it))
-        },
+        value = value,
+        onValueChange = onValueChange,
         shape = RoundedCornerShape(16.dp),
-        maxLines = 1,
+        singleLine = true,
         colors = TextFieldDefaults.outlinedTextFieldColors(
             textColor = MaterialTheme.colors.onSurface,
             backgroundColor = MaterialTheme.colors.editText,
@@ -185,18 +193,28 @@ private fun VerificationCodeTextField(
             textAlign = TextAlign.Center,
             color = MaterialTheme.colors.onSurface
         ),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
         placeholder = {
-            Text(
-                text = "0",
-                modifier = Modifier.padding(start = 12.dp),
-                style = MaterialTheme.typography.subtitle2.copy(
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "0",
+                    textAlign = TextAlign.Center,
                     color = MaterialTheme.colors.onSurface2,
-                    textAlign = TextAlign.Center
+                    style = MaterialTheme.typography.subtitle2
                 )
-            )
+            }
         },
     )
 
 
+}
+
+@Preview
+@Composable
+fun ComposablePreview() {
+    VerificationCodeTextField(value = "0")
 }
 

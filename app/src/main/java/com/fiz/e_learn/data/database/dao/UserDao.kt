@@ -11,6 +11,15 @@ interface UserDao {
     @Query("SELECT * FROM UserEntity WHERE id =:id")
     fun getById(id: String): UserEntity
 
+    @Query("SELECT EXISTS (SELECT* FROM UserEntity WHERE (email =:email AND password =:password))")
+    suspend fun isValidateEmailPassword(email: String, password: String): Boolean
+
+    @Query("SELECT EXISTS (SELECT* FROM UserEntity WHERE numberPhone =:numberPhone)")
+    suspend fun isValidatePhone(numberPhone: String): Boolean
+
+    @Query("UPDATE UserEntity SET password=:password WHERE numberPhone =:numberPhone")
+    suspend fun changePassword(numberPhone: String, password: String)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(categoryEntity: UserEntity)
 

@@ -1,4 +1,4 @@
-package com.fiz.e_learn.data.repositories
+package com.fiz.e_learn.domain.repositories
 
 interface UserRepository {
     suspend fun saveUser(
@@ -11,4 +11,6 @@ interface UserRepository {
     suspend fun validateEmailPassword(email: String, password: String): Boolean
 
     suspend fun validateNumberPhone(numberPhone: String): Boolean
+
+    suspend fun changePassword(numberPhone: String, password: String): Boolean
 }

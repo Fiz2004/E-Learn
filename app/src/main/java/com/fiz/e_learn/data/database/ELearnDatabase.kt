@@ -10,6 +10,6 @@ import com.fiz.e_learn.data.entity.UserEntity
     version = 1,
     exportSchema = false
 )
-abstract class ElearnDatabase : RoomDatabase() {
+abstract class ELearnDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 }

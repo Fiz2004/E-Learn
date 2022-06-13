@@ -5,7 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fiz.e_learn.data.repositories.UserRepository
+import com.fiz.e_learn.domain.repositories.UserRepository
+import com.fiz.e_learn.domain.use_case.SendVerificationCodeOnPhoneNumberUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -13,7 +14,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ForgotPasswordViewModel @Inject constructor(private val userRepository: UserRepository) :
+class ForgotPasswordViewModel @Inject constructor(
+    private val sendVerificationCodeOnPhoneNumberUseCase: SendVerificationCodeOnPhoneNumberUseCase,
+    private val userRepository: UserRepository
+) :
     ViewModel() {
 
     var viewState by mutableStateOf(ForgotPasswordViewState())
@@ -44,30 +48,29 @@ class ForgotPasswordViewModel @Inject constructor(private val userRepository: Us
         viewModelScope.launch {
             viewState = viewState.copy(isLoading = true)
             val numberPhone = viewState.numberPhone
+
             // Проверяем есть ли такой номер в базе
             val responseValidate = run {
                 val response = userRepository.validateNumberPhone(numberPhone)
-                delay(3000)
+                delay(1000)
                 response
             }
             if (!responseValidate) {
                 viewAction.emit(ForgotPasswordAction.ShowError)
                 viewState = viewState.copy(isLoading = false)
                 viewState = viewState.copy(isShowLabelSentVerificationCode = false)
+                return@launch
             }
 
             viewState = viewState.copy(isShowLabelSentVerificationCode = true)
             // Ждем ответа что сообщение отправлено
-            val response = run {
-                delay(3000)
-                true
-            }
-
+            val response = sendVerificationCodeOnPhoneNumberUseCase()
             val action = if (response)
                 ForgotPasswordAction.MoveEnterCode(viewState.numberPhone)
             else
                 ForgotPasswordAction.ShowError
             viewAction.emit(action)
+
             viewState = viewState.copy(isLoading = false)
             viewState = viewState.copy(isShowLabelSentVerificationCode = false)
         }

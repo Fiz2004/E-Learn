@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fiz.e_learn.domain.repositories.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -12,7 +13,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ChangePasswordViewModel @Inject constructor() : ViewModel() {
+class ChangePasswordViewModel @Inject constructor(
+    private val userRepository: UserRepository
+) : ViewModel() {
 
     var viewState by mutableStateOf(ChangePasswordViewState())
         private set
@@ -25,17 +28,22 @@ class ChangePasswordViewModel @Inject constructor() : ViewModel() {
             is ChangePasswordEvent.ConfirmPasswordChanged -> confirmPasswordChanged(event.value)
             is ChangePasswordEvent.NewPasswordChanged -> newPasswordChanged(event.value)
             ChangePasswordEvent.SavePasswordClicked -> savePasswordClicked()
+            is ChangePasswordEvent.LoadScreen -> loadScreen(event.numberPhone)
         }
+    }
+
+    private fun loadScreen(numberPhone: String) {
+        viewState = viewState.copy(numberPhone = numberPhone)
     }
 
     private fun savePasswordClicked() {
         viewModelScope.launch {
             viewState = viewState.copy(isLoading = true)
+            val password = viewState.newPassword.trim().lowercase()
             // Отправляем запрос на изменение пароля
             val response = run {
                 delay(3000)
-                val isChangePasswordTrue = true
-                isChangePasswordTrue
+                userRepository.changePassword(viewState.numberPhone, password)
             }
 
             val action = if (response)

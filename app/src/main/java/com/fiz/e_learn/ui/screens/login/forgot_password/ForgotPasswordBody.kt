@@ -4,11 +4,13 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fiz.e_learn.R
@@ -56,6 +58,7 @@ fun ForgotPasswordBody(
             text = viewState.numberPhone,
             textChange = { viewModel.reduce(ForgotPasswordEvent.PhoneChanged(it)) },
             icon = R.drawable.ic_phone,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             iconSizeWidth = 20.dp,
             iconSizeHeight = 16.dp,
             placeholderText = stringResource(R.string.phone_hint),

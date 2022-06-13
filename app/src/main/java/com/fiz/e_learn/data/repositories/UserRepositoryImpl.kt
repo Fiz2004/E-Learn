@@ -1,9 +1,8 @@
-package com.fiz.e_learn.domain.repositories
+package com.fiz.e_learn.data.repositories
 
 import com.fiz.e_learn.data.data_source.UserLocalDataSource
 import com.fiz.e_learn.data.entity.UserEntity
-import com.fiz.e_learn.data.repositories.UserRepository
-import com.fiz.e_learn.domain.User
+import com.fiz.e_learn.domain.repositories.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -30,33 +29,28 @@ class UserRepositoryImpl(private val userLocalDataSource: UserLocalDataSource) :
         }
     }
 
-    private fun loadUsers(): List<User> {
-        val users = userLocalDataSource.loadUsers().map { it.toUser() }
-        return try {
-            users
-        } catch (e: Exception) {
-            listOf()
-        }
-    }
-
     override suspend fun validateEmailPassword(email: String, password: String): Boolean {
         return withContext(Dispatchers.Default) {
             val checkEmail = email.trim().lowercase()
             val checkPassword = password.trim().lowercase()
-            val allUsers = loadUsers()
-            val result =
-                allUsers.firstOrNull { it.email == checkEmail && it.password == checkPassword } != null
-            result
+            val response = userLocalDataSource.isValidate(checkEmail, checkPassword)
+            response
         }
     }
 
     override suspend fun validateNumberPhone(numberPhone: String): Boolean {
         return withContext(Dispatchers.Default) {
             val checkNumberPhone = numberPhone.trim().lowercase().filter { it.isDigit() }
-            val allUsers = loadUsers()
-            val result =
-                allUsers.firstOrNull { it.numberPhone == checkNumberPhone } != null
-            result
+            val response = userLocalDataSource.isValidatePhone(checkNumberPhone)
+            response
+        }
+    }
+
+    override suspend fun changePassword(numberPhone: String, password: String): Boolean {
+        return withContext(Dispatchers.Default) {
+            val checkPassword = password.trim().lowercase()
+            val response = userLocalDataSource.changePassword(numberPhone, checkPassword)
+            response
         }
     }
 }

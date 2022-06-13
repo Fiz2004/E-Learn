@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -13,6 +14,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
@@ -39,6 +41,7 @@ fun PasswordFingerPrintTextField(
                 .padding(end = 16.dp)
                 .weight(1f),
             icon = R.drawable.ic_password,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             iconSizeWidth = 20.dp,
             iconSizeHeight = 16.dp,
             visualTransformation = PasswordVisualTransformation()

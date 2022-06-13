@@ -6,10 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.fiz.e_learn.R
 import com.fiz.e_learn.data.data_source.UserLocalDataSource
-import com.fiz.e_learn.data.database.ElearnDatabase
+import com.fiz.e_learn.data.database.ELearnDatabase
 import com.fiz.e_learn.data.database.dao.UserDao
-import com.fiz.e_learn.data.repositories.UserRepository
-import com.fiz.e_learn.domain.repositories.UserRepositoryImpl
+import com.fiz.e_learn.data.repositories.UserRepositoryImpl
+import com.fiz.e_learn.domain.repositories.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,7 +21,7 @@ private const val NAME_DATABASE = "elearn_database"
 
 @Module
 @InstallIn(SingletonComponent::class)
-class Module {
+class MainComponent {
 
     @Provides
     @Singleton
@@ -36,10 +36,10 @@ class Module {
     @Singleton
     fun provideRoomDatabase(
         @ApplicationContext context: Context
-    ): ElearnDatabase {
+    ): ELearnDatabase {
         return Room.databaseBuilder(
             context.applicationContext,
-            ElearnDatabase::class.java,
+            ELearnDatabase::class.java,
             NAME_DATABASE
         )
             .fallbackToDestructiveMigration()
@@ -48,7 +48,7 @@ class Module {
 
     @Provides
     @Singleton
-    fun provideUserDao(database: ElearnDatabase): UserDao = database.userDao()
+    fun provideUserDao(database: ELearnDatabase): UserDao = database.userDao()
 
     @Provides
     @Singleton
