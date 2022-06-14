@@ -16,14 +16,15 @@ import com.fiz.e_learn.ui.theme.backgroundHome
 @Composable
 fun ELearnTopAppBar() {
     TopAppBar(
-        modifier = Modifier.defaultMinSize(minHeight = 138.dp),
+        modifier = Modifier
+            .defaultMinSize(minHeight = 148.dp),
         backgroundColor = MaterialTheme.colors.backgroundHome
     ) {
         Column(
             modifier = Modifier.padding(
                 start = 16.dp,
                 end = 16.dp,
-                top = 8.dp,
+                top = 16.dp,
                 bottom = 8.dp
             )
         ) {
