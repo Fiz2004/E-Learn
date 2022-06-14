@@ -2,6 +2,7 @@ package com.fiz.e_learn.ui.screens.main_content.home_content
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -14,14 +15,17 @@ import androidx.navigation.compose.rememberNavController
 import com.fiz.e_learn.ui.theme.ELearnTheme
 
 @Composable
-fun HomeContentBody(mainNavController: NavController? = null) {
+fun HomeContentBody(mainNavController: NavController? = null, userName: String) {
     val navController = rememberNavController()
     val allScreens = items
     val backstackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = backstackEntry?.destination
     Scaffold(
-        topBar = { ELearnTopAppBar() },
-        bottomBar = { ELearnHomeBottomBar(navController) }
+        topBar = { ELearnTopAppBar(currentScreen, userName,moveBackStack={
+            navController.popBackStack()
+        }) },
+        bottomBar = { ELearnHomeBottomBar(navController) },
+        backgroundColor = MaterialTheme.colors.surface
     ) { innerPadding ->
         HomeContentNavHost(
             navController = navController,
@@ -39,7 +43,7 @@ fun HomeContentBody(mainNavController: NavController? = null) {
 fun HomeContentBodyPreview() {
     ELearnTheme {
         Surface {
-            HomeContentBody()
+            HomeContentBody(userName = "test")
         }
     }
 }
@@ -54,7 +58,7 @@ fun HomeContentBodyPreview() {
 fun HomeContentBodyDarkPreview() {
     ELearnTheme {
         Surface {
-            HomeContentBody()
+            HomeContentBody(userName = "test")
         }
     }
 }

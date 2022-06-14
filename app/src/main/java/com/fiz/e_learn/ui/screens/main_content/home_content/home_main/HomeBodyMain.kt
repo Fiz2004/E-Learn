@@ -28,7 +28,7 @@ fun HomeBodyMain(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colors.backgroundHome)
+            .background(MaterialTheme.colors.surface)
             .verticalScroll(rememberScrollState())
             .padding(top = 32.dp),
     ) {

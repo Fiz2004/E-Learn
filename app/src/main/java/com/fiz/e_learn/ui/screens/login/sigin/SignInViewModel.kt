@@ -59,10 +59,12 @@ class SignInViewModel @Inject constructor(private val userRepository: UserReposi
             val email = viewState.email
             val password = viewState.password
             val response = userRepository.validateEmailPassword(email, password)
-            if (response)
-                viewAction.emit(SignInAction.MoveHomeContentScreen)
-            else
+            if (response) {
+                val userName=userRepository.getUserName(email)
+                viewAction.emit(SignInAction.MoveHomeContentScreen(userName))
+            } else {
                 viewAction.emit(SignInAction.ShowError)
+            }
 
             viewState = viewState.copy(
                 isLoading = false
@@ -72,7 +74,7 @@ class SignInViewModel @Inject constructor(private val userRepository: UserReposi
 
     private fun signInWithGoogleClicked() {
         viewModelScope.launch {
-            viewAction.emit(SignInAction.MoveHomeContentScreen)
+            viewAction.emit(SignInAction.MoveHomeContentScreen("Alex Joe"))
         }
     }
 }

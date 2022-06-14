@@ -37,4 +37,10 @@ class UserLocalDataSource(private val userDao: UserDao) {
             }
         }
     }
+
+    suspend fun getUserName(email: String): String {
+        return withContext(Dispatchers.Default) {
+            userDao.getUserName(email).userName
+        }
+    }
 }

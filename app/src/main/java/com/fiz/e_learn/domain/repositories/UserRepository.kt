@@ -13,4 +13,5 @@ interface UserRepository {
     suspend fun validateNumberPhone(numberPhone: String): Boolean
 
     suspend fun changePassword(numberPhone: String, password: String): Boolean
+    suspend fun getUserName(email: String): String
 }

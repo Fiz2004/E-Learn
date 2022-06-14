@@ -31,7 +31,7 @@ fun SignInBody(
     viewModel: SignInViewModel = viewModel(),
     moveSignUp: () -> Unit = {},
     moveForgotPassword: () -> Unit = {},
-    moveHomeContent: () -> Unit = {},
+    moveHomeContent: (String) -> Unit = {},
 ) {
     val context = LocalContext.current
     val viewState = viewModel.viewState
@@ -39,13 +39,13 @@ fun SignInBody(
     val errorText = stringResource(R.string.error_signin_account)
 
     LaunchedEffect(Unit) {
-        viewAction.collect {
-            when (it) {
+        viewAction.collect { action ->
+            when (action) {
                 SignInAction.MoveForgotPasswordScreen -> {
                     moveForgotPassword()
                 }
-                SignInAction.MoveHomeContentScreen -> {
-                    moveHomeContent()
+                is SignInAction.MoveHomeContentScreen -> {
+                    moveHomeContent(action.userName)
                 }
                 SignInAction.MoveSignUpScreen -> {
                     moveSignUp()

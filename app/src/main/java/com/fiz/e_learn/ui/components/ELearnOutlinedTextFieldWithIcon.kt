@@ -51,7 +51,7 @@ fun ELearnOutlinedTextFieldWithIcon(
                 painter = painterResource(
                     id = icon
                 ),
-                colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onSurface2),
+                colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onSurface),
                 contentDescription = null,
                 modifier = Modifier.size(iconSizeWidth, iconSizeHeight),
                 contentScale = ContentScale.Crop

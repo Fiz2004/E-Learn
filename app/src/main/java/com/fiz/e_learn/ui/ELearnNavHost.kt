@@ -54,8 +54,8 @@ fun ELearnNavHost(
                 moveForgotPassword = {
                     navController.navigate(ELearnScreens.ForgotPassword.name)
                 },
-                moveHomeContent = {
-                    navController.navigate(ELearnScreens.HomeContent.name)
+                moveHomeContent = {userName->
+                    navController.navigate(ELearnScreens.HomeContent.name + "/${userName}")
                 })
         }
 
@@ -136,8 +136,14 @@ fun ELearnNavHost(
             )
         }
 
-        composable(ELearnScreens.HomeContent.name) {
-            HomeContentBody(navController)
+        composable(
+            route = ELearnScreens.HomeContent.name + "/{userName}",
+            arguments = listOf(navArgument("userName") { type = NavType.StringType })
+        ) { backStackEntry ->
+
+            val userName = backStackEntry.arguments?.getString("userName") ?: ""
+
+            HomeContentBody(navController, userName)
         }
     }
 }

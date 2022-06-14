@@ -53,5 +53,13 @@ class UserRepositoryImpl(private val userLocalDataSource: UserLocalDataSource) :
             response
         }
     }
+
+    override suspend fun getUserName(email: String): String {
+        return withContext(Dispatchers.Default) {
+            val checkEmail = email.trim().lowercase()
+            val response = userLocalDataSource.getUserName(email)
+            response
+        }
+    }
 }
 

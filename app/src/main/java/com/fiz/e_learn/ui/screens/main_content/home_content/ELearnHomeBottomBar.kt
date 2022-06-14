@@ -18,12 +18,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.theme.greenText
+import com.fiz.e_learn.ui.theme.surface2
 
 @Composable
 fun ELearnHomeBottomBar(navController: NavHostController) {
     BottomNavigation(
         modifier = Modifier.clip(RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp)),
-        backgroundColor = MaterialTheme.colors.background,
+        backgroundColor = MaterialTheme.colors.surface2,
         contentColor = MaterialTheme.colors.primary
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()

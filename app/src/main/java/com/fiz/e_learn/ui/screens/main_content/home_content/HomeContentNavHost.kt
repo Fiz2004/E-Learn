@@ -140,7 +140,7 @@ fun HomeContentNavHost(
                 })
         }
 
-        composable(HomeContentScreen.FavoritiesScreen.route) {
+        composable(HomeContentScreen.FavoritesScreen.route) {
             FavoritiesBody(navController)
         }
         composable(HomeContentScreen.CoursesScreen.route) {

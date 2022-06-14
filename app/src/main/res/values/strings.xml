@@ -69,6 +69,7 @@
     <string name="next">Next</string>
     <string name="password_changed_title">Password Changed Successfully!</string>
     <string name="password_changed_description"> If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing.</string>
+    <string name="search_hint">Search here...</string>
 
 
     <string-array name="on_boarding_title">
