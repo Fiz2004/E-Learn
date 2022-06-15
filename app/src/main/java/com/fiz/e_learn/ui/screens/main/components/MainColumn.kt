@@ -20,7 +20,7 @@ fun MainColumn(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colors.backgroundHome)
-            .padding(vertical = 32.dp)
+            .padding(top = 32.dp)
             .padding(horizontal = 16.dp)
             .verticalScroll(rememberScrollState()),
     ) {

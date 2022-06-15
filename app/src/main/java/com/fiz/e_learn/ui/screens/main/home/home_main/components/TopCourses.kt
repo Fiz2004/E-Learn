@@ -12,8 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
-import com.fiz.e_learn.data.courses
-import com.fiz.e_learn.ui.screens.home_content.home_main.CourseCard
+import com.fiz.e_learn.domain.models.coursesStore
 import com.fiz.e_learn.ui.theme.ELearnTheme
 
 @Composable
@@ -22,10 +21,10 @@ fun TopCourses(
     onClickCourse: (Int) -> Unit = {}
 ) {
     val firstBestCourse by remember {
-        mutableStateOf(courses.sortedByDescending { it.rating }.getOrNull(0))
+        mutableStateOf(coursesStore.sortedByDescending { it.rating }.getOrNull(0))
     }
     val secondBestCourse by remember {
-        mutableStateOf(courses.sortedByDescending { it.rating }.getOrNull(1))
+        mutableStateOf(coursesStore.sortedByDescending { it.rating }.getOrNull(1))
     }
 
     Column(

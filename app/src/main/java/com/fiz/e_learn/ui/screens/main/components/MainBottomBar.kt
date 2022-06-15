@@ -1,6 +1,7 @@
 package com.fiz.e_learn.ui.screens.main.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -24,7 +25,8 @@ import com.fiz.e_learn.ui.theme.surface2
 @Composable
 fun MainBottomBar(navController: NavHostController) {
     BottomNavigation(
-        modifier = Modifier.clip(RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp)),
+        modifier = Modifier
+            .clip(RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp)),
         backgroundColor = MaterialTheme.colors.surface2,
         contentColor = MaterialTheme.colors.primary
     ) {

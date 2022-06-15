@@ -17,7 +17,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
-import com.fiz.e_learn.data.courses
+import com.fiz.e_learn.domain.models.coursesStore
 import com.fiz.e_learn.ui.screens.main.home.home_main.components.IconSeeAll
 import com.fiz.e_learn.ui.screens.main.home.home_main.components.TextSeeAll
 import com.fiz.e_learn.ui.theme.backgroundHome
@@ -29,7 +29,7 @@ fun HomeCourseDetailsBody(
     id: Int?,
     onClickSeeAll: () -> Unit = { }
 ) {
-    val course = courses.find { it.id == id } ?: return
+    val course = coursesStore.find { it.id == id } ?: return
     Column(
         modifier = Modifier
             .fillMaxSize()

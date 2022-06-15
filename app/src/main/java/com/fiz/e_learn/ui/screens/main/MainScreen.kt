@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.fiz.e_learn.ui.screens.main.components.MainBottomBar
-import com.fiz.e_learn.ui.screens.main.components.MainTopAppBar
+import com.fiz.e_learn.ui.screens.main.components.top_app_bar.MainTopAppBar
 import com.fiz.e_learn.ui.theme.ELearnTheme
 
 @Composable

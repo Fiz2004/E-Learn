@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.screens.main.components
+package com.fiz.e_learn.ui.screens.main.components.top_app_bar
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.components.ELearnOutlinedTextFieldWithIcon
+import com.fiz.e_learn.ui.screens.main.components.IconTopBar
 
 @Composable
 fun MainTopAppBar(
@@ -23,7 +24,7 @@ fun MainTopAppBar(
 ) {
     TopAppBar(
         modifier = Modifier
-            .defaultMinSize(minHeight = 148.dp),
+            .defaultMinSize(minHeight = 164.dp),
         contentPadding = PaddingValues(0.dp)
     ) {
         Column(
@@ -32,7 +33,7 @@ fun MainTopAppBar(
                 .padding(
                     start = 16.dp,
                     end = 16.dp,
-                    top = 16.dp,
+                    top = 32.dp,
                     bottom = 8.dp,
                 ),
 

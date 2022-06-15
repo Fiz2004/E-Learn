@@ -8,7 +8,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.fiz.e_learn.data.listCategories
+import com.fiz.e_learn.domain.models.categoriesStore
 
 @Composable
 fun CategoriesChips(onClickCategory: (String) -> Unit) {
@@ -18,12 +18,12 @@ fun CategoriesChips(onClickCategory: (String) -> Unit) {
             .horizontalScroll(rememberScrollState())
     ) {
         StaggeredGrid(rows = 2) {
-            for (category in listCategories) {
+            for (category in categoriesStore) {
                 Chip(
                     modifier = Modifier
                         .padding(end = 8.dp, bottom = 8.dp)
-                        .clickable { onClickCategory(category) },
-                    text = category
+                        .clickable { onClickCategory(category.name) },
+                    text = category.name
                 )
             }
         }

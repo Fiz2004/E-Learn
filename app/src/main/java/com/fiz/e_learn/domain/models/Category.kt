@@ -4,18 +4,18 @@ import com.fiz.e_learn.R
 
 data class Category(
     val name: String,
-    val icon: String
+    val iconResourceMap: String
 )
 
 val categoriesStore: List<Category> = listOf(
-    Category(name = "Designing", icon = "ic_designing"),
-    Category(name = "Development", icon = "ic_development"),
-    Category(name = "Business", icon = "ic_business"),
-    Category(name = "Finance & Accounting", icon = "ic_finance_Accounting"),
-    Category(name = "IT Sectors", icon = "ic_it_Sectors"),
-    Category(name = "Photography", icon = "ic_photography"),
-    Category(name = "Health & Fitness", icon = "ic_health_fitness"),
-    Category(name = "Music", icon = "ic_music"),
+    Category(name = "Designing", iconResourceMap = "ic_designing"),
+    Category(name = "Development", iconResourceMap = "ic_development"),
+    Category(name = "Business", iconResourceMap = "ic_business"),
+    Category(name = "Finance & Accounting", iconResourceMap = "ic_finance_Accounting"),
+    Category(name = "IT Sectors", iconResourceMap = "ic_it_Sectors"),
+    Category(name = "Photography", iconResourceMap = "ic_photography"),
+    Category(name = "Health & Fitness", iconResourceMap = "ic_health_fitness"),
+    Category(name = "Music", iconResourceMap = "ic_music"),
 )
 
 val resourceMapCategories: Map<String, Int> = mapOf(

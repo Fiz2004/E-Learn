@@ -1,4 +1,4 @@
-package com.fiz.e_learn.data
+package com.fiz.e_learn.domain.models
 
 import com.fiz.e_learn.R
 
@@ -15,7 +15,7 @@ data class Course(
     val countLectures: Int = 0,
     val length: Double = 0.0,
 //    val lastUpdate: LocalDate =LocalDate.now(),
-    val img: Int = 0,
+    val pictureResourceMap: Int = 0,
     val video: Int = 0,
     val rating: Double = 0.0,
     val countVoted: Int = 0,
@@ -24,32 +24,15 @@ data class Course(
     val bestSeller: Boolean = false
 )
 
-val listCategories = listOf(
-    "Design",
-    "Development",
-    "Business",
-    "Music",
-    "It & Software",
-    "Health@Fitness",
-    "Business",
-    "Design",
-    "Development",
-    "Business",
-    "Music",
-    "It & Software",
-    "Health@Fitness",
-    "Business",
-)
-
 data class StructureItem(val nameEpisode:String, val description:String="")
 
-val courses = listOf(
+val coursesStore = listOf(
     Course(
         id = 0,
         name = "Generator on there Internet tend",
         author = "Stephen Moris",
         cost = 14.50,
-        img = R.drawable.card4,
+        pictureResourceMap = R.drawable.card4,
         rating = 4.5,
         bestSeller = false
     ),
@@ -62,7 +45,7 @@ val courses = listOf(
         cost = 14.50,
         countVoted = 122,
         allVoted = 25190,
-        img = R.drawable.card3,
+        pictureResourceMap = R.drawable.card3,
 //        lastUpdate=LocalDate.of(2021,6,2),
         includes = listOf(
             "10.5 hrs on demand video",
@@ -71,8 +54,8 @@ val courses = listOf(
             "Access on all Devices",
             "Certificate of Completions"
         ),
-        countLectures=179,
-        length=20.4        ,
+        countLectures = 179,
+        length = 20.4,
         structure = listOf(
             StructureItem("Introduction to 3D Animations & tools"),
             StructureItem("Basics of 3D Animation Theory", "All the Lorem Ipsum generators on the tools repeat predefined chunks."),
@@ -93,7 +76,7 @@ val courses = listOf(
         id = 2,
         name = "Basic Intro with the\n" +
                 "Development",
-        img = R.drawable.card4,
+        pictureResourceMap = R.drawable.card4,
         author = "Stephen Moris",
         cost = 14.50,
         rating = 3.5,
@@ -104,7 +87,7 @@ val courses = listOf(
         name = "Generator on there Internet tend",
         author = "Stephen Moris",
         cost = 14.50,
-        img = R.drawable.card5,
+        pictureResourceMap = R.drawable.card5,
         rating = 1.5,
         bestSeller = true
     ),
@@ -113,7 +96,7 @@ val courses = listOf(
         name = "Generator on there Internet tend",
         author = "Stephen Moris",
         cost = 14.50,
-        img = R.drawable.card3,
+        pictureResourceMap = R.drawable.card3,
         rating = 2.0,
         bestSeller = true
     ),
@@ -122,7 +105,7 @@ val courses = listOf(
         name = "Generator on there Internet tend",
         author = "Stephen Moris",
         cost = 14.50,
-        img = R.drawable.card2,
+        pictureResourceMap = R.drawable.card2,
         rating = 1.5,
         bestSeller = true
     ),
@@ -131,7 +114,7 @@ val courses = listOf(
         name = "Generator on there Internet tend",
         author = "Stephen Moris",
         cost = 14.50,
-        img = R.drawable.card1,
+        pictureResourceMap = R.drawable.card1,
         rating = 5.0,
         bestSeller = false
     ),

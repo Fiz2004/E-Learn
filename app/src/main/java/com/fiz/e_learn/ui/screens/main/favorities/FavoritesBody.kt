@@ -20,12 +20,7 @@ import com.fiz.e_learn.domain.models.Category
 import com.fiz.e_learn.domain.models.categoriesStore
 import com.fiz.e_learn.domain.models.resourceMapCategories
 import com.fiz.e_learn.ui.screens.main.components.MainColumn
-import com.fiz.e_learn.ui.theme.ELearnTheme
-import com.fiz.e_learn.ui.theme.greenText
-import com.fiz.e_learn.ui.theme.surface2
-
-const val WIDTH_SCREEN_DP = 375
-const val HEIGHT_SCREEN_BODY_DP = 564
+import com.fiz.e_learn.ui.theme.*
 
 @Composable
 fun FavoritesBody(
@@ -43,7 +38,7 @@ fun FavoritesBody(
                     .padding(horizontal = 16.dp, vertical = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                val iconId = resourceMapCategories[category.icon]
+                val iconId = resourceMapCategories[category.iconResourceMap]
                 iconId?.let {
                     Icon(
                         modifier = Modifier.size(16.dp),

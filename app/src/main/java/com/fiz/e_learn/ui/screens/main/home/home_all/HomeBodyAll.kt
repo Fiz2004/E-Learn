@@ -14,7 +14,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
-import com.fiz.e_learn.data.courses
+import com.fiz.e_learn.domain.models.coursesStore
+import com.fiz.e_learn.ui.screens.main.components.FullCourseCard
 import com.fiz.e_learn.ui.theme.ELearnTheme
 import com.fiz.e_learn.ui.theme.backgroundHome
 
@@ -48,7 +49,7 @@ fun HomeBodyAll(filter: String? = "all", onClickCourse: (Int) -> Unit = { }) {
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            courses.filter {
+            coursesStore.filter {
                 when (filter) {
                     "all" -> true
                     "top" -> it.bestSeller

@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.screens.home_content.home_main
+package com.fiz.e_learn.ui.screens.main.home.home_main.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
@@ -19,7 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
-import com.fiz.e_learn.data.Course
+import com.fiz.e_learn.domain.models.Course
 import com.fiz.e_learn.ui.theme.Black_900
 import com.fiz.e_learn.ui.theme.ELearnTheme
 
@@ -37,7 +37,7 @@ fun CourseCard(course: Course, modifier: Modifier = Modifier) {
         ) {
             Image(
                 painter = painterResource(
-                    id = course.img
+                    id = course.pictureResourceMap
                 ),
                 contentDescription = null,
                 modifier = Modifier
@@ -85,7 +85,7 @@ fun RatingRow(rating: Double) {
             style = MaterialTheme.typography.caption,
             modifier = Modifier
                 .padding(end = 4.dp)
-                .alpha(0.5f),
+                .alpha(0.9f),
         )
         for (n in 1..5) {
             Image(
@@ -118,7 +118,7 @@ fun CourseCardPreview() {
             CourseCard(
                 Course(
                     name = """Test
-Test""", img = R.drawable.card1, rating = 4.5, bestSeller = true
+Test""", pictureResourceMap = R.drawable.card1, rating = 4.5, bestSeller = true
                 )
             )
         }
@@ -138,7 +138,7 @@ fun CourseCardDarkPreview() {
             CourseCard(
                 Course(
                     name = """Test""",
-                    img = R.drawable.card1,
+                    pictureResourceMap = R.drawable.card1,
                     rating = 2.0,
                     bestSeller = true
                 )

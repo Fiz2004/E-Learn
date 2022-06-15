@@ -20,9 +20,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.fiz.e_learn.R
-import com.fiz.e_learn.data.courses
-import com.fiz.e_learn.ui.screens.home_content.home_main.RatingRow
-import com.fiz.e_learn.ui.screens.home_content.home_main.TextBestSeller
+import com.fiz.e_learn.domain.models.coursesStore
+import com.fiz.e_learn.ui.screens.main.home.home_main.components.RatingRow
+import com.fiz.e_learn.ui.screens.main.home.home_main.components.TextBestSeller
 import com.fiz.e_learn.ui.theme.ELearnTheme
 import com.fiz.e_learn.ui.theme.backgroundHome
 import com.fiz.e_learn.ui.theme.greenText
@@ -39,7 +39,7 @@ fun HomeCourseBaseBody(
     id: Int?,
     onClickReadMore: () -> Unit = { }
 ) {
-    val course = courses.find { it.id == id } ?: return
+    val course = coursesStore.find { it.id == id } ?: return
     Column(
         modifier = Modifier
             .fillMaxSize()

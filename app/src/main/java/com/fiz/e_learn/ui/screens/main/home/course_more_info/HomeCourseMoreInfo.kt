@@ -23,7 +23,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
-import com.fiz.e_learn.data.courses
+import com.fiz.e_learn.domain.models.coursesStore
 import com.fiz.e_learn.ui.theme.ELearnTheme
 import com.fiz.e_learn.ui.theme.backgroundHome
 import com.fiz.e_learn.ui.theme.greenText
@@ -34,7 +34,7 @@ fun HomeCourseMoreInfoBody(
     id: Int?,
     onClickAuthor: () -> Unit = { }
 ) {
-    val course = courses.find { it.id == id } ?: return
+    val course = coursesStore.find { it.id == id } ?: return
     Column(
         modifier = Modifier
             .fillMaxSize()
