@@ -69,7 +69,20 @@
     <string name="next">Next</string>
     <string name="password_changed_title">Password Changed Successfully!</string>
     <string name="password_changed_description"> If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing.</string>
-    <string name="search_hint">Search here...</string>
+    <string name="search_hint">Search here…</string>
+
+    <!--    Buy Screen-->
+    <string name="buy_select_payment">Select Payment</string>
+    <string name="buy_add_new_card">Add New Card</string>
+    <string name="buy_card_number">Card Number</string>
+    <string name="buy_name">Name</string>
+    <string name="buy_card_number_hint">1234 5678 9012 3456</string>
+    <string name="buy_name_hint">Martin Joseph</string>
+    <string name="buy_expiry_date">Expiry Date</string>
+    <string name="buy_expiry_date_hint">01/2025</string>
+    <string name="buy_cvv">CVV</string>
+    <string name="buy_cvv_hint">143</string>
+    <string name="buy_pay_now">Pay Now</string>
 
 
     <string-array name="on_boarding_title">

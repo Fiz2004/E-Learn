@@ -5,21 +5,20 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.fiz.e_learn.ui.screens.ELearnScreens
-import com.fiz.e_learn.ui.screens.enter_code.EnterCodeBody
-import com.fiz.e_learn.ui.screens.enter_code.EnterCodeViewModel
 import com.fiz.e_learn.ui.screens.login.change_password.ChangePasswordBody
 import com.fiz.e_learn.ui.screens.login.change_password.ChangePasswordViewModel
 import com.fiz.e_learn.ui.screens.login.create_account.CreateAccountBody
 import com.fiz.e_learn.ui.screens.login.create_account.CreateAccountViewModel
+import com.fiz.e_learn.ui.screens.login.enter_code.EnterCodeBody
+import com.fiz.e_learn.ui.screens.login.enter_code.EnterCodeViewModel
 import com.fiz.e_learn.ui.screens.login.forgot_password.ForgotPasswordBody
 import com.fiz.e_learn.ui.screens.login.forgot_password.ForgotPasswordViewModel
-import com.fiz.e_learn.ui.screens.login.on_boarding.OnBoardingBody
 import com.fiz.e_learn.ui.screens.login.sigin.SignInBody
 import com.fiz.e_learn.ui.screens.login.sigin.SignInViewModel
 import com.fiz.e_learn.ui.screens.login.sigin.info.InfoBody
 import com.fiz.e_learn.ui.screens.login.sigin.info.InfoViewModel
-import com.fiz.e_learn.ui.screens.main_content.home_content.HomeContentBody
+import com.fiz.e_learn.ui.screens.main.MainScreen
+import com.fiz.e_learn.ui.screens.onboarding.OnBoardingBody
 import com.fiz.e_learn.ui.screens.title.TitleScreenBody
 import com.fiz.e_learn.ui.screens.title.TitleViewModel
 
@@ -143,7 +142,7 @@ fun ELearnNavHost(
 
             val userName = backStackEntry.arguments?.getString("userName") ?: ""
 
-            HomeContentBody(navController, userName)
+            MainScreen(userName)
         }
     }
 }

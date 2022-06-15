@@ -2,7 +2,7 @@ package com.fiz.e_learn.data.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.fiz.e_learn.domain.User
+import com.fiz.e_learn.domain.models.User
 
 @Entity
 data class UserEntity(
