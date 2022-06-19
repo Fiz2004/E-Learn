@@ -11,17 +11,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination
 import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.components.ELearnOutlinedTextFieldWithIcon
-import com.fiz.e_learn.ui.screens.main.components.IconTopBar
+import com.fiz.e_learn.ui.screens.main.MainEvent
+import com.fiz.e_learn.ui.screens.main.MainViewModel
+import com.fiz.e_learn.ui.theme.backgroundHome
 
 @Composable
 fun MainTopAppBar(
+    viewModel: MainViewModel = viewModel(),
     currentScreen: NavDestination?,
     userName: String = "",
-    moveBackStack: () -> Unit = {}
+    moveBackStack: () -> Unit = {},
+    moveCart: () -> Unit = {}
 ) {
+    val state=viewModel.viewState
+
     TopAppBar(
         modifier = Modifier
             .defaultMinSize(minHeight = 164.dp),
@@ -29,7 +36,7 @@ fun MainTopAppBar(
     ) {
         Column(
             modifier = Modifier
-                .background(MaterialTheme.colors.surface)
+                .background(MaterialTheme.colors.backgroundHome)
                 .padding(
                     start = 16.dp,
                     end = 16.dp,
@@ -66,12 +73,12 @@ fun MainTopAppBar(
                     color = MaterialTheme.colors.onSurface
                 )
 
-                IconTopBar(R.drawable.ic_basket)
+                IconTopBar(R.drawable.ic_basket,moveCart)
             }
 
             ELearnOutlinedTextFieldWithIcon(
-                text = "",
-                textChange = {},
+                text = state.search,
+                textChange = {viewModel.onEvent(MainEvent.SearchChanged(it))},
                 placeholderText = stringResource(R.string.search_hint),
                 icon = R.drawable.ic_search,
                 iconSizeWidth = 16.dp,

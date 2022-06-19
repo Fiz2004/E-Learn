@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,7 +38,7 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 @Composable
 fun HomeCourseBaseBody(
     id: Int?,
-    onClickReadMore: () -> Unit = { }
+    moveCourseDetails: () -> Unit = { }
 ) {
     val course = coursesStore.find { it.id == id } ?: return
     Column(
@@ -57,18 +58,22 @@ fun HomeCourseBaseBody(
                 TextBestSeller(modifier = Modifier.weight(1f))
         }
 
-        Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.height(14.dp))
 
         Row {
             RatingRow(course.rating)
 
             Text(
-                text = "(${course.countVoted}) ratings ${course.allVoted} Students",
+                text = stringResource(
+                    id = R.string.base_ratings_students,
+                    course.countVoted.toString(),
+                    course.allVoted.toString()
+                ),
                 style = MaterialTheme.typography.caption
             )
         }
 
-        Spacer(modifier = Modifier.padding(4.dp))
+        Spacer(modifier = Modifier.height(6.dp))
 
         Text(
             text = course.annotation,
@@ -79,17 +84,21 @@ fun HomeCourseBaseBody(
         )
 
         Text(
-            text = "read more",
+            text = stringResource(id=R.string.base_read_more),
             color = MaterialTheme.colors.greenText,
             style = MaterialTheme.typography.body2,
-            modifier = Modifier.clickable { onClickReadMore() }
+            modifier = Modifier.clickable { moveCourseDetails() }
         )
+
+        Spacer(modifier = Modifier.height(14.dp))
 
         VideoPlayer()
 
+        Spacer(modifier = Modifier.height(14.dp))
+
         Text(
             modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),
-            text = "This course includes:",
+            text = stringResource(id=R.string.base_this_course_include),
             style = MaterialTheme.typography.body2,
         )
 

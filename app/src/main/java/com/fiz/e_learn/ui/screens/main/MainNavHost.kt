@@ -2,6 +2,7 @@ package com.fiz.e_learn.ui.screens.main
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -23,7 +24,8 @@ import com.fiz.e_learn.ui.screens.main.settings.SettingsBody
 @Composable
 fun MainNavHost(
     navController: NavHostController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: MainViewModel = viewModel()
 ) {
     NavHost(
         navController = navController,
@@ -31,17 +33,19 @@ fun MainNavHost(
         modifier = modifier
     ) {
         composable(MainScreens.HomeScreen.route) {
+
             HomeBodyMain(
-                onClickCategoriesSeeAll = {
+                viewModel,
+                moveSeeAllCategories = {
                     navController.navigate(MainScreens.HomeScreen.route + "/SeeAll")
                 },
-                onClickCategory = { category ->
+                moveCategory = { category ->
                     navController.navigate(MainScreens.HomeScreen.route + "/Category/$category")
                 },
-                onClickCoursesSeeAll = {
+                moveSeeAllTopCourses = {
                     navController.navigate(MainScreens.HomeScreen.route + "/SeeAll/TopCourses")
                 },
-                onClickCourse = { id ->
+                moveTopCourse = { id ->
                     navController.navigate(MainScreens.HomeScreen.route + "/CourseBase/$id")
                 })
         }
@@ -52,8 +56,9 @@ fun MainNavHost(
 
         composable(MainScreens.HomeScreen.route + "/SeeAll") {
             HomeBodyAll(
+                viewModel,
                 filter = "all",
-                onClickCourse = onClickCourse
+                moveCourse = onClickCourse
             )
         }
 
@@ -61,19 +66,22 @@ fun MainNavHost(
             route = MainScreens.HomeScreen.route + "/Category/{category}",
             arguments = listOf(navArgument("category") { type = NavType.StringType })
         ) { backStackEntry ->
-            val category = (backStackEntry.arguments?.getString("category")).also {
+            val category = (backStackEntry.arguments?.getString("category"))
 
+            category.also {
                 HomeBodyAll(
+                    viewModel,
                     filter = it,
-                    onClickCourse = onClickCourse
+                    moveCourse = onClickCourse
                 )
             }
         }
 
         composable(MainScreens.HomeScreen.route + "/SeeAll/TopCourses") {
             HomeBodyAll(
+                viewModel,
                 filter = "top",
-                onClickCourse = onClickCourse
+                moveCourse = onClickCourse
             )
         }
 
@@ -85,7 +93,7 @@ fun MainNavHost(
 
             HomeCourseBaseBody(
                 id = id,
-                onClickReadMore = {
+                moveCourseDetails = {
                     navController.navigate(MainScreens.HomeScreen.route + "/CourseDetails/$id")
                 })
         }
@@ -98,7 +106,7 @@ fun MainNavHost(
 
             HomeCourseDetailsBody(
                 id = id,
-                onClickSeeAll = {
+                moveCourseMoreInfo = {
                     navController.navigate(MainScreens.HomeScreen.route + "/CourseMoreInfo/$id")
                 })
         }
@@ -111,7 +119,7 @@ fun MainNavHost(
 
             HomeCourseMoreInfoBody(
                 id = id,
-                onClickAuthor = {
+                moveCourseAuthor = {
                     navController.navigate(MainScreens.HomeScreen.route + "/Author/$id")
                 })
         }

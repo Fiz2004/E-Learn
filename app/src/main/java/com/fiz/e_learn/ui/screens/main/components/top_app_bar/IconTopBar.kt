@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.screens.main.components
+package com.fiz.e_learn.ui.screens.main.components.top_app_bar
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

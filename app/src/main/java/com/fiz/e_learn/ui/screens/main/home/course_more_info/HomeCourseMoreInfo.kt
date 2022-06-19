@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
@@ -24,17 +25,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
 import com.fiz.e_learn.domain.models.coursesStore
-import com.fiz.e_learn.ui.theme.ELearnTheme
-import com.fiz.e_learn.ui.theme.backgroundHome
-import com.fiz.e_learn.ui.theme.greenText
-import com.fiz.e_learn.ui.theme.surface2
+import com.fiz.e_learn.ui.theme.*
+import org.threeten.bp.format.DateTimeFormatter
 
 @Composable
 fun HomeCourseMoreInfoBody(
     id: Int?,
-    onClickAuthor: () -> Unit = { }
+    moveCourseAuthor: () -> Unit = { }
 ) {
     val course = coursesStore.find { it.id == id } ?: return
+
+    val courseLengthHours = course.length.toInt().toString()
+    val courseLengthMin = (course.length % 1).toInt().toString()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -47,61 +50,78 @@ fun HomeCourseMoreInfoBody(
             shape = RoundedCornerShape(18.dp),
             backgroundColor = MaterialTheme.colors.surface2
         ) {
-            Column {
+            Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
+                Spacer(modifier = Modifier.height(26.dp))
                 Text(
-                    modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),
-                    text = "Curricullum:",
+                    text = stringResource(R.string.more_info_curricullum),
                     style = MaterialTheme.typography.h6,
                 )
 
+                Spacer(modifier = Modifier.height(8.dp))
+
                 Text(
-                    modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),
-                    text = "${course.countLectures} Lectures   /   ${course.length.toInt()}h ${course.length % 1}min Length",
+                    text =
+                    stringResource(
+                        id = R.string.more_info_count_lectures_length,
+                        course.countLectures.toString(),
+                        courseLengthHours,
+                        courseLengthMin
+                    ),
                     style = MaterialTheme.typography.body2,
                 )
 
+                Spacer(modifier = Modifier.height(8.dp))
+
                 for ((index, episode) in course.structure.withIndex()) {
                     Row(
-                        modifier = Modifier.padding(bottom = 8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            modifier = Modifier.padding(start = 12.dp),
-                            text = "Episode ${index + 1} - ",
-                            style = MaterialTheme.typography.body2,
-                        )
-                        Text(
-                            modifier = Modifier.padding(start = 12.dp),
-                            text = episode.nameEpisode,
+                            text = stringResource(
+                                id = R.string.more_info_episode,
+                                (index + 1).toString(),
+                                episode.nameEpisode
+                            ),
                             style = MaterialTheme.typography.body2,
                         )
                     }
                     if (episode.description.isNotBlank()) {
                         Text(
-                            modifier = Modifier.padding(start = 12.dp, bottom = 8.dp),
                             text = episode.description,
                             style = MaterialTheme.typography.body2,
+                            color=MaterialTheme.colors.onSurface2
                         )
                     }
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
+                Spacer(modifier = Modifier.height(18.dp))
             }
         }
+        Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),
-            text = "Course Info:",
+            text = stringResource(id = R.string.more_info_course_info),
             style = MaterialTheme.typography.h6,
         )
 
-//        CourseInfoItem(R.drawable.ic_update,"Last Updated on ${
-//            DateTimeFormatter.ofPattern("MMMM dd, yyyy").format(course.lastUpdate)}")
+        Spacer(modifier = Modifier.height(8.dp))
+
+        CourseInfoItem(
+            R.drawable.ic_update,
+            stringResource(
+                id = R.string.more_info_last_updated,
+                DateTimeFormatter.ofPattern("MMMM dd, yyyy").format(course.lastUpdate)
+            )
+        )
+
         CourseInfoItemWithClickedText(
             R.drawable.ic_users,
-            "Author : ",
-            "${course.author}",
-            onClickAuthor
+            stringResource(id = R.string.more_info_author),
+            course.author,
+            moveCourseAuthor
         )
-        CourseInfoItem(R.drawable.ic_local, "English, French")
+
+        CourseInfoItem(R.drawable.ic_local, course.languages.joinToString())
     }
 }
 
@@ -117,7 +137,6 @@ fun CourseInfoItem(icon: Int, text: String) {
             contentDescription = null,
         )
         Text(
-            modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),
             text = text,
             style = MaterialTheme.typography.body2,
         )
@@ -129,7 +148,7 @@ private fun CourseInfoItemWithClickedText(
     icon: Int,
     text: String,
     clickedText: String,
-    onClickAuthor: () -> Unit = { }
+    moveCourseAuthor: () -> Unit = { }
 ) {
     val annotatedText = buildAnnotatedString {
         withStyle(
@@ -169,11 +188,11 @@ private fun CourseInfoItemWithClickedText(
             onClick = { offset ->
 
                 annotatedText.getStringAnnotations(
-                    tag = "sign up", start = offset,
+                    tag = "author", start = offset,
                     end = offset
                 )
                     .firstOrNull()?.let {
-                        onClickAuthor()
+                        moveCourseAuthor()
                     }
             },
         )
@@ -182,11 +201,11 @@ private fun CourseInfoItemWithClickedText(
 
 @Preview(
     showBackground = true,
-    widthDp = 375,
-    heightDp = 875
+    widthDp = WIDTH_SCREEN_DP,
+    heightDp = HEIGHT_SCREEN_BODY_DP
 )
 @Composable
-fun HomeBodyPreview() {
+fun Preview() {
     ELearnTheme {
         Surface {
             HomeCourseMoreInfoBody(1)
@@ -197,11 +216,11 @@ fun HomeBodyPreview() {
 @Preview(
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES,
-    widthDp = 375,
-    heightDp = 875
+    widthDp = WIDTH_SCREEN_DP,
+    heightDp = HEIGHT_SCREEN_BODY_DP
 )
 @Composable
-fun HomeBodyDarkPreview() {
+fun DarkPreview() {
     ELearnTheme {
         Surface {
             HomeCourseMoreInfoBody(1)

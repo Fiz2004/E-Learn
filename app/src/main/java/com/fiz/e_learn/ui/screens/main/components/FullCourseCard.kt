@@ -118,7 +118,7 @@ fun FullCourseCard(
                         modifier = Modifier
                             .padding(top = 8.dp),
                         text = stringResource(
-                            R.string.courses_percent_completed,
+                            R.string.buy_courses_percent_completed,
                             (progress * 100).toInt().toString()
                         ),
                         style = MaterialTheme.typography.caption,

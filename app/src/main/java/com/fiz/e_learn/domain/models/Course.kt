@@ -1,6 +1,7 @@
 package com.fiz.e_learn.domain.models
 
 import com.fiz.e_learn.R
+import org.threeten.bp.LocalDate
 
 data class Course(
     val id: Int = 0,
@@ -14,14 +15,15 @@ data class Course(
     val description: String = "",
     val countLectures: Int = 0,
     val length: Double = 0.0,
-//    val lastUpdate: LocalDate =LocalDate.now(),
+    val lastUpdate: LocalDate =LocalDate.now(),
     val pictureResourceMap: Int = 0,
     val video: Int = 0,
     val rating: Double = 0.0,
     val countVoted: Int = 0,
     val allVoted: Int = 0,
     val cost: Double = 0.0,
-    val bestSeller: Boolean = false
+    val bestSeller: Boolean = false,
+    val languages: List<String> = listOf(),
 )
 
 data class StructureItem(val nameEpisode:String, val description:String="")
@@ -41,7 +43,7 @@ val coursesStore = listOf(
         name = "Coding with Python Interface",
         author = "Stephen Moris",
         annotation = "A long established fact that a reader will beens distract by the readable content of a page when looking attes its layout. A long established fact that a reader will beens distract by the readable content of a page when looking attes its layout... read more",
-        description = "There are many variations of passages Ipsum’s available, but the majority will have suffered were going to use a passage. All the Lorem Ipsum generators on the Internets tend to repeat predefined chunks.",
+        description = "There are many variations of passages Ipsum’s available, but the majority will have suffered were going to use a passage. \nAll the Lorem Ipsum generators on the Internets tend to repeat predefined chunks.",
         cost = 14.50,
         countVoted = 122,
         allVoted = 25190,
@@ -70,7 +72,8 @@ val coursesStore = listOf(
             "A handful of model sentence what are which looks reasonable.",
         ),
         rating = 2.5,
-        bestSeller = true
+        bestSeller = true,
+        languages=listOf("English", "French")
     ),
     Course(
         id = 2,

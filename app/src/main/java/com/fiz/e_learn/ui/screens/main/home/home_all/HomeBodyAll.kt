@@ -13,14 +13,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fiz.e_learn.R
 import com.fiz.e_learn.domain.models.coursesStore
+import com.fiz.e_learn.ui.screens.main.MainViewModel
 import com.fiz.e_learn.ui.screens.main.components.FullCourseCard
 import com.fiz.e_learn.ui.theme.ELearnTheme
+import com.fiz.e_learn.ui.theme.HEIGHT_SCREEN_BODY_DP
+import com.fiz.e_learn.ui.theme.WIDTH_SCREEN_DP
 import com.fiz.e_learn.ui.theme.backgroundHome
 
 @Composable
-fun HomeBodyAll(filter: String? = "all", onClickCourse: (Int) -> Unit = { }) {
+fun HomeBodyAll(
+    viewModel: MainViewModel = viewModel(),
+    filter: String? = "all",
+    moveCourse: (Int) -> Unit = { }
+) {
+    val state = viewModel.viewState
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -31,19 +41,19 @@ fun HomeBodyAll(filter: String? = "all", onClickCourse: (Int) -> Unit = { }) {
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(
                 R.string.top_courses_in_category, when (filter) {
-                    "all" -> stringResource(R.string.all)
-                    "top" -> stringResource(R.string.top)
+                    "all" -> stringResource(R.string.all_all)
+                    "top" -> stringResource(R.string.all_top)
                     else -> ""
                 }, when (filter) {
                     "all" -> ""
                     "top" -> ""
-                    else -> "in " + filter!!
+                    else -> stringResource(R.string.all_in_category,filter!!)
                 }
             ),
             style = MaterialTheme.typography.h6
         )
 
-        Spacer(modifier = Modifier.padding(4.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
@@ -55,11 +65,11 @@ fun HomeBodyAll(filter: String? = "all", onClickCourse: (Int) -> Unit = { }) {
                     "top" -> it.bestSeller
                     else -> it.category == filter
                 }
-            }.forEach {
+            }.filter { it.name.lowercase().contains(state.search.lowercase()) }.forEach {
                 item {
                     FullCourseCard(
                         it,
-                        modifier = Modifier.clickable { onClickCourse(it.id) }
+                        modifier = Modifier.clickable { moveCourse(it.id) }
                     )
                 }
             }
@@ -69,11 +79,11 @@ fun HomeBodyAll(filter: String? = "all", onClickCourse: (Int) -> Unit = { }) {
 
 @Preview(
     showBackground = true,
-    widthDp = 375,
-    heightDp = 875
+    widthDp = WIDTH_SCREEN_DP,
+    heightDp = HEIGHT_SCREEN_BODY_DP
 )
 @Composable
-fun HomeBodyPreview() {
+private fun Preview() {
     ELearnTheme {
         Surface {
             HomeBodyAll()
@@ -84,11 +94,11 @@ fun HomeBodyPreview() {
 @Preview(
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES,
-    widthDp = 375,
-    heightDp = 875
+    widthDp = WIDTH_SCREEN_DP,
+    heightDp = HEIGHT_SCREEN_BODY_DP
 )
 @Composable
-fun HomeBodyDarkPreview() {
+private fun DarkPreview() {
     ELearnTheme {
         Surface {
             HomeBodyAll()

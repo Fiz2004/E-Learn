@@ -18,6 +18,7 @@ import com.fiz.e_learn.ui.screens.login.sigin.SignInViewModel
 import com.fiz.e_learn.ui.screens.login.info.InfoBody
 import com.fiz.e_learn.ui.screens.login.info.InfoViewModel
 import com.fiz.e_learn.ui.screens.main.MainScreen
+import com.fiz.e_learn.ui.screens.main.MainViewModel
 import com.fiz.e_learn.ui.screens.onboarding.OnBoardingBody
 import com.fiz.e_learn.ui.screens.title.TitleScreenBody
 import com.fiz.e_learn.ui.screens.title.TitleViewModel
@@ -139,10 +140,11 @@ fun ELearnNavHost(
             route = ELearnScreens.HomeContent.name + "/{userName}",
             arguments = listOf(navArgument("userName") { type = NavType.StringType })
         ) { backStackEntry ->
+            val viewModel = hiltViewModel<MainViewModel>()
 
             val userName = backStackEntry.arguments?.getString("userName") ?: ""
 
-            MainScreen(userName)
+            MainScreen(viewModel,userName)
         }
     }
 }

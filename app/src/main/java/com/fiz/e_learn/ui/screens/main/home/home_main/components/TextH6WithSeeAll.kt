@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 
 @Composable
-fun TextH6WithSeeAll(text: Int, modifier: Modifier = Modifier, onClickSeeAll: () -> Unit) {
+fun TextH6WithSeeAll(text: Int, modifier: Modifier = Modifier, moveSeeAllCategories: () -> Unit) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
@@ -22,7 +22,7 @@ fun TextH6WithSeeAll(text: Int, modifier: Modifier = Modifier, onClickSeeAll: ()
 
         Spacer(modifier = Modifier.weight(1f))
 
-        TextSeeAll(onClickSeeAll)
+        TextSeeAll(moveSeeAllCategories)
 
         IconSeeAll()
     }

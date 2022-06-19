@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.domain.models.categoriesStore
 
 @Composable
-fun CategoriesChips(onClickCategory: (String) -> Unit) {
+fun CategoriesChips(moveCategory: (String) -> Unit) {
     Row(
         modifier = Modifier
             .padding(start = 16.dp)
@@ -22,7 +22,7 @@ fun CategoriesChips(onClickCategory: (String) -> Unit) {
                 Chip(
                     modifier = Modifier
                         .padding(end = 8.dp, bottom = 8.dp)
-                        .clickable { onClickCategory(category.name) },
+                        .clickable { moveCategory(category.name) },
                     text = category.name
                 )
             }

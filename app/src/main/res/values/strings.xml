@@ -28,8 +28,6 @@
     <string name="explore">Explore</string>
     <string name="real_world">A Real-World</string>
     <string name="expirience">Experience!!!</string>
-    <string name="all">All</string>
-    <string name="top">Top</string>
     <string name="i_hereby_agree_to_the">I hereby agree to the</string>
     <string name="terms_of_services">terms of services</string>
     <string name="privacy_police">privacy policy</string>
@@ -38,6 +36,28 @@
     <string name="error_sent_verification_code">Error sent Verification Code</string>
     <string name="error_create_account">Error Create Account</string>
     <string name="error_signin_account">Error SignIn Account</string>
+
+    <!--    HomeBodyAll-->
+    <string name="all_all">All</string>
+    <string name="all_top">Top</string>
+    <string name="all_in_category"> in %1$s</string>
+
+    <!--    HomeCourseBase-->
+    <string name="base_ratings_students">%1$s ratings %2$s Students</string>
+    <string name="base_read_more">read more</string>
+    <string name="base_this_course_include">"This course includes:"</string>
+
+    <!--    CourseDetails-->
+    <string name="details_will_learn">What will you learn:</string>
+    <string name="details_description">Description:</string>
+
+    <!--    MoreInfo Screen-->
+    <string name="more_info_curricullum">Curricullum:</string>
+    <string name="more_info_count_lectures_length">%1$s Lectures  /  %2$sh %3$smin Length</string>
+    <string name="more_info_episode">Episode %1$s - %2$s</string>
+    <string name="more_info_course_info">Course Info:</string>
+    <string name="more_info_last_updated">Last Updated on %1$s</string>
+    <string name="more_info_author">Author : </string>
 
     <!--    Forgot Screen-->
     <string name="forgot_password">Forgot Password</string>
@@ -83,7 +103,7 @@
     <string name="buy_cvv">CVV</string>
     <string name="buy_cvv_hint">143</string>
     <string name="buy_pay_now">Pay Now</string>
-    <string name="courses_percent_completed">%1$s%% Completed</string>
+    <string name="buy_courses_percent_completed">%1$s%% Completed</string>
 
 
     <string-array name="on_boarding_title">

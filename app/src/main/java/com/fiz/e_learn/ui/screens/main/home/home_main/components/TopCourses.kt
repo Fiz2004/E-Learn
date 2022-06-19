@@ -17,8 +17,8 @@ import com.fiz.e_learn.ui.theme.ELearnTheme
 
 @Composable
 fun TopCourses(
-    onClickCoursesSeeAll: () -> Unit = {},
-    onClickCourse: (Int) -> Unit = {}
+    moveSeeAllTopCourses: () -> Unit = {},
+    moveTopCourse: (Int) -> Unit = {}
 ) {
     val firstBestCourse by remember {
         mutableStateOf(coursesStore.sortedByDescending { it.rating }.getOrNull(0))
@@ -35,7 +35,7 @@ fun TopCourses(
 
         Spacer(modifier = Modifier.padding(4.dp))
 
-        TextH6WithSeeAll(R.string.top_courses, onClickSeeAll = onClickCoursesSeeAll)
+        TextH6WithSeeAll(R.string.top_courses, moveSeeAllCategories = moveSeeAllTopCourses)
 
         Spacer(modifier = Modifier.padding(8.dp))
 
@@ -43,7 +43,7 @@ fun TopCourses(
             firstBestCourse?.let {
                 CourseCard(it, modifier = Modifier
                     .weight(0.475f)
-                    .clickable { onClickCourse(it.id) })
+                    .clickable { moveTopCourse(it.id) })
             }
 
             Spacer(Modifier.weight(0.05f))
@@ -51,7 +51,7 @@ fun TopCourses(
             secondBestCourse?.let {
                 CourseCard(it, modifier = Modifier
                     .weight(0.475f)
-                    .clickable { onClickCourse(it.id) })
+                    .clickable { moveTopCourse(it.id) })
             }
         }
     }

@@ -9,29 +9,38 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.fiz.e_learn.ui.screens.main.components.MainBottomBar
 import com.fiz.e_learn.ui.screens.main.components.top_app_bar.MainTopAppBar
 import com.fiz.e_learn.ui.theme.ELearnTheme
+import com.fiz.e_learn.ui.theme.backgroundHome
 
 @Composable
-fun MainScreen(userName: String) {
+fun MainScreen(
+    viewModel: MainViewModel = viewModel(),
+    userName: String
+) {
     val navController = rememberNavController()
     val backstackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = backstackEntry?.destination
     Scaffold(
         topBar = {
-            MainTopAppBar(currentScreen, userName, moveBackStack = {
+            MainTopAppBar(viewModel, currentScreen, userName, moveBackStack = {
                 navController.popBackStack()
-            })
+            },
+                moveCart = {
+                    navController.navigate(MainScreens.HomeScreen.route + "/Cart")
+                })
         },
         bottomBar = { MainBottomBar(navController) },
-        backgroundColor = MaterialTheme.colors.surface
+        backgroundColor = MaterialTheme.colors.backgroundHome
     ) { innerPadding ->
         MainNavHost(
             navController = navController,
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(innerPadding),
+            viewModel
         )
     }
 }
