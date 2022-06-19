@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.screens.create_account
+package com.fiz.e_learn.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border

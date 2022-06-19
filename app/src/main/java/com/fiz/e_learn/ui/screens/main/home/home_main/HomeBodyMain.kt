@@ -1,10 +1,7 @@
 package com.fiz.e_learn.ui.screens.main.home.home_main
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
@@ -34,7 +31,7 @@ fun HomeBodyMain(
 
         Banner()
 
-        Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         TextH6WithSeeAll(
             R.string.categories,
@@ -42,7 +39,7 @@ fun HomeBodyMain(
             onClickSeeAll = onClickCategoriesSeeAll
         )
 
-        Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.height(14.dp))
 
         CategoriesChips(onClickCategory)
 

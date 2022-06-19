@@ -15,8 +15,8 @@ import com.fiz.e_learn.ui.screens.login.forgot_password.ForgotPasswordBody
 import com.fiz.e_learn.ui.screens.login.forgot_password.ForgotPasswordViewModel
 import com.fiz.e_learn.ui.screens.login.sigin.SignInBody
 import com.fiz.e_learn.ui.screens.login.sigin.SignInViewModel
-import com.fiz.e_learn.ui.screens.login.sigin.info.InfoBody
-import com.fiz.e_learn.ui.screens.login.sigin.info.InfoViewModel
+import com.fiz.e_learn.ui.screens.login.info.InfoBody
+import com.fiz.e_learn.ui.screens.login.info.InfoViewModel
 import com.fiz.e_learn.ui.screens.main.MainScreen
 import com.fiz.e_learn.ui.screens.onboarding.OnBoardingBody
 import com.fiz.e_learn.ui.screens.title.TitleScreenBody

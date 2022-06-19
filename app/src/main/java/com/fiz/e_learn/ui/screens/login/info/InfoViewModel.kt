@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.screens.login.sigin.info
+package com.fiz.e_learn.ui.screens.login.info
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

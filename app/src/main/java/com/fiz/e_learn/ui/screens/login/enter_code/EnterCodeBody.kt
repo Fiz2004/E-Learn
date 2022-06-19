@@ -28,7 +28,7 @@ import com.fiz.e_learn.ui.components.BaseContainerForLogInGroup
 import com.fiz.e_learn.ui.components.ELearnButton
 import com.fiz.e_learn.ui.components.Progress
 import com.fiz.e_learn.ui.components.TextH5
-import com.fiz.e_learn.ui.screens.create_account.BaseIconForLogInGroup
+import com.fiz.e_learn.ui.components.BaseIconForLogInGroup
 import com.fiz.e_learn.ui.theme.border
 import com.fiz.e_learn.ui.theme.editText
 import com.fiz.e_learn.ui.theme.greenText
@@ -67,14 +67,14 @@ fun EnterCodeBody(
         viewModel.reduce(EnterCodeEvent.LoadScreen(numberPhone))
     }
 
-    BaseContainerForLogInGroup {
+    BaseContainerForLogInGroup(top=186) {
         BaseIconForLogInGroup(R.drawable.ic_key, 36.dp, 40.dp)
 
-        Spacer(modifier = Modifier.padding(12.dp))
+        Spacer(modifier = Modifier.height(18.dp))
 
         TextH5(stringResource(R.string.enter_code))
 
-        Spacer(modifier = Modifier.padding(4.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         Text(
             modifier = Modifier.width(250.dp),
@@ -92,7 +92,7 @@ fun EnterCodeBody(
             }
         )
 
-        Spacer(modifier = Modifier.padding(20.dp))
+        Spacer(modifier = Modifier.height(28.dp))
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -140,7 +140,7 @@ fun EnterCodeBody(
             )
         }
 
-        Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.height(26.dp))
 
         ELearnButton(
             stringResource(R.string.change_password),
@@ -150,7 +150,7 @@ fun EnterCodeBody(
             }
         )
 
-        Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.height(22.dp))
 
         ClickableText(
             modifier = Modifier.width(250.dp),

@@ -3,6 +3,7 @@ package com.fiz.e_learn.ui.screens.login.forgot_password
 import android.widget.Toast
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
@@ -15,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.components.*
-import com.fiz.e_learn.ui.screens.create_account.BaseIconForLogInGroup
+import com.fiz.e_learn.ui.components.BaseIconForLogInGroup
 
 @Composable
 fun ForgotPasswordBody(
@@ -41,18 +42,18 @@ fun ForgotPasswordBody(
         }
     }
 
-    BaseContainerForLogInGroup {
+    BaseContainerForLogInGroup(top=200) {
         BaseIconForLogInGroup(R.drawable.ic_key, 36.dp, 40.dp)
 
-        Spacer(modifier = Modifier.padding(12.dp))
+        Spacer(modifier = Modifier.height(18.dp))
 
         TextH5(R.string.forgot_password)
 
-        Spacer(modifier = Modifier.padding(4.dp))
+        Spacer(modifier = Modifier.height(4.dp))
 
         TextSubtitle2(stringResource(id = R.string.forgot_description))
 
-        Spacer(modifier = Modifier.padding(20.dp))
+        Spacer(modifier = Modifier.height(28.dp))
 
         ELearnOutlinedTextFieldWithIcon(
             text = viewState.numberPhone,
@@ -66,7 +67,7 @@ fun ForgotPasswordBody(
                 .fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         ELearnButton(
             stringResource(id = R.string.continue_text),
@@ -76,7 +77,7 @@ fun ForgotPasswordBody(
             }
         )
 
-        Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         if (viewState.isShowLabelSentVerificationCode)
             TextSentVerificationCode(

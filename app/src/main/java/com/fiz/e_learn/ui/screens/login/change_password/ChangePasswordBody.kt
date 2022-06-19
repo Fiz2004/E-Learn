@@ -3,6 +3,7 @@ package com.fiz.e_learn.ui.screens.login.change_password
 import android.widget.Toast
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
@@ -16,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.components.*
-import com.fiz.e_learn.ui.screens.create_account.BaseIconForLogInGroup
+import com.fiz.e_learn.ui.components.BaseIconForLogInGroup
 
 @Composable
 fun ChangePasswordBody(
@@ -49,18 +50,18 @@ fun ChangePasswordBody(
         viewModel.reduce(ChangePasswordEvent.LoadScreen(numberPhone))
     }
 
-    BaseContainerForLogInGroup {
+    BaseContainerForLogInGroup(top=186) {
         BaseIconForLogInGroup(R.drawable.ic_key, 36.dp, 40.dp)
 
-        Spacer(modifier = Modifier.padding(12.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         TextH5(stringResource(R.string.change_password))
 
-        Spacer(modifier = Modifier.padding(4.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
         TextSubtitle2(stringResource(id = R.string.change_password_description))
 
-        Spacer(modifier = Modifier.padding(20.dp))
+        Spacer(modifier = Modifier.height(28.dp))
 
         ELearnOutlinedTextFieldWithIcon(
             text = viewState.newPassword,
@@ -76,7 +77,7 @@ fun ChangePasswordBody(
             visualTransformation = PasswordVisualTransformation()
         )
 
-        Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         ELearnOutlinedTextFieldWithIcon(
             text = viewState.confirmPassword,
@@ -92,7 +93,7 @@ fun ChangePasswordBody(
             visualTransformation = PasswordVisualTransformation()
         )
 
-        Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         ELearnButton(
             stringResource(R.string.save_password),

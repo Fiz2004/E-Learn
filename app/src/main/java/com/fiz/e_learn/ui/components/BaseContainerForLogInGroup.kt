@@ -10,7 +10,9 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun BaseContainerForLogInGroup(
-    modifier: Modifier = Modifier, content: @Composable (() -> Unit)? = null
+    top:Int,
+    modifier: Modifier = Modifier,
+    content: @Composable (() -> Unit)? = null
 ) {
     Column(
         modifier = modifier
@@ -19,7 +21,8 @@ fun BaseContainerForLogInGroup(
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(82.dp))
+        Spacer(modifier = Modifier.height(top.dp))
+
         content?.let {
             it()
         }

@@ -22,8 +22,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.components.TextH5
 import com.fiz.e_learn.ui.components.TextSubtitle2
-import com.fiz.e_learn.ui.theme.ELearnTheme
-import com.fiz.e_learn.ui.theme.surface2
+import com.fiz.e_learn.ui.theme.*
 
 @Composable
 fun OnBoardingBody(
@@ -62,7 +61,7 @@ fun OnBoardingBody(
         )
         Column(
             modifier = Modifier
-                .padding(top = 44.72.dp, bottom = 43.84.dp)
+                .padding(top = 44.dp, bottom = 44.dp)
                 .align(Alignment.BottomCenter),
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -81,12 +80,12 @@ fun MainText(
     TextH5(
         stringArrayResource(R.array.on_boarding_title)[onBoardingViewModel.uiState.page - 1],
         Modifier
-            .padding(bottom = 13.41.dp)
+            .padding(bottom = 14.dp)
             .width(280.dp)
     )
     TextSubtitle2(
         stringArrayResource(R.array.on_boarding_description)[onBoardingViewModel.uiState.page - 1],
-        Modifier.padding(start = 50.dp, end = 50.dp, bottom = 68.4.dp)
+        Modifier.padding(start = 50.dp, end = 50.dp, bottom =68.dp)
     )
     FloatingButton(onBoardingViewModel, onClickButton)
 }
@@ -98,7 +97,7 @@ private fun FloatingButton(
 ) {
     Box(
         modifier = Modifier
-            .size(70.15.dp, 70.15.dp)
+            .size(70.dp, 70.dp)
             .clip(CircleShape)
             .clickable { onClickButton() },
     ) {
@@ -108,7 +107,7 @@ private fun FloatingButton(
             ),
             contentDescription = null,
             modifier = Modifier
-                .size(70.15.dp, 70.15.dp)
+                .size(70.dp, 70.dp)
                 .align(Alignment.Center),
             contentScale = ContentScale.Fit
         )
@@ -118,7 +117,7 @@ private fun FloatingButton(
             ),
             contentDescription = null,
             modifier = Modifier
-                .size(43.84.dp, 43.84.dp)
+                .size(44.dp, 44.dp)
                 .align(Alignment.Center),
             contentScale = ContentScale.Crop
         )
@@ -127,11 +126,11 @@ private fun FloatingButton(
 
 @Preview(
     showBackground = true,
-    widthDp = 375,
-    heightDp = 875
+    widthDp = WIDTH_SCREEN_DP,
+    heightDp = HEIGHT_SCREEN_DP
 )
 @Composable
-fun OnBoardingBodyPreview() {
+private fun Preview() {
     ELearnTheme {
         Surface {
             OnBoardingBody("3")
@@ -142,11 +141,11 @@ fun OnBoardingBodyPreview() {
 @Preview(
     showBackground = true,
     uiMode = UI_MODE_NIGHT_YES,
-    widthDp = 375,
-    heightDp = 875
+    widthDp = WIDTH_SCREEN_DP,
+    heightDp = HEIGHT_SCREEN_DP
 )
 @Composable
-fun OnBoardingBodyDarkPreview() {
+private fun DarkPreview() {
     ELearnTheme {
         Surface {
             OnBoardingBody("3")

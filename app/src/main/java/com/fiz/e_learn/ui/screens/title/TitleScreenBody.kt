@@ -30,7 +30,7 @@ fun TitleScreenBody(
     ) {
         Text(
             text = "E-Learn",
-            fontSize = 43.84.sp,
+            fontSize = 44.sp,
             fontFamily = FontFamily(Font(R.font.comfortaa_light))
         )
 

@@ -1,4 +1,4 @@
-package com.fiz.e_learn.ui.screens.login.sigin.info
+package com.fiz.e_learn.ui.screens.login.info
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -79,15 +79,15 @@ fun InfoBody(
             contentScale = ContentScale.Fit
         )
 
-        Spacer(modifier = Modifier.padding(12.dp))
+        Spacer(modifier = Modifier.height(70.dp))
 
         TextH5(title)
 
-        Spacer(modifier = Modifier.padding(4.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
         TextSubtitle2(description)
 
-        Spacer(modifier = Modifier.padding(20.dp))
+        Spacer(modifier = Modifier.height(36.dp))
 
         ELearnButton(
             stringResource(R.string.sign_in),
