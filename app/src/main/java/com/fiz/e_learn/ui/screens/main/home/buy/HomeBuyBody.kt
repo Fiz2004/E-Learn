@@ -84,8 +84,11 @@ fun HomeBuyBody(
 
         ELearnButton(
             modifier = Modifier.padding(top = 16.dp),
-            text = stringResource(R.string.buy_pay_now)
+            text = stringResource(R.string.buy_pay_now),
+            onClick = {moveInfoScreen()}
         )
+
+        Spacer(modifier = Modifier.height(40.dp))
     }
 }
 

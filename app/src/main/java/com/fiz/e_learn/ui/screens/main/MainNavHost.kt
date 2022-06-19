@@ -1,14 +1,20 @@
 package com.fiz.e_learn.ui.screens.main
 
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.ELearnScreens
+import com.fiz.e_learn.ui.screens.info.InfoBody
+import com.fiz.e_learn.ui.screens.info.InfoViewModel
 import com.fiz.e_learn.ui.screens.main.courses.CoursesBody
 import com.fiz.e_learn.ui.screens.main.favorities.FavoritesBody
 import com.fiz.e_learn.ui.screens.main.home.buy.HomeBuyBody
@@ -20,6 +26,7 @@ import com.fiz.e_learn.ui.screens.main.home.home_all.HomeBodyAll
 import com.fiz.e_learn.ui.screens.main.home.home_course_base.HomeCourseBaseBody
 import com.fiz.e_learn.ui.screens.main.home.home_main.HomeBodyMain
 import com.fiz.e_learn.ui.screens.main.settings.SettingsBody
+import com.fiz.e_learn.ui.theme.backgroundHome
 
 @Composable
 fun MainNavHost(
@@ -132,10 +139,10 @@ fun MainNavHost(
 
             HomeCourseAuthorBody(
                 id = id,
-                onClickBuyNow = {
+                moveBuyScreen = {
                     navController.navigate(MainScreens.HomeScreen.route + "/Buy")
                 },
-                onClickAddCart = {
+                moveCartScreen = {
                     navController.navigate(MainScreens.HomeScreen.route + "/Cart")
                 })
         }
@@ -145,7 +152,7 @@ fun MainNavHost(
         ) {
             HomeBuyBody(
                 moveInfoScreen = {
-                    navController.navigate(ELearnScreens.Info.name)
+                    navController.navigate(ELearnScreens.Info.name + "/Buy")
                 })
         }
 
@@ -153,9 +160,26 @@ fun MainNavHost(
             route = MainScreens.HomeScreen.route + "/Cart"
         ) {
             HomeCartBody(
-                onClickPayNow = {
-                    navController.navigate(ELearnScreens.Info.name)
+                moveBuyScreen = {
+                    navController.navigate(MainScreens.HomeScreen.route + "/Buy")
                 })
+        }
+
+        composable(
+            route = ELearnScreens.Info.name + "/{previewScreen}",
+            arguments = listOf(navArgument("previewScreen") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val viewModel = hiltViewModel<InfoViewModel>()
+
+            val previewScreen = backStackEntry.arguments?.getString("previewScreen") ?: ""
+
+            InfoBody(
+                viewModel = viewModel,
+                background= MaterialTheme.colors.backgroundHome,
+                textButton= stringResource(R.string.info_view_course),
+                previewScreen = previewScreen,
+                moveSignInScreen = { navController.navigate(MainScreens.HomeScreen.route) }
+            )
         }
 
         composable(MainScreens.FavoritesScreen.route) {

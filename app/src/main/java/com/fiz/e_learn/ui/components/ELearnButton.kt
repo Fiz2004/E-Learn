@@ -3,6 +3,7 @@ package com.fiz.e_learn.ui.components
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -22,10 +23,11 @@ fun ELearnButton(
 ) {
     Button(
         modifier = modifier
-            .height(54.dp)
+            .height(52.dp)
             .fillMaxWidth(),
         enabled = enabled,
-        onClick = onClick
+        onClick = onClick,
+        shape = RoundedCornerShape(18.dp)
     ) {
         TextSubtitle1(
             text = text,

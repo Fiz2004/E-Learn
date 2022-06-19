@@ -1,5 +1,6 @@
 package com.fiz.e_learn.ui
 
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.*
@@ -15,13 +16,14 @@ import com.fiz.e_learn.ui.screens.login.forgot_password.ForgotPasswordBody
 import com.fiz.e_learn.ui.screens.login.forgot_password.ForgotPasswordViewModel
 import com.fiz.e_learn.ui.screens.login.sigin.SignInBody
 import com.fiz.e_learn.ui.screens.login.sigin.SignInViewModel
-import com.fiz.e_learn.ui.screens.login.info.InfoBody
-import com.fiz.e_learn.ui.screens.login.info.InfoViewModel
+import com.fiz.e_learn.ui.screens.info.InfoBody
+import com.fiz.e_learn.ui.screens.info.InfoViewModel
 import com.fiz.e_learn.ui.screens.main.MainScreen
 import com.fiz.e_learn.ui.screens.main.MainViewModel
 import com.fiz.e_learn.ui.screens.onboarding.OnBoardingBody
 import com.fiz.e_learn.ui.screens.title.TitleScreenBody
 import com.fiz.e_learn.ui.screens.title.TitleViewModel
+import com.fiz.e_learn.ui.theme.backgroundHome
 
 @Composable
 fun ELearnNavHost(

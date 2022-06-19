@@ -59,6 +59,16 @@
     <string name="more_info_last_updated">Last Updated on %1$s</string>
     <string name="more_info_author">Author : </string>
 
+    <!--    CourseAuthor-->
+    <string name="author_about">About Instructor:</string>
+    <string name="author_top_rated">Top Rated Instructor</string>
+    <string name="author_courses_uploaded">%1$s Courses Uploaded</string>
+    <string name="author_award">Best Seller Award</string>
+    <string name="author_followed">5+ Million Students Followed</string>
+    <string name="author_offer_price">OFFER PRICE : </string>
+    <string name="author_buy_now">Buy Now</string>
+    <string name="author_add_cart">Add to Cart</string>
+
     <!--    Forgot Screen-->
     <string name="forgot_password">Forgot Password</string>
     <string name="forgot_description">A handful of model sentence structures</string>
@@ -104,6 +114,17 @@
     <string name="buy_cvv_hint">143</string>
     <string name="buy_pay_now">Pay Now</string>
     <string name="buy_courses_percent_completed">%1$s%% Completed</string>
+
+    <!--    Cart Screen-->
+    <string name="cart_coupon_code">Coupon Code</string>
+    <string name="cart_apply_now">APPLY NOW</string>
+    <string name="cart_subtotal">Subtotal</string>
+    <string name="cart_shipping">Shipping</string>
+    <string name="total">Total</string>
+    <string name="cart_free">Free</string>
+    <string name="info_buy_title">Your order has been Placed Successfully!!!</string>
+    <string name="info_buy_descpription">\" If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing.\"</string>
+    <string name="info_view_course">View My Course</string>
 
 
     <string-array name="on_boarding_title">

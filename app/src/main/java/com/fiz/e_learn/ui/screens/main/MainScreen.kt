@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.fiz.e_learn.ui.ELearnScreens
 import com.fiz.e_learn.ui.screens.main.components.MainBottomBar
 import com.fiz.e_learn.ui.screens.main.components.top_app_bar.MainTopAppBar
 import com.fiz.e_learn.ui.theme.ELearnTheme
@@ -25,21 +26,30 @@ fun MainScreen(
     val navController = rememberNavController()
     val backstackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = backstackEntry?.destination
-    Scaffold(
-        topBar = {
-            MainTopAppBar(viewModel, currentScreen, userName, moveBackStack = {
-                navController.popBackStack()
+
+    if (currentScreen?.route != ELearnScreens.Info.name + "/{previewScreen}")
+        Scaffold(
+            topBar = {
+                MainTopAppBar(viewModel, currentScreen, userName, moveBackStack = {
+                    navController.popBackStack()
+                },
+                    moveCart = {
+                        navController.navigate(MainScreens.HomeScreen.route + "/Cart")
+                    })
             },
-                moveCart = {
-                    navController.navigate(MainScreens.HomeScreen.route + "/Cart")
-                })
-        },
-        bottomBar = { MainBottomBar(navController) },
-        backgroundColor = MaterialTheme.colors.backgroundHome
-    ) { innerPadding ->
+            bottomBar = { MainBottomBar(navController) },
+            backgroundColor = MaterialTheme.colors.backgroundHome
+        ) { innerPadding ->
+            MainNavHost(
+                navController = navController,
+                modifier = Modifier.padding(innerPadding),
+                viewModel
+            )
+        }
+    else {
         MainNavHost(
             navController = navController,
-            modifier = Modifier.padding(innerPadding),
+            modifier = Modifier,
             viewModel
         )
     }

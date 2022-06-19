@@ -4,68 +4,83 @@ import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.Center
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.components.ELearnButton
 import com.fiz.e_learn.ui.screens.main.components.MainColumn
 import com.fiz.e_learn.ui.screens.sigin.TextSubtitle1
-import com.fiz.e_learn.ui.theme.ELearnTheme
-import com.fiz.e_learn.ui.theme.greenText
-import com.fiz.e_learn.ui.theme.surface2
+import com.fiz.e_learn.ui.theme.*
 
 @Composable
 fun HomeCartBody(
-    onClickPayNow: () -> Unit = {}
+    moveBuyScreen: () -> Unit = {}
 ) {
     MainColumn {
-        CardCourse(modifier = Modifier.fillMaxWidth())
+        CardCourse("Get Started with Python", "\$40.95", modifier = Modifier.fillMaxWidth())
 
-        Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
-        CardCourse(modifier = Modifier.fillMaxWidth())
+        CardCourse("Get Started with Python", "\$40.95", modifier = Modifier.fillMaxWidth())
 
-        Spacer(modifier = Modifier.padding(32.dp))
+        Spacer(modifier = Modifier.height(32.dp))
 
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(18.dp),
             backgroundColor = MaterialTheme.colors.surface2
         ) {
-            Row {
-                Text(
-                    modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 16.dp),
-                    text = "Coupon Code",
-                    style = MaterialTheme.typography.body2
-                )
+            Row(
+                modifier = Modifier
+                    .height(48.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = CenterVertically
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(horizontal = 16.dp),
+                    contentAlignment = Center
+                ) {
+                    Text(
+                        text = stringResource(R.string.cart_coupon_code),
+                        style = MaterialTheme.typography.body2,
+                    )
+                }
 
                 Spacer(modifier = Modifier.weight(1f))
 
                 Button(
                     modifier = Modifier
-                        .height(54.dp)
+                        .fillMaxHeight()
                         .width(130.dp),
                     onClick = {}) {
-                    TextSubtitle1("APPLY NOW")
+                    TextSubtitle1(stringResource(R.string.cart_apply_now))
                 }
             }
         }
 
-        Spacer(modifier = Modifier.padding(16.dp))
+        Spacer(modifier = Modifier.height(22.dp))
 
         Row {
             Text(
-                text = "Subtotal",
+                text = stringResource(R.string.cart_subtotal),
                 style = MaterialTheme.typography.subtitle1
             )
 
@@ -77,27 +92,27 @@ fun HomeCartBody(
             )
         }
 
-        Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         Row {
             Text(
-                text = "Shipping",
+                text = stringResource(R.string.cart_shipping),
                 style = MaterialTheme.typography.subtitle1
             )
 
             Spacer(modifier = Modifier.weight(1f))
 
             Text(
-                text = "Free",
+                text = stringResource(R.string.cart_free),
                 style = MaterialTheme.typography.subtitle1
             )
         }
 
-        Spacer(modifier = Modifier.padding(12.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         Row {
             Text(
-                text = "Total",
+                text = stringResource(R.string.total),
                 style = MaterialTheme.typography.h6
             )
 
@@ -110,15 +125,19 @@ fun HomeCartBody(
             )
         }
 
-        Spacer(modifier = Modifier.padding(32.dp))
+        Spacer(modifier = Modifier.height(38.dp))
 
-        ELearnButton(stringResource(id = R.string.proceed_to_checkout))
+        ELearnButton(stringResource(id = R.string.proceed_to_checkout), onClick = moveBuyScreen)
+
+        Spacer(modifier = Modifier.height(40.dp))
     }
 }
 
 
 @Composable
 private fun CardCourse(
+    text: String,
+    price: String,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -126,9 +145,9 @@ private fun CardCourse(
             .fillMaxWidth()
             .background(
                 color = MaterialTheme.colors.surface2,
-                shape = RoundedCornerShape(18.dp)
+                shape = RoundedCornerShape(14.dp)
             )
-            .padding(vertical = 16.dp)
+            .padding(vertical = 24.dp)
             .padding(start = 8.dp, end = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -136,29 +155,23 @@ private fun CardCourse(
             painter = painterResource(id = R.drawable.card1),
             contentDescription = null,
             modifier = Modifier
-                .padding(4.dp)
-                .size(53.dp)
-                .clip(shape = RoundedCornerShape(8.dp)),
+                .size(52.dp)
+                .clip(shape = RoundedCornerShape(16.dp)),
             contentScale = ContentScale.Crop
         )
 
-        Spacer(
-            modifier = Modifier
-                .weight(0.05f)
-                .defaultMinSize(minWidth = 22.dp)
-        )
+        Spacer(modifier = Modifier.width(16.dp))
 
-        Column(
-            modifier = Modifier
-                .padding(end = 8.dp)
-                .weight(0.5f)
-        ) {
+        Column() {
             Text(
-                text = "Get Started with Python",
+                text = text,
                 style = MaterialTheme.typography.subtitle1,
             )
+
+            Spacer(modifier = Modifier.height(4.dp))
+
             Text(
-                text = "\$40.95",
+                text = price,
                 color = MaterialTheme.colors.greenText,
                 style = MaterialTheme.typography.h6,
             )
@@ -167,43 +180,58 @@ private fun CardCourse(
 
         Spacer(
             modifier = Modifier
-                .weight(0.05f)
+                .weight(1f)
                 .defaultMinSize(minWidth = 22.dp)
         )
 
-        Card(
-            modifier = Modifier
-                .height(72.dp)
-                .width(40.dp),
-            border = BorderStroke(2.dp, MaterialTheme.colors.greenText),
-            shape = RoundedCornerShape(10.dp),
-            backgroundColor = MaterialTheme.colors.surface2
+        val count = remember { mutableStateOf(1) }
+        Quantity(count = count.value.toString(),
+            minusClicked = { count.value-- },
+            plusClicked = { count.value++ })
+    }
+}
+
+@Composable
+fun Quantity(
+    count: String,
+    minusClicked: () -> Unit = {},
+    plusClicked: () -> Unit = {},
+) {
+    Card(
+        modifier = Modifier
+            .height(72.dp)
+            .width(40.dp),
+        border = BorderStroke(1.dp, MaterialTheme.colors.greenText),
+        shape = RoundedCornerShape(8.dp),
+        backgroundColor = MaterialTheme.colors.surface2
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
-                modifier = Modifier.padding(2.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "-",
-                    style = MaterialTheme.typography.subtitle1,
-                )
-                Text(
-                    text = "1",
-                    style = MaterialTheme.typography.subtitle1,
-                )
-                Text(
-                    text = "+",
-                    style = MaterialTheme.typography.subtitle1,
-                )
-            }
+            Text(
+                modifier = Modifier
+                    .clickable { minusClicked() },
+                text = "-",
+                style = MaterialTheme.typography.subtitle1,
+            )
+            Text(
+                text = count,
+                style = MaterialTheme.typography.subtitle1,
+            )
+            Text(
+                modifier = Modifier
+                    .clickable { plusClicked() },
+                text = "+",
+                style = MaterialTheme.typography.subtitle1,
+            )
         }
     }
 }
 
 @Preview(
     showBackground = true,
-    widthDp = 375,
-    heightDp = 564
+    widthDp = WIDTH_SCREEN_DP,
+    heightDp = HEIGHT_SCREEN_BODY_DP
 )
 @Composable
 fun HomeCartPreview() {
@@ -217,8 +245,8 @@ fun HomeCartPreview() {
 @Preview(
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES,
-    widthDp = 375,
-    heightDp = 564
+    widthDp = WIDTH_SCREEN_DP,
+    heightDp = HEIGHT_SCREEN_BODY_DP
 )
 @Composable
 fun HomeCartDarkPreview() {

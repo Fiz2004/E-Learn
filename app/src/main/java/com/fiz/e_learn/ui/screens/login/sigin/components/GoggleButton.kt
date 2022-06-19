@@ -23,7 +23,7 @@ import com.fiz.e_learn.ui.theme.subtitle1OnSurface
 fun GoggleButton(onClick: () -> Unit) {
     OutlinedButton(modifier = Modifier
         .fillMaxWidth()
-        .height(54.dp),
+        .height(52.dp),
         border = BorderStroke(1.dp, MaterialTheme.colors.border),
         onClick = { onClick() }) {
         Image(

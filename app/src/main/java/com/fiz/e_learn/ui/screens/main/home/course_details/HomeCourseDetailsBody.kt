@@ -44,7 +44,7 @@ fun HomeCourseDetailsBody(
     ) {
         Card(
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(18.dp),
+            shape = RoundedCornerShape(26.dp),
             backgroundColor = MaterialTheme.colors.surface2
         ) {
             Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
