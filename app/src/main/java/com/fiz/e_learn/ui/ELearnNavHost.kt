@@ -1,11 +1,12 @@
 package com.fiz.e_learn.ui
 
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.fiz.e_learn.ui.screens.info.InfoBody
+import com.fiz.e_learn.ui.screens.info.InfoViewModel
 import com.fiz.e_learn.ui.screens.login.change_password.ChangePasswordBody
 import com.fiz.e_learn.ui.screens.login.change_password.ChangePasswordViewModel
 import com.fiz.e_learn.ui.screens.login.create_account.CreateAccountBody
@@ -16,14 +17,11 @@ import com.fiz.e_learn.ui.screens.login.forgot_password.ForgotPasswordBody
 import com.fiz.e_learn.ui.screens.login.forgot_password.ForgotPasswordViewModel
 import com.fiz.e_learn.ui.screens.login.sigin.SignInBody
 import com.fiz.e_learn.ui.screens.login.sigin.SignInViewModel
-import com.fiz.e_learn.ui.screens.info.InfoBody
-import com.fiz.e_learn.ui.screens.info.InfoViewModel
 import com.fiz.e_learn.ui.screens.main.MainScreen
 import com.fiz.e_learn.ui.screens.main.MainViewModel
 import com.fiz.e_learn.ui.screens.onboarding.OnBoardingBody
 import com.fiz.e_learn.ui.screens.title.TitleScreenBody
 import com.fiz.e_learn.ui.screens.title.TitleViewModel
-import com.fiz.e_learn.ui.theme.backgroundHome
 
 @Composable
 fun ELearnNavHost(
@@ -31,68 +29,68 @@ fun ELearnNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = ELearnScreens.TitleScreens.name,
+        startDestination = NamesELearnScreens.Title.name,
     ) {
-        composable(ELearnScreens.TitleScreens.name) {
+        composable(NamesELearnScreens.Title.name) {
             val viewModel = hiltViewModel<TitleViewModel>()
 
             TitleScreenBody(
                 viewModel = viewModel,
                 moveOnBoardingScreen = { navController.navigate("onBoarding") },
-                moveLogInScreen = { navController.navigate(ELearnScreens.SignIn.name) }
+                moveLogInScreen = { navController.navigate(NamesELearnScreens.SignIn.name) }
             )
         }
 
         onBoardingGraph(navController)
 
-        composable(ELearnScreens.SignIn.name) {
+        composable(NamesELearnScreens.SignIn.name) {
             val viewModel = hiltViewModel<SignInViewModel>()
 
             SignInBody(
                 viewModel = viewModel,
                 moveSignUp = {
-                    navController.navigate(ELearnScreens.CreateAccount.name)
+                    navController.navigate(NamesELearnScreens.CreateAccount.name)
                 },
                 moveForgotPassword = {
-                    navController.navigate(ELearnScreens.ForgotPassword.name)
+                    navController.navigate(NamesELearnScreens.ForgotPassword.name)
                 },
-                moveHomeContent = {userName->
-                    navController.navigate(ELearnScreens.HomeContent.name + "/${userName}")
+                moveHomeContent = { userEmail ->
+                    navController.navigate(NamesELearnScreens.HomeContent.name + "/${userEmail}")
                 })
         }
 
-        composable(ELearnScreens.CreateAccount.name) {
+        composable(NamesELearnScreens.CreateAccount.name) {
             val viewModel = hiltViewModel<CreateAccountViewModel>()
 
             CreateAccountBody(
                 viewModel = viewModel,
                 moveTermsOfServicesInfo = {
-                    navController.navigate(ELearnScreens.Info.name + "/TermsOfServices")
+                    navController.navigate(NamesELearnScreens.Info.name + "/TermsOfServices")
                 },
                 movePrivacyPolicyInfo = {
-                    navController.navigate(ELearnScreens.Info.name + "/PrivacyPolicy")
+                    navController.navigate(NamesELearnScreens.Info.name + "/PrivacyPolicy")
                 },
                 moveInfoScreen = {
-                    navController.navigate(ELearnScreens.Info.name + "/CreateAccount")
+                    navController.navigate(NamesELearnScreens.Info.name + "/CreateAccount")
                 },
                 moveSignInScreen = {
-                    navController.navigate(ELearnScreens.SignIn.name)
+                    navController.navigate(NamesELearnScreens.SignIn.name)
                 }
             )
         }
 
-        composable(ELearnScreens.ForgotPassword.name) {
+        composable(NamesELearnScreens.ForgotPassword.name) {
             val viewModel = hiltViewModel<ForgotPasswordViewModel>()
 
             ForgotPasswordBody(
                 viewModel = viewModel,
                 moveEnterCodeScreen = { numberPhone ->
-                    navController.navigate(ELearnScreens.EnterCode.name + "/${numberPhone}")
+                    navController.navigate(NamesELearnScreens.EnterCode.name + "/${numberPhone}")
                 })
         }
 
         composable(
-            route = ELearnScreens.EnterCode.name + "/{numberPhone}",
+            route = NamesELearnScreens.EnterCode.name + "/{numberPhone}",
             arguments = listOf(navArgument("numberPhone") { type = NavType.StringType })
         ) { backStackEntry ->
             val viewModel = hiltViewModel<EnterCodeViewModel>()
@@ -102,14 +100,14 @@ fun ELearnNavHost(
             EnterCodeBody(
                 viewModel = viewModel,
                 moveChangePasswordScreen = {
-                    navController.navigate(ELearnScreens.ChangePassword.name + "/${numberPhone}")
+                    navController.navigate(NamesELearnScreens.ChangePassword.name + "/${numberPhone}")
                 },
                 numberPhone = numberPhone
             )
         }
 
         composable(
-            route = ELearnScreens.ChangePassword.name + "/{numberPhone}",
+            route = NamesELearnScreens.ChangePassword.name + "/{numberPhone}",
             arguments = listOf(navArgument("numberPhone") { type = NavType.StringType })
         ) { backStackEntry ->
             val viewModel = hiltViewModel<ChangePasswordViewModel>()
@@ -118,13 +116,13 @@ fun ELearnNavHost(
 
             ChangePasswordBody(
                 viewModel = viewModel,
-                moveInfoScreen = { navController.navigate(ELearnScreens.Info.name + "/ChangePassword") },
+                moveInfoScreen = { navController.navigate(NamesELearnScreens.Info.name + "/ChangePassword") },
                 numberPhone = numberPhone
             )
         }
 
         composable(
-            route = ELearnScreens.Info.name + "/{previewScreen}",
+            route = NamesELearnScreens.Info.name + "/{previewScreen}",
             arguments = listOf(navArgument("previewScreen") { type = NavType.StringType })
         ) { backStackEntry ->
             val viewModel = hiltViewModel<InfoViewModel>()
@@ -134,33 +132,34 @@ fun ELearnNavHost(
             InfoBody(
                 viewModel = viewModel,
                 previewScreen = previewScreen,
-                moveSignInScreen = { navController.navigate(ELearnScreens.SignIn.name) }
+                moveSignInScreen = { navController.navigate(NamesELearnScreens.SignIn.name) }
             )
         }
 
         composable(
-            route = ELearnScreens.HomeContent.name + "/{userName}",
-            arguments = listOf(navArgument("userName") { type = NavType.StringType })
+            route = NamesELearnScreens.HomeContent.name + "/{userEmail}",
+            arguments = listOf(navArgument("userEmail") { type = NavType.StringType })
         ) { backStackEntry ->
             val viewModel = hiltViewModel<MainViewModel>()
 
-            val userName = backStackEntry.arguments?.getString("userName") ?: ""
+            val userEmail = backStackEntry.arguments?.getString("userEmail") ?: ""
+            viewModel.initUser(userEmail)
 
-            MainScreen(viewModel,userName)
+            MainScreen(viewModel)
         }
     }
 }
 
 fun NavGraphBuilder.onBoardingGraph(navController: NavController) {
-    navigation(startDestination = ELearnScreens.OnBoarding.name + "/1", route = "onBoarding") {
-        composable(ELearnScreens.OnBoarding.name + "/1") {
+    navigation(startDestination = NamesELearnScreens.OnBoarding.name + "/1", route = "onBoarding") {
+        composable(NamesELearnScreens.OnBoarding.name + "/1") {
             OnBoardingBody("1") {
-                navController.navigate(ELearnScreens.OnBoarding.name + "/2")
+                navController.navigate(NamesELearnScreens.OnBoarding.name + "/2")
             }
         }
 
         composable(
-            route = ELearnScreens.OnBoarding.name + "/{page}",
+            route = NamesELearnScreens.OnBoarding.name + "/{page}",
             arguments = listOf(navArgument("page") { type = NavType.StringType })
         ) { backStackEntry ->
             val viewModel = hiltViewModel<TitleViewModel>()
@@ -169,11 +168,11 @@ fun NavGraphBuilder.onBoardingGraph(navController: NavController) {
 
             OnBoardingBody(page = backStackEntry.arguments?.getString("page")) {
                 when (page) {
-                    2 -> navController.navigate(ELearnScreens.OnBoarding.name + "/3")
-                    3 -> navController.navigate(ELearnScreens.OnBoarding.name + "/4")
+                    2 -> navController.navigate(NamesELearnScreens.OnBoarding.name + "/3")
+                    3 -> navController.navigate(NamesELearnScreens.OnBoarding.name + "/4")
                     4 -> {
                         viewModel.firstTimeLaunchCompleted()
-                        navController.navigate(ELearnScreens.SignIn.name)
+                        navController.navigate(NamesELearnScreens.SignIn.name)
                     }
                 }
             }

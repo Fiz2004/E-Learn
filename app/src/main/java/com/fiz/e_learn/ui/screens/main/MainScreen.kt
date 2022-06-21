@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.fiz.e_learn.ui.ELearnScreens
+import com.fiz.e_learn.ui.NamesELearnScreens
 import com.fiz.e_learn.ui.screens.main.components.MainBottomBar
 import com.fiz.e_learn.ui.screens.main.components.top_app_bar.MainTopAppBar
 import com.fiz.e_learn.ui.theme.ELearnTheme
@@ -20,21 +20,22 @@ import com.fiz.e_learn.ui.theme.backgroundHome
 
 @Composable
 fun MainScreen(
-    viewModel: MainViewModel = viewModel(),
-    userName: String
+    viewModel: MainViewModel = viewModel()
 ) {
     val navController = rememberNavController()
     val backstackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = backstackEntry?.destination
 
-    if (currentScreen?.route != ELearnScreens.Info.name + "/{previewScreen}")
+    val state = viewModel.viewState
+
+    if (currentScreen?.route != NamesELearnScreens.Info.name + "/{previewScreen}")
         Scaffold(
             topBar = {
-                MainTopAppBar(viewModel, currentScreen, userName, moveBackStack = {
+                MainTopAppBar(viewModel, currentScreen, state.userName, moveBackStack = {
                     navController.popBackStack()
                 },
                     moveCart = {
-                        navController.navigate(MainScreens.HomeScreen.route + "/Cart")
+                        navController.navigate(NamesMainScreens.HomeScreen.route + "/Cart")
                     })
             },
             bottomBar = { MainBottomBar(navController) },
@@ -64,7 +65,7 @@ fun MainScreen(
 fun MainScreenPreview() {
     ELearnTheme {
         Surface {
-            MainScreen(userName = "test")
+            MainScreen()
         }
     }
 }
@@ -79,7 +80,7 @@ fun MainScreenPreview() {
 fun MainScreenDarkPreview() {
     ELearnTheme {
         Surface {
-            MainScreen(userName = "test")
+            MainScreen()
         }
     }
 }

@@ -17,7 +17,7 @@ class UserRepositoryImpl(private val userLocalDataSource: UserLocalDataSource) :
         return try {
             val user = UserEntity(
                 id = UUID.randomUUID().toString(),
-                userName = userName.trim().lowercase(),
+                userName = userName.trim(),
                 email = email.trim().lowercase(),
                 numberPhone = numberPhone.trim().lowercase().filter { it.isDigit() },
                 password = password.trim().lowercase()
@@ -57,7 +57,15 @@ class UserRepositoryImpl(private val userLocalDataSource: UserLocalDataSource) :
     override suspend fun getUserName(email: String): String {
         return withContext(Dispatchers.Default) {
             val checkEmail = email.trim().lowercase()
-            val response = userLocalDataSource.getUserName(email)
+            val response = userLocalDataSource.getUserName(checkEmail)
+            response
+        }
+    }
+
+    override suspend fun getPhoneNumber(email: String): String {
+        return withContext(Dispatchers.Default) {
+            val checkEmail = email.trim().lowercase()
+            val response = userLocalDataSource.getPhoneNumber(checkEmail)
             response
         }
     }

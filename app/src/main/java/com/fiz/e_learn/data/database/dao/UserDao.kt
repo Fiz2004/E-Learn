@@ -12,7 +12,7 @@ interface UserDao {
     fun getById(id: String): UserEntity
 
     @Query("SELECT * FROM UserEntity WHERE email =:email")
-    suspend fun getUserName(email:String): UserEntity
+    suspend fun getUser(email: String): UserEntity
 
     @Query("SELECT EXISTS (SELECT* FROM UserEntity WHERE (email =:email AND password =:password))")
     suspend fun isValidateEmailPassword(email: String, password: String): Boolean

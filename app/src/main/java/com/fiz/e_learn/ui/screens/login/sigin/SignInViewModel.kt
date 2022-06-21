@@ -60,8 +60,7 @@ class SignInViewModel @Inject constructor(private val userRepository: UserReposi
             val password = viewState.password
             val response = userRepository.validateEmailPassword(email, password)
             if (response) {
-                val userName=userRepository.getUserName(email)
-                viewAction.emit(SignInAction.MoveHomeContentScreen(userName))
+                viewAction.emit(SignInAction.MoveHomeContentScreen(email))
             } else {
                 viewAction.emit(SignInAction.ShowError)
             }

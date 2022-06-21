@@ -6,7 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -24,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.components.*
-import com.fiz.e_learn.ui.components.BaseIconForLogInGroup
 import com.fiz.e_learn.ui.screens.login.sigin.components.GoggleButton
 import com.fiz.e_learn.ui.screens.login.sigin.components.TextSignUp
 import com.fiz.e_learn.ui.screens.sigin.TextSubtitle1
@@ -52,14 +50,13 @@ fun SignInBody(
                     moveForgotPassword()
                 }
                 is SignInAction.MoveHomeContentScreen -> {
-                    moveHomeContent(action.userName)
+                    moveHomeContent(action.userEmail)
                 }
                 SignInAction.MoveSignUpScreen -> {
                     moveSignUp()
                 }
                 SignInAction.ShowError -> {
                     Toast.makeText(context, errorText, Toast.LENGTH_SHORT).show()
-
                 }
             }
         }

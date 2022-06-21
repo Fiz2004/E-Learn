@@ -1,7 +1,7 @@
 package com.fiz.e_learn.ui
 
-enum class ELearnScreens {
-    TitleScreens(),
+enum class NamesELearnScreens {
+    Title(),
     OnBoarding(),
     SignIn(),
     CreateAccount(),
