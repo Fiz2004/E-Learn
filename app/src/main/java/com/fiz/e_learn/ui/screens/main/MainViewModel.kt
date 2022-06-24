@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fiz.e_learn.domain.repositories.UserRepository
+import com.fiz.e_learn.ui.screens.login.sigin.TEST_EMAIL
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
@@ -32,12 +33,19 @@ class MainViewModel @Inject constructor(private val userRepository: UserReposito
 
     fun initUser(email: String) {
         viewModelScope.launch {
-            val userName = userRepository.getUserName(email)
-            val numberPhone = userRepository.getPhoneNumber(email)
-            viewState = viewState.copy(
-                userName = userName,
-                numberPhone = numberPhone
-            )
+            viewState = if (email != TEST_EMAIL) {
+                val userName = userRepository.getUserName(email)
+                val numberPhone = userRepository.getPhoneNumber(email)
+                viewState.copy(
+                    userName = userName,
+                    numberPhone = numberPhone
+                )
+            } else {
+                viewState.copy(
+                    userName = "Alex Joe",
+                    numberPhone = "8-912-123-234"
+                )
+            }
         }
     }
 

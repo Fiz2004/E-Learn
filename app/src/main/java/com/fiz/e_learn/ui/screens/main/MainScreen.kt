@@ -35,7 +35,7 @@ fun MainScreen(
                     navController.popBackStack()
                 },
                     moveCart = {
-                        navController.navigate(NamesMainScreens.HomeScreen.route + "/Cart")
+                        navController.navigate(MainScreens.HomeScreen.name + "/Cart")
                     })
             },
             bottomBar = { MainBottomBar(navController) },

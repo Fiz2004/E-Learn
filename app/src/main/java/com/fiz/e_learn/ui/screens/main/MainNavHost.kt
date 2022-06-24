@@ -34,34 +34,34 @@ fun MainNavHost(
     modifier: Modifier = Modifier,
     viewModel: MainViewModel = viewModel()
 ) {
+    val onClickCourse: (Int) -> Unit = { id ->
+        navController.navigate(MainScreens.HomeScreen.name + "/CourseBase/$id")
+    }
+
     NavHost(
         navController = navController,
-        startDestination = NamesMainScreens.HomeScreen.route,
+        startDestination = MainScreens.HomeScreen.name,
         modifier = modifier
     ) {
-        composable(NamesMainScreens.HomeScreen.route) {
+        composable(MainScreens.HomeScreen.name) {
 
             HomeBodyMain(
                 viewModel,
                 moveSeeAllCategories = {
-                    navController.navigate(NamesMainScreens.HomeScreen.route + "/SeeAll")
+                    navController.navigate(MainScreens.HomeScreen.name + "/SeeAll")
                 },
                 moveCategory = { category ->
-                    navController.navigate(NamesMainScreens.HomeScreen.route + "/Category/$category")
+                    navController.navigate(MainScreens.HomeScreen.name + "/Category/$category")
                 },
                 moveSeeAllTopCourses = {
-                    navController.navigate(NamesMainScreens.HomeScreen.route + "/SeeAll/TopCourses")
+                    navController.navigate(MainScreens.HomeScreen.name + "/SeeAll/TopCourses")
                 },
                 moveTopCourse = { id ->
-                    navController.navigate(NamesMainScreens.HomeScreen.route + "/CourseBase/$id")
+                    navController.navigate(MainScreens.HomeScreen.name + "/CourseBase/$id")
                 })
         }
 
-        val onClickCourse: (Int) -> Unit = { id ->
-            navController.navigate(NamesMainScreens.HomeScreen.route + "/CourseBase/$id")
-        }
-
-        composable(NamesMainScreens.HomeScreen.route + "/SeeAll") {
+        composable(MainScreens.HomeScreen.name + "/SeeAll") {
             HomeBodyAll(
                 viewModel,
                 filter = "all",
@@ -70,7 +70,7 @@ fun MainNavHost(
         }
 
         composable(
-            route = NamesMainScreens.HomeScreen.route + "/Category/{category}",
+            route = MainScreens.HomeScreen.name + "/Category/{category}",
             arguments = listOf(navArgument("category") { type = NavType.StringType })
         ) { backStackEntry ->
             val category = (backStackEntry.arguments?.getString("category"))
@@ -84,7 +84,7 @@ fun MainNavHost(
             }
         }
 
-        composable(NamesMainScreens.HomeScreen.route + "/SeeAll/TopCourses") {
+        composable(MainScreens.HomeScreen.name + "/SeeAll/TopCourses") {
             HomeBodyAll(
                 viewModel,
                 filter = "top",
@@ -93,7 +93,7 @@ fun MainNavHost(
         }
 
         composable(
-            route = NamesMainScreens.HomeScreen.route + "/CourseBase/{id}",
+            route = MainScreens.HomeScreen.name + "/CourseBase/{id}",
             arguments = listOf(navArgument("id") { type = NavType.IntType })
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getInt("id")
@@ -101,12 +101,12 @@ fun MainNavHost(
             HomeCourseBaseBody(
                 id = id,
                 moveCourseDetails = {
-                    navController.navigate(NamesMainScreens.HomeScreen.route + "/CourseDetails/$id")
+                    navController.navigate(MainScreens.HomeScreen.name + "/CourseDetails/$id")
                 })
         }
 
         composable(
-            route = NamesMainScreens.HomeScreen.route + "/CourseDetails/{id}",
+            route = MainScreens.HomeScreen.name + "/CourseDetails/{id}",
             arguments = listOf(navArgument("id") { type = NavType.IntType })
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getInt("id")
@@ -114,12 +114,12 @@ fun MainNavHost(
             HomeCourseDetailsBody(
                 id = id,
                 moveCourseMoreInfo = {
-                    navController.navigate(NamesMainScreens.HomeScreen.route + "/CourseMoreInfo/$id")
+                    navController.navigate(MainScreens.HomeScreen.name + "/CourseMoreInfo/$id")
                 })
         }
 
         composable(
-            route = NamesMainScreens.HomeScreen.route + "/CourseMoreInfo/{id}",
+            route = MainScreens.HomeScreen.name + "/CourseMoreInfo/{id}",
             arguments = listOf(navArgument("id") { type = NavType.IntType })
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getInt("id")
@@ -127,12 +127,12 @@ fun MainNavHost(
             HomeCourseMoreInfoBody(
                 id = id,
                 moveCourseAuthor = {
-                    navController.navigate(NamesMainScreens.HomeScreen.route + "/Author/$id")
+                    navController.navigate(MainScreens.HomeScreen.name + "/Author/$id")
                 })
         }
 
         composable(
-            route = NamesMainScreens.HomeScreen.route + "/Author/{id}",
+            route = MainScreens.HomeScreen.name + "/Author/{id}",
             arguments = listOf(navArgument("id") { type = NavType.IntType })
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getInt("id")
@@ -140,15 +140,15 @@ fun MainNavHost(
             HomeCourseAuthorBody(
                 id = id,
                 moveBuyScreen = {
-                    navController.navigate(NamesMainScreens.HomeScreen.route + "/Buy")
+                    navController.navigate(MainScreens.HomeScreen.name + "/Buy")
                 },
                 moveCartScreen = {
-                    navController.navigate(NamesMainScreens.HomeScreen.route + "/Cart")
+                    navController.navigate(MainScreens.HomeScreen.name + "/Cart")
                 })
         }
 
         composable(
-            route = NamesMainScreens.HomeScreen.route + "/Buy"
+            route = MainScreens.HomeScreen.name + "/Buy"
         ) {
             HomeBuyBody(
                 moveInfoScreen = {
@@ -157,11 +157,11 @@ fun MainNavHost(
         }
 
         composable(
-            route = NamesMainScreens.HomeScreen.route + "/Cart"
+            route = MainScreens.HomeScreen.name + "/Cart"
         ) {
             HomeCartBody(
                 moveBuyScreen = {
-                    navController.navigate(NamesMainScreens.HomeScreen.route + "/Buy")
+                    navController.navigate(MainScreens.HomeScreen.name + "/Buy")
                 })
         }
 
@@ -178,17 +178,17 @@ fun MainNavHost(
                 background= MaterialTheme.colors.backgroundHome,
                 textButton= stringResource(R.string.info_view_course),
                 previewScreen = previewScreen,
-                moveSignInScreen = { navController.navigate(NamesMainScreens.HomeScreen.route) }
+                moveSignInScreen = { navController.navigate(MainScreens.HomeScreen.name) }
             )
         }
 
-        composable(NamesMainScreens.FavoritesScreen.route) {
+        composable(MainScreens.FavoritesScreen.name) {
             FavoritesBody()
         }
-        composable(NamesMainScreens.CoursesScreen.route) {
+        composable(MainScreens.CoursesScreen.name) {
             CoursesBody()
         }
-        composable(NamesMainScreens.SettingsScreen.route) {
+        composable(MainScreens.SettingsScreen.name) {
             SettingsBody(viewModel)
         }
     }

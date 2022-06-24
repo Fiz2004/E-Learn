@@ -23,7 +23,7 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.fiz.e_learn.ui.screens.main.NamesMainScreens
+import com.fiz.e_learn.ui.screens.main.MainScreens
 import java.util.*
 
 private val TabHeight = 56.dp
@@ -35,8 +35,8 @@ private const val TabFadeOutAnimationDuration = 100
 
 @Composable
 fun ELearnTabRow(
-    allScreens: List<NamesMainScreens>,
-    onTabSelected: (NamesMainScreens) -> Unit,
+    allScreens: List<MainScreens>,
+    onTabSelected: (MainScreens) -> Unit,
     currentScreen: Boolean
 ) {
     Surface(
@@ -47,7 +47,7 @@ fun ELearnTabRow(
         Row(Modifier.selectableGroup()) {
             allScreens.forEach { screen ->
                 ELearnTab(
-                    text = stringResource(screen.resourceId),
+                    text = stringResource(screen.textId),
                     onSelected = { onTabSelected(screen) },
                     selected = currentScreen
                 )

@@ -73,7 +73,9 @@ class SignInViewModel @Inject constructor(private val userRepository: UserReposi
 
     private fun signInWithGoogleClicked() {
         viewModelScope.launch {
-            viewAction.emit(SignInAction.MoveHomeContentScreen("Alex Joe"))
+            viewAction.emit(SignInAction.MoveHomeContentScreen(TEST_EMAIL))
         }
     }
 }
+
+const val TEST_EMAIL = "TESTEMAIL@ufhuuhewf.fewhigefu.ugfegew.ewjfhie"
