@@ -1,6 +1,7 @@
 package com.fiz.e_learn.ui.screens.main
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -30,6 +31,7 @@ fun MainScreen(
 
     if (currentScreen?.route != NamesELearnScreens.Info.name + "/{previewScreen}")
         Scaffold(
+            modifier = Modifier.navigationBarsPadding(),
             topBar = {
                 MainTopAppBar(viewModel, currentScreen, state.userName, moveBackStack = {
                     navController.popBackStack()

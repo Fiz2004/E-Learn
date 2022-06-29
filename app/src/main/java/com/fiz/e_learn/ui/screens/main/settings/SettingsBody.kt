@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -18,6 +19,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fiz.e_learn.R
 import com.fiz.e_learn.ui.screens.main.MainViewModel
 import com.fiz.e_learn.ui.screens.main.components.MainColumn
+import com.fiz.e_learn.ui.theme.greenText
 import com.fiz.e_learn.ui.theme.surface2
 
 @Composable
@@ -73,12 +75,16 @@ fun SettingsBody(viewModel: MainViewModel = viewModel()) {
 
 @Composable
 private fun AccountInfo(userName: String, numberPhone: String) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Image(
             modifier = Modifier.size(72.dp),
             painter = painterResource(
                 id = R.drawable.settings_pic_user
-            ), contentDescription = null
+            ),
+            contentDescription = null
         )
 
         Spacer(modifier = Modifier.height(14.dp))
@@ -99,18 +105,24 @@ private fun AccountInfo(userName: String, numberPhone: String) {
 
 @Composable
 private fun AccountItem(icon: Int, text: Int, onClick: () -> Unit = {}) {
-    Column(modifier = Modifier.clickable { onClick() }) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Image(
-                modifier = Modifier.size(24.dp),
-                painter = painterResource(
-                    id = icon
-                ), contentDescription = null
-            )
-            Text(
-                text = stringResource(text),
-                style = MaterialTheme.typography.subtitle1
-            )
-        }
+    Row(
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 16.dp)
+            .clickable { onClick() },
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            modifier = Modifier.size(24.dp),
+            painter = painterResource(
+                id = icon
+            ),
+            contentDescription = null,
+            tint = MaterialTheme.colors.greenText
+        )
+        Spacer(modifier = Modifier.width(14.dp))
+        Text(
+            text = stringResource(text),
+            style = MaterialTheme.typography.subtitle1
+        )
     }
 }

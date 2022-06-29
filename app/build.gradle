@@ -75,7 +75,7 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.42")
 
     // Video
-    implementation("com.google.android.exoplayer:exoplayer:2.17.1")
+    implementation("com.google.android.exoplayer:exoplayer:2.18.0")
 
     // Date
     implementation("com.jakewharton.threetenabp:threetenabp:1.4.0")
@@ -87,7 +87,7 @@ dependencies {
     kapt("androidx.room:room-compiler:2.4.2")
 
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3")
 
     // UI Controller
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.23.1")

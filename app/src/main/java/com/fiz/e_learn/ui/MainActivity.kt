@@ -28,8 +28,6 @@ class MainActivity : ComponentActivity() {
                     color = Color.Transparent,
                     darkIcons = useDarkIcons
                 )
-
-                systemUiController.isNavigationBarVisible = false
             }
 
             ELearnTheme {
